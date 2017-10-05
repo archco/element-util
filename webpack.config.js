@@ -48,6 +48,8 @@ const Mod = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'element-util.mod.js',
+    library: 'ElementUtil',
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
