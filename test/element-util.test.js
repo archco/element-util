@@ -27,4 +27,20 @@ describe('ElementUtil', () => {
       expect(hit).to.equal(1);
     });
   });
+
+  describe('#sort', () => {
+    it('sort on list.', () => {
+      let items = ElementUtil.sort('ul.sort');
+      expect(items[0].textContent).to.equal('abc');
+    });
+
+    it('sort on table.', () => {
+      ElementUtil.sort('table.sort');
+      ElementUtil.getElement('table.sort thead th:nth-child(3)').click();
+      let firstRowDate = ElementUtil
+        .getElement('td:nth-child(3)', 'table.sort tbody tr:first-child')
+        .textContent;
+      expect(firstRowDate).to.equal('1444-05-01');
+    });
+  });
 });
