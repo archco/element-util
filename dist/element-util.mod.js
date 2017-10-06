@@ -468,7 +468,7 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Sort = exports.Filter = undefined;
+exports.ElementSort = exports.ElementFilter = undefined;
 
 var _base = __webpack_require__(0);
 
@@ -487,6 +487,11 @@ var _sort = __webpack_require__(4);
 var _sort2 = _interopRequireDefault(_sort);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// TODO:
+// - Write test file more..
+// - Write docs.
+// - release.
 
 var filterMethod = {
   filter: function filter(selector, _filter) {
@@ -511,8 +516,8 @@ var sortMethod = {
 var ElementUtil = Object.assign(_base2.default, _util2.default, filterMethod, sortMethod);
 
 exports.default = ElementUtil;
-exports.Filter = _filter3.default;
-exports.Sort = _sort2.default;
+exports.ElementFilter = _filter3.default;
+exports.ElementSort = _sort2.default;
 
 /***/ }),
 /* 3 */
@@ -540,6 +545,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Filter = function () {
+  /**
+   * constructor
+   *
+   * @param  {String|Nodelist} selector
+   * @param  {String} filter
+   * @param  {Object} [options={}]
+   * @return {void}
+   */
   function Filter(selector, filter) {
     var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
@@ -553,6 +566,13 @@ var Filter = function () {
 
   // public
 
+  /**
+   * Returns default options.
+   *
+   * @return {Object}
+   */
+
+
   _createClass(Filter, [{
     key: 'getDefaultOptions',
     value: function getDefaultOptions() {
@@ -560,17 +580,38 @@ var Filter = function () {
         htmlMode: false
       };
     }
+
+    /**
+     * set filter string.
+     *
+     * @param {String} filter
+     */
+
   }, {
     key: 'setFilter',
     value: function setFilter(filter) {
       this._filter = filter;
       return this;
     }
+
+    /**
+     * Returns number of filtered elements count.
+     *
+     * @return {Number}
+     */
+
   }, {
     key: 'getHit',
     value: function getHit() {
       return this._hit;
     }
+
+    /**
+     * Excute filtering.
+     *
+     * @return {void}
+     */
+
   }, {
     key: 'filtering',
     value: function filtering() {
@@ -670,6 +711,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Sort = function () {
+  /**
+   * constructor
+   *
+   * @param  {Element|String} elm  Base element.
+   * @param  {Object} [options={}]
+   * @return {void}
+   */
   function Sort(elm) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
@@ -682,11 +730,18 @@ var Sort = function () {
 
   // public
 
+  /**
+   * Returns default options.
+   *
+   * @return {Object}
+   */
+
+
   _createClass(Sort, [{
     key: 'getDefaultOptions',
     value: function getDefaultOptions() {
       return {
-        items: 'auto', // 'auto' | selector | Nodlist | Array
+        items: 'auto', // Items selector: 'auto' | selector | Nodlist | Array
         datasetName: {
           sortDirection: 'sortDirection', // data-sort-direction: 'asc' | 'desc'
           sortType: 'sortType', // data-sort-type: 'string' | 'number' | 'date'
@@ -694,17 +749,38 @@ var Sort = function () {
         }
       };
     }
+
+    /**
+     * Set base element.
+     *
+     * @param {Element|String} elm
+     */
+
   }, {
     key: 'setElement',
     value: function setElement(elm) {
       this._elm = _base2.default.getElement(elm);
       return this;
     }
+
+    /**
+     * Returns sort target items.
+     *
+     * @return {Array}
+     */
+
   }, {
     key: 'getItems',
     value: function getItems() {
       return this._items;
     }
+
+    /**
+     * Set sort target items.
+     *
+     * @param {String|Nodelist} items 'auto' | selector | Nodlist | Array
+     */
+
   }, {
     key: 'setItems',
     value: function setItems(items) {
@@ -720,6 +796,13 @@ var Sort = function () {
 
       return this;
     }
+
+    /**
+     * Excute sorting.
+     *
+     * @return {void}
+     */
+
   }, {
     key: 'sorting',
     value: function sorting() {
