@@ -13,7 +13,7 @@ const jsRule = {
 };
 
 const Library = {
-  entry: './lib/element-util.js',
+  entry: './lib/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'element-util.js',
@@ -25,10 +25,11 @@ const Library = {
       jsRule,
     ],
   },
+  devtool: 'source-map',
 };
 
 const Minify = {
-  entry: './lib/element-util.js',
+  entry: './lib/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'element-util.min.js',
@@ -44,7 +45,7 @@ const Minify = {
 };
 
 const Mod = {
-  entry: './lib/element-util.js',
+  entry: './lib/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'element-util.mod.js',

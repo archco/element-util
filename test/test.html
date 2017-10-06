@@ -3,9 +3,46 @@
   <head>
     <title>Mocha Tests</title>
     <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+    <style>
+      #mocha {
+        z-index: 10;
+      }
+      #test {
+        z-index: -1;
+        visibility: hidden;
+      }
+    </style>
   </head>
   <body>
     <div id="mocha"></div>
+    <div id="test">
+      <table class="filter">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>James</td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Nora</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Owen</td>
+            <td>14</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <script src="../node_modules/mocha/mocha.js"></script>
     <script src="../node_modules/chai/chai.js"></script>
     <script>
