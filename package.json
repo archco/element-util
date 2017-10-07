@@ -5,6 +5,8 @@
   "main": "dist/element-util.js",
   "module": "dist/element-util.mod.js",
   "directories": {
+    "dist": "dist",
+    "docs": "docs",
     "lib": "lib",
     "test": "test"
   },
