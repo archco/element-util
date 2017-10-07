@@ -453,10 +453,10 @@ exports.default = {
    */
   toggleShow: function toggleShow(selector) {
     var elm = _base2.default.getElement(selector);
-    if (elm.classList.contains(ClassName.HIDE)) {
-      this.show(selector);
+    if (elm.style.display !== 'none') {
+      this.hide(elm);
     } else {
-      this.hide(selector);
+      this.show(elm);
     }
   }
 };

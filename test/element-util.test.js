@@ -31,6 +31,20 @@ describe('ElementUtil', () => {
         expect(elm.classList.contains('test-class')).to.equal(true);
       });
     });
+
+    describe('#toggleShow', () => {
+      let elm = ElementUtil.getElement('div.show-target');
+
+      it('First toggle will show a element.', () => {
+        ElementUtil.toggleShow(elm);
+        expect(elm.style.display).to.be.empty;
+      });
+
+      it('Second toggle will hide a element.', () => {
+        ElementUtil.toggleShow(elm);
+        expect(elm.style.display).to.equal('none');
+      });
+    });
   });
 
   describe('ElementFilter', () => {
