@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fix util method "toggleShow()".
 
 ## [1.0.0] - 2017-10-07
 First release. Please see [ElementUtil API](https://github.com/archco/element-util/tree/master/docs).
