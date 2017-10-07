@@ -483,10 +483,11 @@ var _elementSort2 = _interopRequireDefault(_elementSort);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var filterMethod = {
-  filter: function filter(selector, _filter) {
+  filter: function filter(selector) {
+    var filter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     var htmlMode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-    var f = new _elementFilter2.default(selector, _filter, { htmlMode: htmlMode });
+    var f = new _elementFilter2.default(selector, filter, { htmlMode: htmlMode });
     f.execute();
     return f.getHit();
   }
@@ -768,7 +769,7 @@ var ElementSort = function () {
     /**
      * Set sort target items.
      *
-     * @param {String|Nodelist} items 'auto' | selector | Nodlist | Array
+     * @param {String|NodeList} items 'auto' | selector | Nodlist | Array
      */
 
   }, {

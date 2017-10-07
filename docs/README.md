@@ -11,7 +11,7 @@
 ## [Util Methods](util-methods.md)
 - [#addListener](util-methods.md#addlistener): Add event listener on selector.
 - [#wrap](util-methods.md#wrap): Wrap elements by div.wrapper, one by one.
-- [#wrapAll](util-methods.md#wrapAll): Wrap all elements inside to div.wrapper.
+- [#wrapAll](util-methods.md#wrapall): Wrap all elements inside to div.wrapper.
 - [#submitConfirm](util-methods.md#submitconfirm): Add confirm message on 'submit' event.
 - [#addClass](util-methods.md#addclass): Add class to an element.
 - [#removeClass](util-methods.md#removeclass): Remove class from an element.
@@ -21,5 +21,7 @@
 - [#toggleShow](util-methods.md#toggleshow): Toggling show/hide element.
 
 ## [Element Filter](element-filter.md)
+The functional class for filtering elements in node list.
 
 ## [Element Sort](element-sort.md)
+The functional class for sort elements.
