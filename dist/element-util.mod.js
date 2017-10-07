@@ -177,24 +177,27 @@ exports.default = {
   /**
    * Element to NodeList
    *
-   * @param  {Element} element
+   * @param  {Element|String} elm
    * @return {NodeList}
    */
-  toNodeList: function toNodeList(element) {
-    element.setAttribute('toNodeList', '');
+  toNodeList: function toNodeList(elm) {
+    elm = this.getElement(elm);
+    elm.setAttribute('toNodeList', '');
     var nodelist = document.querySelectorAll('[toNodeList]');
-    element.removeAttribute('toNodeList');
+    elm.removeAttribute('toNodeList');
     return nodelist;
   },
 
 
   /**
-   * Converting a NodeList to an Array.
+   * Convert NodeList to Array.
    *
-   * @param  {NodeList} nodelist
+   * @param  {NodeList|String} nodelist
    * @return {Array}
    */
   nodeListToArray: function nodeListToArray(nodelist) {
+    nodelist = this.getElements(nodelist);
+
     return Array.prototype.slice.call(nodelist);
   },
 
@@ -202,17 +205,17 @@ exports.default = {
   /**
    * find ancestor by selector.
    *
-   * @param  {Element|String} element or querySelector
+   * @param  {Element|String} elm or querySelector
    * @param  {String}  selector
    * @return {Element|null}
    */
-  findAncestor: function findAncestor(element, selector) {
-    element = this.getElement(element);
+  findAncestor: function findAncestor(elm, selector) {
+    elm = this.getElement(elm);
     do {
-      if (element == this.getElement('html')) return null;
-      element = element.parentElement;
-    } while (!element.matches(selector));
-    return element;
+      if (elm == this.getElement('html')) return null;
+      elm = elm.parentElement;
+    } while (!elm.matches(selector));
+    return elm;
   },
   _resolveBase: function _resolveBase(base) {
     base = base === document ? base : this.getElement(base);
@@ -242,7 +245,7 @@ exports.default = {
   /**
    * add event listener on selector.
    *
-   * @param {String}   selector
+   * @param {String|Element|NodeList}   selector
    * @param {String}   type  event type
    * @param {Function} listener
    * @param {Boolean}  [ useCapture = false ]
@@ -285,7 +288,7 @@ exports.default = {
   /**
    * wrap elements by wrapper, one by one.
    *
-   * @param  {String} selector
+   * @param  {String|Element|NodeList} selector
    * @param  {String} className wrapper's class name.
    * @param  {String} [ tagName = 'DIV' ] wrapper's tag name.
    * @return {void}
@@ -335,7 +338,7 @@ exports.default = {
   /**
    * wrap all elements inside to wrapper.
    *
-   * @param  {String} selector
+   * @param  {String|Element|NodeList} selector
    * @param  {String} className wrapper's class name.
    * @param  {String} [ tagName = 'DIV' ] wrapper's tag name.
    * @return {void}
@@ -380,7 +383,7 @@ exports.default = {
   /**
    * addClass
    *
-   * @param  {String} selector
+   * @param  {String|Element} selector
    * @param  {String} className
    * @return {void}
    */
@@ -393,7 +396,7 @@ exports.default = {
   /**
    * removeClass
    *
-   * @param  {String} selector
+   * @param  {String|Element} selector
    * @param  {String} className
    * @return {void}
    */
@@ -406,7 +409,7 @@ exports.default = {
   /**
    * toggleClass
    *
-   * @param  {String} selector
+   * @param  {String|Element} selector
    * @param  {String} className
    * @return {void}
    */
@@ -419,7 +422,7 @@ exports.default = {
   /**
    * hide element
    *
-   * @param  {String} selector
+   * @param  {String|Element} selector
    * @return {void}
    */
   hide: function hide(selector) {
@@ -431,7 +434,7 @@ exports.default = {
   /**
    * show element
    *
-   * @param  {String} selector
+   * @param  {String|Element} selector
    * @return {void}
    */
   show: function show(selector) {
@@ -445,7 +448,7 @@ exports.default = {
   /**
    * toggleShow
    *
-   * @param  {String} selector
+   * @param  {String|Element} selector
    * @return {void}
    */
   toggleShow: function toggleShow(selector) {
@@ -478,27 +481,22 @@ var _util = __webpack_require__(1);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _filter2 = __webpack_require__(3);
+var _elementFilter = __webpack_require__(3);
 
-var _filter3 = _interopRequireDefault(_filter2);
+var _elementFilter2 = _interopRequireDefault(_elementFilter);
 
-var _sort = __webpack_require__(4);
+var _elementSort = __webpack_require__(4);
 
-var _sort2 = _interopRequireDefault(_sort);
+var _elementSort2 = _interopRequireDefault(_elementSort);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// TODO:
-// - Write test file more..
-// - Write docs.
-// - release.
 
 var filterMethod = {
   filter: function filter(selector, _filter) {
     var htmlMode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-    var f = new _filter3.default(selector, _filter, { htmlMode: htmlMode });
-    f.filtering();
+    var f = new _elementFilter2.default(selector, _filter, { htmlMode: htmlMode });
+    f.excute();
     return f.getHit();
   }
 };
@@ -507,8 +505,8 @@ var sortMethod = {
   sort: function sort(elm) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    var s = new _sort2.default(elm, options);
-    s.sorting();
+    var s = new _elementSort2.default(elm, options);
+    s.excute();
     return s.getItems();
   }
 };
@@ -516,8 +514,8 @@ var sortMethod = {
 var ElementUtil = Object.assign(_base2.default, _util2.default, filterMethod, sortMethod);
 
 exports.default = ElementUtil;
-exports.ElementFilter = _filter3.default;
-exports.ElementSort = _sort2.default;
+exports.ElementFilter = _elementFilter2.default;
+exports.ElementSort = _elementSort2.default;
 
 /***/ }),
 /* 3 */
@@ -544,19 +542,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Filter = function () {
+var ElementFilter = function () {
   /**
    * constructor
    *
    * @param  {String|Nodelist} selector
-   * @param  {String} filter
-   * @param  {Object} [options={}]
-   * @return {void}
+   * @param  {String} [filter = '']
+   * @param  {Object} [options = {}]
+   * @return {ElementFilter}
    */
-  function Filter(selector, filter) {
+  function ElementFilter(selector) {
+    var filter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-    _classCallCheck(this, Filter);
+    _classCallCheck(this, ElementFilter);
 
     this._elms = _base2.default.getElements(selector);
     this._filter = filter;
@@ -573,7 +572,7 @@ var Filter = function () {
    */
 
 
-  _createClass(Filter, [{
+  _createClass(ElementFilter, [{
     key: 'getDefaultOptions',
     value: function getDefaultOptions() {
       return {
@@ -613,8 +612,8 @@ var Filter = function () {
      */
 
   }, {
-    key: 'filtering',
-    value: function filtering() {
+    key: 'execute',
+    value: function execute() {
       if (this._elmsIsTable()) {
         this._filteringTable();
       } else {
@@ -677,10 +676,10 @@ var Filter = function () {
     }
   }]);
 
-  return Filter;
+  return ElementFilter;
 }();
 
-exports.default = Filter;
+exports.default = ElementFilter;
 ;
 
 /***/ }),
@@ -710,18 +709,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Sort = function () {
+var ElementSort = function () {
   /**
    * constructor
    *
    * @param  {Element|String} elm  Base element.
    * @param  {Object} [options={}]
-   * @return {void}
+   * @return {ElementSort}
    */
-  function Sort(elm) {
+  function ElementSort(elm) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    _classCallCheck(this, Sort);
+    _classCallCheck(this, ElementSort);
 
     this.options = Object.assign(this.getDefaultOptions(), options);
     this._elm = _base2.default.getElement(elm);
@@ -737,7 +736,7 @@ var Sort = function () {
    */
 
 
-  _createClass(Sort, [{
+  _createClass(ElementSort, [{
     key: 'getDefaultOptions',
     value: function getDefaultOptions() {
       return {
@@ -804,8 +803,8 @@ var Sort = function () {
      */
 
   }, {
-    key: 'sorting',
-    value: function sorting() {
+    key: 'excute',
+    value: function excute() {
       if (this._elmIsTable()) {
         this._sortTable();
       } else {
@@ -970,10 +969,10 @@ var Sort = function () {
     }
   }]);
 
-  return Sort;
+  return ElementSort;
 }();
 
-exports.default = Sort;
+exports.default = ElementSort;
 ;
 
 /***/ })

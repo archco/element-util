@@ -1,5 +1,8 @@
 const expect = window.chai.expect;
-const ElementUtil = window.ElementUtil.default;
+const Module = window.ElementUtil;
+const ElementUtil = Module.default;
+const ElementFilter = Module.ElementFilter;
+const ElementSort = Module.ElementSort;
 
 describe('ElementUtil', () => {
   it('ElementUtil to be an object.', () => {

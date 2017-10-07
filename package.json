@@ -1,7 +1,7 @@
 {
   "name": "element-util",
   "version": "1.0.0",
-  "description": "The helper library that provide convenience for using DOM Element and Nodelist.",
+  "description": "The javascript library for using DOM Elements conveniently.",
   "main": "dist/element-util.js",
   "module": "dist/element-util.mod.js",
   "directories": {
