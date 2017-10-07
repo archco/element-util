@@ -45,7 +45,7 @@ Convert NodeList to Array.
 ```javascript
 let array = ElementUtil.nodeListToArray(nodelist);
 ```
-- Param  {NodeList|String} nodelist
+- Param  {NodeList|String|Array} nodelist
 - Return {Array}
 
 ## findAncestor

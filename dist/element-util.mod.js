@@ -192,12 +192,12 @@ exports.default = {
   /**
    * Convert NodeList to Array.
    *
-   * @param  {NodeList|String} nodelist
+   * @param  {NodeList|String|Array} nodelist
    * @return {Array}
    */
   nodeListToArray: function nodeListToArray(nodelist) {
+    if (Array.isArray(nodelist)) return nodelist;
     nodelist = this.getElements(nodelist);
-
     return Array.prototype.slice.call(nodelist);
   },
 
@@ -496,7 +496,7 @@ var filterMethod = {
     var htmlMode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     var f = new _elementFilter2.default(selector, _filter, { htmlMode: htmlMode });
-    f.excute();
+    f.execute();
     return f.getHit();
   }
 };
@@ -506,7 +506,7 @@ var sortMethod = {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     var s = new _elementSort2.default(elm, options);
-    s.excute();
+    s.execute();
     return s.getItems();
   }
 };
@@ -786,13 +786,14 @@ var ElementSort = function () {
       if (this._elmIsTable()) {
         this._items = _base2.default.getElements('tbody tr', this._elm);
       } else if (items === 'auto') {
-        this._items = this._elm.children;
+        this._items = _base2.default.nodeListToArray(this._elm.childNodes).filter(function (node) {
+          return node.tagName;
+        });
       } else {
         this._items = _base2.default.getElements(items, this._elm);
       }
 
       this._items = _base2.default.nodeListToArray(this._items);
-
       return this;
     }
 
@@ -803,8 +804,8 @@ var ElementSort = function () {
      */
 
   }, {
-    key: 'excute',
-    value: function excute() {
+    key: 'execute',
+    value: function execute() {
       if (this._elmIsTable()) {
         this._sortTable();
       } else {
