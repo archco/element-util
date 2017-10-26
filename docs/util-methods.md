@@ -100,3 +100,24 @@ ElementUtil.toggleShow(selector);
 ```
 - Param {String|Element} selector
 - Return {void}
+
+## makeHiddenInput
+Make `input[type="hidden"]` element.
+- Syntax
+```javascript
+let input = Element.makeHiddenInput(name, value);
+```
+- Param  {String} name - input name.
+- Param  {String} value - input value.
+- Return {Element}
+
+## appendHiddenInput
+Append hidden type input to target element.
+- Syntax
+```javascript
+Element.appendHiddenInput(target, name, value);
+```
+- Param  {Element|String} target - target element.
+- Param  {String} name - input name.
+- Param  {String} value - input value.
+- Return {void}

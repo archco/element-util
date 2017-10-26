@@ -19,6 +19,8 @@
 - [#hide](util-methods.md#hide): Hide an element. use style `display: none;`
 - [#show](util-methods.md#show): Remove `display: none;`
 - [#toggleShow](util-methods.md#toggleshow): Toggling show/hide element.
+- [#makeHiddenInput](util-methods.md#makehiddeninput): Make `input[type="hidden"]` element.
+- [#appendHiddenInput](util-methods.md#appendhiddeninput): Append hidden type input to target element.
 
 ## [Element Filter](element-filter.md)
 The functional class for filtering elements in node list.
