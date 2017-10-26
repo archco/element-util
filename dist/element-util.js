@@ -449,6 +449,39 @@ exports.default = {
     } else {
       this.show(elm);
     }
+  },
+
+
+  /**
+   * Make hidden type input.
+   *
+   * @param  {String} name
+   * @param  {String} value
+   * @return {Element}
+   */
+  makeHiddenInput: function makeHiddenInput(name, value) {
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = name;
+    input.value = value;
+    return input;
+  },
+
+
+  /**
+   * Append hidden input to target element.
+   *
+   * @param  {Element|String} target
+   * @param  {String} name
+   * @param  {String} value
+   * @return {void}
+   */
+  appendHiddenInput: function appendHiddenInput(target, name, value) {
+    target = _base2.default.getElement(target);
+
+    // Remove if already has input.
+    _base2.default.removeElements('input[name="' + name + '"]', target);
+    target.appendChild(this.makeHiddenInput(name, value));
   }
 };
 

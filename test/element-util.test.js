@@ -45,6 +45,34 @@ describe('ElementUtil', () => {
         expect(elm.style.display).to.equal('none');
       });
     });
+
+    describe('#makeHiddenInput', () => {
+      it('Returns input:hidden element.', () => {
+        let input = ElementUtil.makeHiddenInput('input-hidden', 'test-value');
+        expect(input).to.be.instanceof(Element);
+        expect(input.tagName).to.equal('INPUT');
+        expect(input.type).to.equal('hidden');
+      });
+    });
+
+    describe('#appendHiddenInput', () => {
+      let target = document.createElement('div');
+
+      it('Append input:hidden to target as child node.', () => {
+        ElementUtil.appendHiddenInput(target, 'input-hidden', 'test-value');
+        let input = target.querySelector('input[type="hidden"]');
+
+        expect(input).to.be.instanceof(Element);
+        expect(input.value).to.equal('test-value');
+      });
+
+      it('If same input name is exists, then will replace it.', () => {
+        ElementUtil.appendHiddenInput(target, 'input-hidden', 'other-value');
+        let input = target.querySelector('input[type="hidden"]');
+
+        expect(input.value).to.equal('other-value');
+      });
+    });
   });
 
   describe('ElementFilter', () => {
