@@ -52,8 +52,8 @@ let array = ElementUtil.nodeListToArray(nodelist);
 Find ancestor from element.
 - Syntax
 ```javascript
-let element = ElementUtil.findAncestor(elm, selector);
+let element = ElementUtil.findAncestor(self, ancestor);
 ```
-- Param {Element|String} elm or querySelector - base element.
-- Param {String} selector - ancestor's querySelector.
+- Param {Element|String} self - base element.
+- Param {Element|String} ancestor
 - Return {Element|null}
