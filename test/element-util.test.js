@@ -21,6 +21,27 @@ describe('ElementUtil', () => {
         expect(badFn).to.throw(ReferenceError);
       });
     });
+
+    describe('#findAncestor', () => {
+      it('Returns Element if find ancestor.', () => {
+        let elm = ElementUtil.findAncestor('table.filter', '#test');
+        expect(elm).to.be.an.instanceof(Element);
+      });
+
+      it('Returns null if not found ancestor.', () => {
+        let elm = ElementUtil.findAncestor('table.filter', '#impossible');
+        expect(elm).to.be.null;
+      });
+
+      it('It works too if set ancestor parameter as Element.', () => {
+        let elm = ElementUtil.findAncestor(
+          ElementUtil.getElement('table.filter'),
+          ElementUtil.getElement('#test')
+        );
+        console.log(elm);
+        expect(elm).to.equal(document.querySelector('#test'));
+      });
+    });
   });
 
   describe('utilMethods', () => {

@@ -203,19 +203,23 @@ exports.default = {
 
 
   /**
-   * find ancestor by selector.
+   * Find ancestor element.
    *
-   * @param  {Element|String} elm or querySelector
-   * @param  {String}  selector
+   * @param  {Element|String} self
+   * @param  {Element|String} ancestor
    * @return {Element|null}
    */
-  findAncestor: function findAncestor(elm, selector) {
-    elm = this.getElement(elm);
+  findAncestor: function findAncestor(self, ancestor) {
+    self = this.getElement(self);
+    var isMatch = function isMatch(self) {
+      return ancestor instanceof Element ? self === ancestor : self.matches(ancestor);
+    };
+
     do {
-      if (elm == this.getElement('html')) return null;
-      elm = elm.parentElement;
-    } while (!elm.matches(selector));
-    return elm;
+      if (self == this.getElement('html')) return null;
+      self = self.parentElement;
+    } while (!isMatch(self));
+    return self;
   },
   _resolveBase: function _resolveBase(base) {
     base = base === document ? base : this.getElement(base);
