@@ -443,8 +443,8 @@ exports.default = {
    */
   show: function show(selector) {
     var elm = _base2.default.getElement(selector);
-    if (elm.style.display && elm.style.display === 'none') {
-      elm.style.display = null;
+    if (elm.style.display && elm.style.display == 'none') {
+      elm.style.display = '';
     }
   },
 

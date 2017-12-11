@@ -1,39 +1,42 @@
-const expect = window.chai.expect;
-const Module = window.ElementUtil;
-const ElementUtil = Module.default;
-const ElementFilter = Module.ElementFilter;
-const ElementSort = Module.ElementSort;
+var expect = window.chai.expect;
+var Module = window.ElementUtil;
+var ElementUtil = Module.default;
+var ElementFilter = Module.ElementFilter;
+var ElementSort = Module.ElementSort;
 
-describe('ElementUtil', () => {
-  it('ElementUtil to be an object.', () => {
+describe('ElementUtil', function () {
+  it('ElementUtil to be an object.', function () {
     expect(ElementUtil).to.be.an('object');
   });
 
-  describe('baseMethods', () => {
-    describe('#getElement', () => {
-      it('Returns to be an instance of Element.', () => {
+  describe('baseMethods', function () {
+    describe('#getElement', function () {
+      it('Returns to be an instance of Element.', function () {
         let elm = ElementUtil.getElement('#mocha');
         expect(elm).to.be.an.instanceof(Element);
       });
 
-      it('If base is not exists, then will occur ReferenceError.', () => {
-        let badFn = () => ElementUtil.getElement('div', '#mocha1');
+      it('If base is not exists, then will occur ReferenceError.', function () {
+        let badFn = function () {
+          ElementUtil.getElement('div', '#mocha1');
+        };
+
         expect(badFn).to.throw(ReferenceError);
       });
     });
 
-    describe('#findAncestor', () => {
-      it('Returns Element if find ancestor.', () => {
+    describe('#findAncestor', function () {
+      it('Returns Element if find ancestor.', function () {
         let elm = ElementUtil.findAncestor('table.filter', '#test');
         expect(elm).to.be.an.instanceof(Element);
       });
 
-      it('Returns null if not found ancestor.', () => {
+      it('Returns null if not found ancestor.', function () {
         let elm = ElementUtil.findAncestor('table.filter', '#impossible');
         expect(elm).to.be.null;
       });
 
-      it('It works too if set ancestor parameter as Element.', () => {
+      it('It works too if set ancestor parameter as Element.', function () {
         let elm = ElementUtil.findAncestor(
           ElementUtil.getElement('table.filter'),
           ElementUtil.getElement('#test')
@@ -41,7 +44,7 @@ describe('ElementUtil', () => {
         expect(elm).to.equal(document.querySelector('#test'));
       });
 
-      it('No problem in using innerHTML.', () => {
+      it('No problem in using innerHTML.', function () {
         let elm = ElementUtil.getElement('#test > span.inside');
         elm.innerHTML = '<span class="inside">Hello</span>';
         let insideElm = ElementUtil.getElement('#test > span.inside > span.inside');
@@ -51,31 +54,31 @@ describe('ElementUtil', () => {
     });
   });
 
-  describe('utilMethods', () => {
-    describe('#addClass', () => {
-      it('Add class to element.', () => {
+  describe('utilMethods', function () {
+    describe('#addClass', function () {
+      it('Add class to element.', function () {
         let elm = ElementUtil.getElement('#test');
         ElementUtil.addClass(elm, 'test-class');
         expect(elm.classList.contains('test-class')).to.equal(true);
       });
     });
 
-    describe('#toggleShow', () => {
+    describe('#toggleShow', function () {
       let elm = ElementUtil.getElement('div.show-target');
 
-      it('First toggle will show a element.', () => {
+      it('First toggle will show a element.', function () {
         ElementUtil.toggleShow(elm);
         expect(elm.style.display).to.be.empty;
       });
 
-      it('Second toggle will hide a element.', () => {
+      it('Second toggle will hide a element.', function () {
         ElementUtil.toggleShow(elm);
         expect(elm.style.display).to.equal('none');
       });
     });
 
-    describe('#makeHiddenInput', () => {
-      it('Returns input:hidden element.', () => {
+    describe('#makeHiddenInput', function () {
+      it('Returns input:hidden element.', function () {
         let input = ElementUtil.makeHiddenInput('input-hidden', 'test-value');
         expect(input).to.be.instanceof(Element);
         expect(input.tagName).to.equal('INPUT');
@@ -83,10 +86,10 @@ describe('ElementUtil', () => {
       });
     });
 
-    describe('#appendHiddenInput', () => {
+    describe('#appendHiddenInput', function () {
       let target = document.createElement('div');
 
-      it('Append input:hidden to target as child node.', () => {
+      it('Append input:hidden to target as child node.', function () {
         ElementUtil.appendHiddenInput(target, 'input-hidden', 'test-value');
         let input = target.querySelector('input[type="hidden"]');
 
@@ -94,7 +97,7 @@ describe('ElementUtil', () => {
         expect(input.value).to.equal('test-value');
       });
 
-      it('If same input name is exists, then will replace it.', () => {
+      it('If same input name is exists, then will replace it.', function () {
         ElementUtil.appendHiddenInput(target, 'input-hidden', 'other-value');
         let input = target.querySelector('input[type="hidden"]');
 
@@ -103,23 +106,23 @@ describe('ElementUtil', () => {
     });
   });
 
-  describe('ElementFilter', () => {
-    describe('#filter', () => {
-      it('filtering on table element.', () => {
+  describe('ElementFilter', function () {
+    describe('#filter', function () {
+      it('filtering on table element.', function () {
         let hit = ElementUtil.filter('table.filter', 'james');
         expect(hit).to.equal(1);
       });
     });
   });
 
-  describe('ElementSort', () => {
-    describe('#sort', () => {
-      it('sort on list.', () => {
+  describe('ElementSort', function () {
+    describe('#sort', function () {
+      it('sort on list.', function () {
         let items = ElementUtil.sort('ul.sort');
         expect(items[0].textContent).to.equal('abc');
       });
 
-      it('sort on table.', () => {
+      it('sort on table.', function () {
         ElementUtil.sort('table.sort');
         ElementUtil.getElement('table.sort thead th:nth-child(3)').click();
         let firstRowDate = ElementUtil

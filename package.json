@@ -43,5 +43,6 @@
     "presets": [
       "env"
     ]
-  }
+  },
+  "dependencies": {}
 }
