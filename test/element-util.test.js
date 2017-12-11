@@ -38,8 +38,15 @@ describe('ElementUtil', () => {
           ElementUtil.getElement('table.filter'),
           ElementUtil.getElement('#test')
         );
-        console.log(elm);
         expect(elm).to.equal(document.querySelector('#test'));
+      });
+
+      it('No problem in using innerHTML.', () => {
+        let elm = ElementUtil.getElement('#test > span.inside');
+        elm.innerHTML = '<span class="inside">Hello</span>';
+        let insideElm = ElementUtil.getElement('#test > span.inside > span.inside');
+        expect(ElementUtil.findAncestor(insideElm, '#test'))
+          .to.equal(document.querySelector('#test'));
       });
     });
   });
