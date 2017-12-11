@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Adds notice about using polyfill for browser compatibility. Please see [README.md#polyfill](https://github.com/archco/element-util/blob/master/README.md#polyfill)
+
+### Fixed
+- Fix compatibility problem in `show()`.
 
 ## [1.1.1] - 2017-11-19
 ### Changed
