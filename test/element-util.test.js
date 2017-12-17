@@ -32,7 +32,7 @@ describe('ElementUtil', function () {
       });
 
       it('Returns null if not found ancestor.', function () {
-        let elm = ElementUtil.findAncestor('table.filter', '#impossible');
+        let elm = ElementUtil.findAncestor('table.filter', '#not-element');
         expect(elm).to.be.null;
       });
 
@@ -50,6 +50,10 @@ describe('ElementUtil', function () {
         let insideElm = ElementUtil.getElement('#test > span.inside > span.inside');
         expect(ElementUtil.findAncestor(insideElm, '#test'))
           .to.equal(document.querySelector('#test'));
+      });
+
+      it('Returns null when if `null` is during method process.', function () {
+        expect(ElementUtil.findAncestor('#not-element', '#test')).to.be.null;
       });
     });
   });

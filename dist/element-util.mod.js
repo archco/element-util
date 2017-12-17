@@ -216,7 +216,10 @@ exports.default = {
     };
 
     do {
-      if (self == this.getElement('html')) return null;
+      if (self == null || self.parentElement == null) {
+        return null;
+      }
+
       self = self.parentElement;
     } while (!isMatch(self));
     return self;
