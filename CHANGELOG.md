@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.3] - 2017-12-17
+### Fixed
+- Fix problem in `findAncestor()`. #2
+
 ## [1.1.2] - 2017-12-11
 ### Added
 - Adds notice about using polyfill for browser compatibility. Please see [README.md#polyfill](https://github.com/archco/element-util/blob/master/README.md#polyfill)
@@ -27,7 +31,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.0.0] - 2017-10-07
 First release. Please see [ElementUtil API](https://github.com/archco/element-util/tree/master/docs).
 
-[Unreleased]: https://github.com/archco/element-util/compare/v1.1.2...HEAD
+[Unreleased]: https://github.com/archco/element-util/compare/v1.1.3...HEAD
+[1.1.3]: https://github.com/archco/element-util/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/archco/element-util/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/archco/element-util/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/archco/element-util/compare/v1.0.0...v1.1.0
