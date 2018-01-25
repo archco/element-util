@@ -1,13 +1,13 @@
-import Filter from './classes/filter';
-import Sorter from './classes/sorter';
+import ElementFilter from './classes/element-filter';
+import ElementSorter from './classes/element-sorter';
 import * as BaseMethods from './methods/base';
 import * as UtilMethods from './methods/util';
 
 type ElementTarget = BaseMethods.ElementTarget;
 
 export {
-  Filter,
-  Sorter,
+  ElementFilter,
+  ElementSorter,
 };
 
 export default {
@@ -15,12 +15,12 @@ export default {
   ...UtilMethods,
 
   filter(selector: ElementTarget, filter: string = '', enableHTML: boolean = false): number {
-    const f = new Filter(selector, filter, { enableHTML });
+    const f = new ElementFilter(selector, filter, { enableHTML });
     return f.execute().hit;
   },
 
   sort(elm: ElementTarget, options: object = {}): HTMLElement[] {
-    const s = new Sorter(elm, options);
+    const s = new ElementSorter(elm, options);
     return s.execute().getItems();
   },
 };

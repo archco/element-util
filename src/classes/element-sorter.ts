@@ -15,7 +15,7 @@ interface SorterOptions {
   datasetName?: DatasetNames;
 }
 
-export default class Sorter {
+export default class ElementSorter {
   elm: HTMLElement;
   items: HTMLElement[];
   options: SorterOptions;

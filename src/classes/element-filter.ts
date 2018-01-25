@@ -7,7 +7,7 @@ interface FilterOptions {
   enableHTML?: boolean;
 }
 
-export default class Filter {
+export default class ElementFilter {
   elms: NodeList;
   filter: string;
   hit: number = 0;
