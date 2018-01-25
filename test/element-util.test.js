@@ -25,6 +25,22 @@ describe('ElementUtil', function () {
       });
     });
 
+    describe('#removeElements', function () {
+      it('works', function () {
+        let div = document.createElement('div');
+        for (let i = 0; i < 5; i++) {
+          let span = document.createElement('span');
+          div.appendChild(span);
+        }
+        // before
+        expect(div.children.length).to.equal(5);
+        let num = ElementUtil.removeElements('span', div);
+        // than
+        expect(div.children.length).to.equal(0);
+        expect(num).to.equal(5);
+      });
+    });
+
     describe('#findAncestor', function () {
       it('Returns Element if find ancestor.', function () {
         let elm = ElementUtil.findAncestor('table.filter', '#test');
