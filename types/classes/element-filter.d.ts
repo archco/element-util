@@ -13,7 +13,7 @@ export default class ElementFilter {
   constructor(selector: ElementTarget, filter?: string, options?: FilterOptions);
 
   getDefaultOptions(): FilterOptions;
-  setOptions(options: FilterOptions);
+  setOptions(options: FilterOptions): this;
   setFilter(filter: string): this;
   getHit(): number;
   execute(): this;
