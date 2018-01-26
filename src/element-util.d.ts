@@ -1,17 +1,8 @@
-/// <reference types="../node_modules/typescript/lib/lib.dom" />
-/// <reference types="../node_modules/typescript/lib/lib.es5" />
-/// <reference types="../node_modules/typescript/lib/lib.scripthost" />
-/// <reference types="../node_modules/typescript/lib/lib.dom.iterable" />
-/// <reference types="../node_modules/typescript/lib/lib.es2015.iterable" />
-
 import ElementFilter from './classes/element-filter';
 import ElementSorter from './classes/element-sorter';
-import * as BaseMethods from './methods/base';
-import * as UtilMethods from './methods/util';
+import { ElementTarget } from './methods/base';
 
 export as namespace ElementUtil;
-
-declare type ElementTarget = BaseMethods.ElementTarget;
 
 export {
   ElementFilter,

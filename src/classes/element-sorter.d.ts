@@ -1,6 +1,5 @@
-import * as baseMethods from '../methods/base';
+import { ElementTarget } from '../methods/base';
 
-declare type ElementTarget = baseMethods.ElementTarget;
 declare type ItemsSettable = string|NodeList|HTMLElement[];
 
 declare interface DatasetNames {

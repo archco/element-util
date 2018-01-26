@@ -1,7 +1,4 @@
-import * as baseMethods from '../methods/base';
-import * as utilMethods from '../methods/util';
-
-declare type ElementTarget = baseMethods.ElementTarget;
+import { ElementTarget } from '../methods/base';
 
 declare interface FilterOptions {
   enableHTML?: boolean;

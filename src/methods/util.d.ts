@@ -1,6 +1,4 @@
-import * as baseMethods from './base';
-
-declare type ElementTarget = baseMethods.ElementTarget;
+import { ElementTarget } from './base';
 
 export function addListener(selector: ElementTarget, type: string, listener: EventListener, useCapture?: boolean): number|null;
 
