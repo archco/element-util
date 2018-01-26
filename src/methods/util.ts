@@ -7,17 +7,12 @@ export function addListener(
   type: string,
   listener: EventListener,
   useCapture: boolean = false,
-): number|null {
+): number {
 
   const elms: NodeList = baseMethods.getElements(selector);
-  if (!elms.length) {
-    return null;
-  }
-
   for (const elm of elms) {
     elm.addEventListener(type, listener, useCapture);
   }
-
   return elms.length;
 }
 

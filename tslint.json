@@ -6,6 +6,7 @@
     "object-literal-sort-keys": [true, "ignore-case", "match-declaration-order", "shorthand-first"],
     "member-access": [true, "no-public"],
     "arrow-parens": [true, "ban-single-arg-parens"],
-    "prefer-for-of": false
+    "prefer-for-of": false,
+    "no-namespace": [true, "allow-declarations"]
   }
 }

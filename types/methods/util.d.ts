@@ -1,6 +1,13 @@
 import { ElementTarget } from './base';
 
-export function addListener(selector: ElementTarget, type: string, listener: EventListener, useCapture?: boolean): number|null;
+export as namespace ElementUtil;
+
+export function addListener(
+  selector: ElementTarget,
+  type: string,
+  listener: EventListener,
+  useCapture?: boolean,
+): number|null;
 
 export function wrap(selector: ElementTarget, className: string, tagName?: string): void;
 

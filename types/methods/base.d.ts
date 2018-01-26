@@ -1,3 +1,5 @@
+export as namespace ElementUtil;
+
 export type ElementTarget = string|Element|NodeList;
 
 declare function resolveBase(base: Document|ElementTarget): Document|Element;
