@@ -55,7 +55,9 @@ export function wrapAll(
   const div = document.createElement(tagName);
   div.classList.add(className);
 
-  elms.forEach(elm => div.appendChild(elm));
+  for (const elm of elms) {
+    div.appendChild(elm);
+  }
 
   if (preSibling) {
     parent.insertBefore(div, preSibling.nextSibling);

@@ -1,3 +1,6 @@
+/// <reference types="../node_modules/typescript/lib/lib.es2015.iterable" />
+/// <reference types="../node_modules/typescript/lib/lib.dom.iterable" />
+
 import ElementFilter from './classes/element-filter';
 import ElementSorter from './classes/element-sorter';
 import * as BaseMethods from './methods/base';

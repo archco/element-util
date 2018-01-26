@@ -282,13 +282,26 @@ function wrapAll(selector, className, tagName) {
     var preSibling = elms[0].previousSibling;
     var div = document.createElement(tagName);
     div.classList.add(className);
-    elms.forEach(function (elm) { return div.appendChild(elm); });
+    try {
+        for (var elms_3 = __values(elms), elms_3_1 = elms_3.next(); !elms_3_1.done; elms_3_1 = elms_3.next()) {
+            var elm = elms_3_1.value;
+            div.appendChild(elm);
+        }
+    }
+    catch (e_3_1) { e_3 = { error: e_3_1 }; }
+    finally {
+        try {
+            if (elms_3_1 && !elms_3_1.done && (_a = elms_3.return)) _a.call(elms_3);
+        }
+        finally { if (e_3) throw e_3.error; }
+    }
     if (preSibling) {
         parent.insertBefore(div, preSibling.nextSibling);
     }
     else {
         parent.appendChild(div);
     }
+    var e_3, _a;
 }
 function submitConfirm(selector, message) {
     if (message === void 0) { message = 'Are you confirm?'; }
