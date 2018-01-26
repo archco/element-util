@@ -24,7 +24,8 @@ export function addListener(
 export function wrap(
   selector: ElementTarget,
   className: string,
-  tagName: string = 'div'): void {
+  tagName: string = 'div',
+): void {
 
   const elms = baseMethods.getElements(selector);
   for (const elm of elms) {
@@ -45,7 +46,8 @@ export function wrap(
 export function wrapAll(
   selector: ElementTarget,
   className: string,
-  tagName: string = 'div'): void {
+  tagName: string = 'div',
+): void {
 
   const elms = baseMethods.getElements(selector);
   const parent = elms[0].parentNode;

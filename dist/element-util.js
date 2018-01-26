@@ -70,12 +70,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -197,151 +196,7 @@ function findAncestor(self, ancestor) {
 
 
 /***/ }),
-
-/***/ 1:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_filter__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_sorter__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__methods_base__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__methods_util__ = __webpack_require__(2);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Filter", function() { return __WEBPACK_IMPORTED_MODULE_0__classes_filter__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Sorter", function() { return __WEBPACK_IMPORTED_MODULE_1__classes_sorter__["a"]; });
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = (__assign({}, __WEBPACK_IMPORTED_MODULE_2__methods_base__, __WEBPACK_IMPORTED_MODULE_3__methods_util__, { filter: function (selector, filter, enableHTML) {
-        if (filter === void 0) { filter = ''; }
-        if (enableHTML === void 0) { enableHTML = false; }
-        var f = new __WEBPACK_IMPORTED_MODULE_0__classes_filter__["a" /* default */](selector, filter, { enableHTML: enableHTML });
-        return f.execute().hit;
-    },
-    sort: function (elm, options) {
-        if (options === void 0) { options = {}; }
-        var s = new __WEBPACK_IMPORTED_MODULE_1__classes_sorter__["a" /* default */](elm, options);
-        return s.execute().getItems();
-    } }));
-
-
-/***/ }),
-
-/***/ 18:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__methods_base__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__methods_util__ = __webpack_require__(2);
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-
-
-var Filter = /** @class */ (function () {
-    function Filter(selector, filter, options) {
-        if (filter === void 0) { filter = ''; }
-        if (options === void 0) { options = {}; }
-        this.hit = 0;
-        this.elms = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"](selector);
-        this.filter = filter;
-        this.options = this.getDefaultOptions();
-        this.setOptions(options);
-    }
-    Filter.prototype.getDefaultOptions = function () {
-        return {
-            enableHTML: false,
-        };
-    };
-    Filter.prototype.setOptions = function (options) {
-        this.options = __assign({}, this.options, options);
-    };
-    Filter.prototype.setFilter = function (filter) {
-        this.filter = filter;
-        return this;
-    };
-    Filter.prototype.getHit = function () {
-        return this.hit;
-    };
-    Filter.prototype.execute = function () {
-        if (this.elmsIsTable()) {
-            this.filteringTable();
-        }
-        else {
-            this.filteringNodes(this.elms);
-        }
-        return this;
-    };
-    Filter.prototype.filteringTable = function () {
-        var table = this.elms[0];
-        var tableRows = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"]('tbody tr', table);
-        this.filteringNodes(tableRows);
-    };
-    Filter.prototype.filteringNodes = function (nodes) {
-        this.hit = 0;
-        var filter = this.filter.toUpperCase();
-        try {
-            for (var nodes_1 = __values(nodes), nodes_1_1 = nodes_1.next(); !nodes_1_1.done; nodes_1_1 = nodes_1.next()) {
-                var node = nodes_1_1.value;
-                var elm = node;
-                var content = this.options.enableHTML
-                    ? elm.innerHTML
-                    : elm.textContent;
-                if (content.toUpperCase().indexOf(filter) === -1) {
-                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["hide"](elm);
-                }
-                else {
-                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["show"](elm);
-                    this.hit++;
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (nodes_1_1 && !nodes_1_1.done && (_a = nodes_1.return)) _a.call(nodes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        var e_1, _a;
-    };
-    Filter.prototype.elmsIsTable = function () {
-        var elm = this.elms[0];
-        return this.elms.length === 1 && elm.tagName === 'TABLE';
-    };
-    return Filter;
-}());
-/* harmony default export */ __webpack_exports__["a"] = (Filter);
-
-
-/***/ }),
-
-/***/ 2:
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -485,8 +340,148 @@ function appendHiddenInput(target, name, value) {
 
 
 /***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/***/ 55:
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__methods_base__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__methods_util__ = __webpack_require__(1);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ElementFilter", function() { return __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ElementSorter", function() { return __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__["a"]; });
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (__assign({}, __WEBPACK_IMPORTED_MODULE_2__methods_base__, __WEBPACK_IMPORTED_MODULE_3__methods_util__, { filter: function (selector, filter, enableHTML) {
+        if (filter === void 0) { filter = ''; }
+        if (enableHTML === void 0) { enableHTML = false; }
+        var f = new __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__["a" /* default */](selector, filter, { enableHTML: enableHTML });
+        return f.execute().hit;
+    },
+    sort: function (elm, options) {
+        if (options === void 0) { options = {}; }
+        var s = new __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__["a" /* default */](elm, options);
+        return s.execute().getItems();
+    } }));
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__methods_base__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__methods_util__ = __webpack_require__(1);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+
+
+var ElementFilter = /** @class */ (function () {
+    function ElementFilter(selector, filter, options) {
+        if (filter === void 0) { filter = ''; }
+        if (options === void 0) { options = {}; }
+        this.hit = 0;
+        this.elms = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"](selector);
+        this.filter = filter;
+        this.options = this.getDefaultOptions();
+        this.setOptions(options);
+    }
+    ElementFilter.prototype.getDefaultOptions = function () {
+        return {
+            enableHTML: false,
+        };
+    };
+    ElementFilter.prototype.setOptions = function (options) {
+        this.options = __assign({}, this.options, options);
+    };
+    ElementFilter.prototype.setFilter = function (filter) {
+        this.filter = filter;
+        return this;
+    };
+    ElementFilter.prototype.getHit = function () {
+        return this.hit;
+    };
+    ElementFilter.prototype.execute = function () {
+        if (this.elmsIsTable()) {
+            this.filteringTable();
+        }
+        else {
+            this.filteringNodes(this.elms);
+        }
+        return this;
+    };
+    ElementFilter.prototype.filteringTable = function () {
+        var table = this.elms[0];
+        var tableRows = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"]('tbody tr', table);
+        this.filteringNodes(tableRows);
+    };
+    ElementFilter.prototype.filteringNodes = function (nodes) {
+        this.hit = 0;
+        var filter = this.filter.toUpperCase();
+        try {
+            for (var nodes_1 = __values(nodes), nodes_1_1 = nodes_1.next(); !nodes_1_1.done; nodes_1_1 = nodes_1.next()) {
+                var node = nodes_1_1.value;
+                var elm = node;
+                var content = this.options.enableHTML
+                    ? elm.innerHTML
+                    : elm.textContent;
+                if (content.toUpperCase().indexOf(filter) === -1) {
+                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["hide"](elm);
+                }
+                else {
+                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["show"](elm);
+                    this.hit++;
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (nodes_1_1 && !nodes_1_1.done && (_a = nodes_1.return)) _a.call(nodes_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        var e_1, _a;
+    };
+    ElementFilter.prototype.elmsIsTable = function () {
+        var elm = this.elms[0];
+        return this.elms.length === 1 && elm.tagName === 'TABLE';
+    };
+    return ElementFilter;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (ElementFilter);
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -526,15 +521,15 @@ var __read = (this && this.__read) || function (o, n) {
     return ar;
 };
 
-var Sorter = /** @class */ (function () {
-    function Sorter(elm, options) {
+var ElementSorter = /** @class */ (function () {
+    function ElementSorter(elm, options) {
         if (options === void 0) { options = {}; }
         this.options = this.getDefaultOptions();
         this.setOptions(options);
         this.setElement(elm);
         this.setItems(this.options.items);
     }
-    Sorter.prototype.getDefaultOptions = function () {
+    ElementSorter.prototype.getDefaultOptions = function () {
         return {
             items: 'auto',
             datasetName: {
@@ -544,18 +539,18 @@ var Sorter = /** @class */ (function () {
             },
         };
     };
-    Sorter.prototype.setOptions = function (options) {
+    ElementSorter.prototype.setOptions = function (options) {
         this.options = __assign({}, this.options, options);
         return this;
     };
-    Sorter.prototype.setElement = function (elm) {
+    ElementSorter.prototype.setElement = function (elm) {
         this.elm = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElement"](elm);
         return this;
     };
-    Sorter.prototype.getItems = function () {
+    ElementSorter.prototype.getItems = function () {
         return this.items;
     };
-    Sorter.prototype.setItems = function (items) {
+    ElementSorter.prototype.setItems = function (items) {
         if (this.elmIsTable()) {
             var nodeList = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"]('tbody tr', this.elm);
             this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["nodeListToArray"](nodeList);
@@ -570,14 +565,14 @@ var Sorter = /** @class */ (function () {
         }
         return this;
     };
-    Sorter.prototype.execute = function () {
+    ElementSorter.prototype.execute = function () {
         this.elmIsTable() ? this.sortTable() : this.sortElements();
         return this;
     };
-    Sorter.prototype.elmIsTable = function () {
+    ElementSorter.prototype.elmIsTable = function () {
         return this.elm.tagName === 'TABLE';
     };
-    Sorter.prototype.sortElements = function () {
+    ElementSorter.prototype.sortElements = function () {
         var _this = this;
         var compareMethod = function (a, b) {
             var aVal = _this.getSortValue(a);
@@ -589,7 +584,7 @@ var Sorter = /** @class */ (function () {
         this.toggleSortDirection(this.elm);
         this.sorting(this.items, compareMethod.bind(this));
     };
-    Sorter.prototype.sortTable = function () {
+    ElementSorter.prototype.sortTable = function () {
         var _this = this;
         var heads = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"]('thead th', this.elm);
         var _loop_1 = function (i, head) {
@@ -615,7 +610,7 @@ var Sorter = /** @class */ (function () {
         }
         var e_1, _d;
     };
-    Sorter.prototype.sorting = function (items, compareMethod) {
+    ElementSorter.prototype.sorting = function (items, compareMethod) {
         items.sort(compareMethod);
         items.forEach(function (item) {
             var parent = item.parentNode;
@@ -623,7 +618,7 @@ var Sorter = /** @class */ (function () {
             parent.appendChild(item);
         });
     };
-    Sorter.prototype.sortingTable = function (rows, nth, type, direction) {
+    ElementSorter.prototype.sortingTable = function (rows, nth, type, direction) {
         var _this = this;
         var compareMethod = function (a, b) {
             a = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElement"]("td:nth-child(" + nth + ")", a);
@@ -636,24 +631,24 @@ var Sorter = /** @class */ (function () {
         };
         this.sorting(rows, compareMethod.bind(this));
     };
-    Sorter.prototype.getSortValue = function (elm) {
+    ElementSorter.prototype.getSortValue = function (elm) {
         var sortValue = elm.dataset[this.options.datasetName.sortValue];
         if (!sortValue) {
             sortValue = elm.textContent;
         }
         return sortValue.toUpperCase();
     };
-    Sorter.prototype.getSortType = function (elm) {
+    ElementSorter.prototype.getSortType = function (elm) {
         return elm.dataset[this.options.datasetName.sortType] || null;
     };
-    Sorter.prototype.getSortDirection = function (elm) {
+    ElementSorter.prototype.getSortDirection = function (elm) {
         return elm.dataset[this.options.datasetName.sortDirection];
     };
-    Sorter.prototype.toggleSortDirection = function (elm) {
+    ElementSorter.prototype.toggleSortDirection = function (elm) {
         elm.dataset[this.options.datasetName.sortDirection]
             = this.getSortDirection(elm) === 'asc' ? 'desc' : 'asc';
     };
-    Sorter.prototype.compare = function (a, b, type, asc) {
+    ElementSorter.prototype.compare = function (a, b, type, asc) {
         if (asc === void 0) { asc = true; }
         var compareNumber = function (aVal, bVal) {
             var aNum = parseFloat(aVal);
@@ -678,13 +673,12 @@ var Sorter = /** @class */ (function () {
             return asc ? a.localeCompare(b) : b.localeCompare(a);
         }
     };
-    return Sorter;
+    return ElementSorter;
 }());
-/* harmony default export */ __webpack_exports__["a"] = (Sorter);
+/* harmony default export */ __webpack_exports__["a"] = (ElementSorter);
 
 
 /***/ })
-
-/******/ });
+/******/ ]);
 });
 //# sourceMappingURL=element-util.js.map

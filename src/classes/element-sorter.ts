@@ -1,5 +1,4 @@
 import * as baseMethods from '../methods/base';
-import { nodeListToArray } from '../methods/base';
 
 type ElementTarget = baseMethods.ElementTarget;
 type ItemsSettable = string|NodeList|HTMLElement[];
@@ -27,7 +26,7 @@ export default class ElementSorter {
     this.setItems(this.options.items);
   }
 
-  getDefaultOptions() {
+  getDefaultOptions(): SorterOptions {
     return {
       items: 'auto', // Items selector: 'auto' | selector | NodeList | Array
       datasetName: {
