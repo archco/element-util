@@ -1,15 +1,15 @@
 var expect = window.chai.expect;
 var Module = window.ElementUtil;
 var ElementUtil = Module.default;
-var ElementFilter = Module.ElementFilter;
-var ElementSort = Module.ElementSort;
+// var ElementFilter = Module.ElementFilter;
+// var ElementSort = Module.ElementSort;
 
 describe('ElementUtil', function () {
   it('ElementUtil to be an object.', function () {
     expect(ElementUtil).to.be.an('object');
   });
 
-  describe('baseMethods', function () {
+  describe('#BaseMethods', function () {
     describe('#getElement', function () {
       it('Returns to be an instance of Element.', function () {
         let elm = ElementUtil.getElement('#mocha');
@@ -22,6 +22,22 @@ describe('ElementUtil', function () {
         };
 
         expect(badFn).to.throw(ReferenceError);
+      });
+    });
+
+    describe('#removeElements', function () {
+      it('works', function () {
+        let div = document.createElement('div');
+        for (let i = 0; i < 5; i++) {
+          let span = document.createElement('span');
+          div.appendChild(span);
+        }
+        // before
+        expect(div.children.length).to.equal(5);
+        let num = ElementUtil.removeElements('span', div);
+        // than
+        expect(div.children.length).to.equal(0);
+        expect(num).to.equal(5);
       });
     });
 
@@ -58,7 +74,63 @@ describe('ElementUtil', function () {
     });
   });
 
-  describe('utilMethods', function () {
+  describe('#UtilMethods', function () {
+    describe('#wrap', function () {
+      it('wrapping elements each one.', function () {
+        const div = document.createElement('div');
+        for (let i = 0; i < 5; i++) {
+          const span = document.createElement('span');
+          div.appendChild(span);
+        }
+        // before
+        expect(div.children[0].tagName).to.equal('SPAN');
+        const elms = ElementUtil.getElements('span', div);
+        ElementUtil.wrap(elms, 'wrapper', 'div');
+        // than
+        expect(div.children[0].tagName).to.equal('DIV');
+        expect(div.children[1].classList.contains('wrapper')).to.be.true;
+      });
+    });
+
+    describe('#wrapAll', function () {
+      it('wrapping all elements.', function () {
+        const div = document.createElement('div');
+        for (let i = 0; i < 5; i++) {
+          const span = document.createElement('span');
+          div.appendChild(span);
+        }
+        // before
+        expect(div.children[0].tagName).to.equal('SPAN');
+        const elms = ElementUtil.getElements('span', div);
+        ElementUtil.wrapAll(elms, 'wrapper', 'div');
+        // than
+        expect(div.children.length).to.equal(1);
+        expect(div.children[0].children.length).to.equal(5);
+        expect(div.children[0].tagName).to.equal('DIV');
+        expect(div.children[0].classList.contains('wrapper')).to.be.true;
+      });
+
+      it('works even when target elements are position between siblings.', function () {
+        const div = document.createElement('div');
+        for (let i = 1; i <= 6; i++) {
+          const span = document.createElement('span');
+          if (i % 2 == 0) {
+            span.classList.add('target');
+          }
+          div.appendChild(span);
+        }
+        // before
+        expect(div.children.length).to.equal(6);
+        expect(div.children[1].classList.contains('target')).to.be.true;
+        const elms = ElementUtil.getElements('span.target', div);
+        ElementUtil.wrapAll(elms, 'wrapper', 'div');
+        // than
+        expect(div.children.length).to.equal(4);
+        expect(div.children[1].classList.contains('wrapper')).to.be.true;
+        expect(div.children[1].children.length).to.equal(3);
+      });
+    });
+
     describe('#addClass', function () {
       it('Add class to element.', function () {
         let elm = ElementUtil.getElement('#test');

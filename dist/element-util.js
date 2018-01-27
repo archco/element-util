@@ -1,5 +1,14 @@
-window["ElementUtil"] =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["ElementUtil"] = factory();
+	else
+		root["ElementUtil"] = factory();
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -66,948 +75,795 @@ window["ElementUtil"] =
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  /**
-   * getElement
-   *
-   * @param  {String|Element|NodeList} selector
-   * @param  {String|Element} [ base = document ]
-   * @return {Element}
-   */
-  getElement: function getElement(selector) {
-    var base = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-
-    base = this._resolveBase(base);
-
-    if (typeof selector === 'string') {
-      return base.querySelector(selector);
-    } else if (selector instanceof Element) {
-      return selector;
-    } else if (selector instanceof NodeList) {
-      return selector[0];
-    } else {
-      throw new TypeError('selector is must be String or Element');
-    }
-  },
-
-
-  /**
-   * getElements
-   *
-   * @param  {String|Element|NodeList} selector
-   * @param  {String|Element} [ base = document ]
-   * @return {NodeList}
-   */
-  getElements: function getElements(selector) {
-    var base = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-
-    base = this._resolveBase(base);
-
-    if (typeof selector === 'string') {
-      return base.querySelectorAll(selector);
-    } else if (selector instanceof Element) {
-      return this.toNodeList(selector);
-    } else if (selector instanceof NodeList) {
-      return selector;
-    } else {
-      throw new TypeError('selector is must be String or NodeList');
-    }
-  },
-
-
-  /**
-   * removeElements
-   *
-   * @param  {String|Element|NodeList} selector
-   * @param  {String|Element} [ base = document ]
-   * @return {Number} number of affected.
-   */
-  removeElements: function removeElements(selector) {
-    var base = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-
-    base = this._resolveBase(base);
-
-    var elms = this.getElements(selector, base);
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = elms[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var elm = _step.value;
-
-        elm.parentNode.removeChild(elm);
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["getElement"] = getElement;
+/* harmony export (immutable) */ __webpack_exports__["getElements"] = getElements;
+/* harmony export (immutable) */ __webpack_exports__["removeElements"] = removeElements;
+/* harmony export (immutable) */ __webpack_exports__["toNodeList"] = toNodeList;
+/* harmony export (immutable) */ __webpack_exports__["nodeListToArray"] = nodeListToArray;
+/* harmony export (immutable) */ __webpack_exports__["findAncestor"] = findAncestor;
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
         }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-
-    return elms.length;
-  },
-
-
-  /**
-   * Element to NodeList
-   *
-   * @param  {Element|String} elm
-   * @return {NodeList}
-   */
-  toNodeList: function toNodeList(elm) {
-    elm = this.getElement(elm);
-    elm.setAttribute('toNodeList', '');
-    var nodelist = document.querySelectorAll('[toNodeList]');
-    elm.removeAttribute('toNodeList');
-    return nodelist;
-  },
-
-
-  /**
-   * Convert NodeList to Array.
-   *
-   * @param  {NodeList|String|Array} nodelist
-   * @return {Array}
-   */
-  nodeListToArray: function nodeListToArray(nodelist) {
-    if (Array.isArray(nodelist)) return nodelist;
-    nodelist = this.getElements(nodelist);
-    return Array.prototype.slice.call(nodelist);
-  },
-
-
-  /**
-   * Find ancestor element.
-   *
-   * @param  {Element|String} self
-   * @param  {Element|String} ancestor
-   * @return {Element|null}
-   */
-  findAncestor: function findAncestor(self, ancestor) {
-    self = this.getElement(self);
-    var isMatch = function isMatch(self) {
-      return ancestor instanceof Element ? self === ancestor : self.matches(ancestor);
     };
-
+};
+function resolveBase(base) {
+    base = base === document ? base : getElement(base);
+    if (!base) {
+        throw new ReferenceError("'base' element is not exist!");
+    }
+    return base;
+}
+/**
+ * Polyfill for Element.matches
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#polyfill
+ */
+function polyfillForMatches() {
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = Element.prototype.msMatchesSelector;
+    }
+}
+/**
+ * Get element.
+ * @param  selector querySelector
+ * @param  base     base element. default is Document.
+ * @return
+ */
+function getElement(selector, base) {
+    if (base === void 0) { base = document; }
+    base = resolveBase(base);
+    if (typeof selector === 'string') {
+        return base.querySelector(selector);
+    }
+    else if (selector instanceof Element) {
+        return selector;
+    }
+    else if (selector instanceof NodeList) {
+        return selector[0];
+    }
+    else {
+        throw new TypeError('selector is must be String or Element');
+    }
+}
+/**
+ * Get elements as NodeList.
+ * @param  selector querySelector
+ * @param  base     base element. default is Document.
+ * @return
+ */
+function getElements(selector, base) {
+    if (base === void 0) { base = document; }
+    base = resolveBase(base);
+    if (typeof selector === 'string') {
+        return base.querySelectorAll(selector);
+    }
+    else if (selector instanceof Element) {
+        return toNodeList(selector);
+    }
+    else if (selector instanceof NodeList) {
+        return selector;
+    }
+    else {
+        throw new TypeError('selector is must be String or NodeList');
+    }
+}
+/**
+ * Remove elements.
+ * @param  selector querySelector
+ * @param  base     base element. default is Document.
+ * @return          number of removed.
+ */
+function removeElements(selector, base) {
+    if (base === void 0) { base = document; }
+    base = resolveBase(base);
+    var elms = getElements(selector, base);
+    try {
+        for (var elms_1 = __values(elms), elms_1_1 = elms_1.next(); !elms_1_1.done; elms_1_1 = elms_1.next()) {
+            var elm = elms_1_1.value;
+            elm.parentNode.removeChild(elm);
+        }
+    }
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (elms_1_1 && !elms_1_1.done && (_a = elms_1.return)) _a.call(elms_1);
+        }
+        finally { if (e_1) throw e_1.error; }
+    }
+    return elms.length;
+    var e_1, _a;
+}
+/**
+ * Convert a single element to NodeList.
+ * @param  elm
+ * @return
+ */
+function toNodeList(elm) {
+    elm = getElement(elm);
+    elm.setAttribute('toNodeList', '');
+    var nodeList = document.querySelectorAll('[toNodeList]');
+    elm.removeAttribute('toNodeList');
+    return nodeList;
+}
+/**
+ * Convert NodeList to Array.
+ * @param  list
+ * @return
+ */
+function nodeListToArray(list) {
+    if (Array.isArray(list)) {
+        return list;
+    }
+    else {
+        list = this.getElements(list);
+        return Array.prototype.slice.call(list);
+    }
+}
+/**
+ * Find ancestor element.
+ * @param  self
+ * @param  ancestor
+ * @return          Element or null.
+ */
+function findAncestor(self, ancestor) {
+    polyfillForMatches();
+    self = getElement(self);
+    var isMatch = function (elm) { return ancestor instanceof Element
+        ? elm === ancestor
+        : elm.matches(ancestor); };
     do {
-      if (self == null || self.parentElement == null) {
-        return null;
-      }
-
-      self = self.parentElement;
+        if (self == null || self.parentElement == null) {
+            return null;
+        }
+        self = self.parentElement;
     } while (!isMatch(self));
     return self;
-  },
-  _resolveBase: function _resolveBase(base) {
-    base = base === document ? base : this.getElement(base);
-    if (!base) throw new ReferenceError("'base' element is not exist!");
-    return base;
-  }
-};
+}
+
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["addListener"] = addListener;
+/* harmony export (immutable) */ __webpack_exports__["wrap"] = wrap;
+/* harmony export (immutable) */ __webpack_exports__["wrapAll"] = wrapAll;
+/* harmony export (immutable) */ __webpack_exports__["submitConfirm"] = submitConfirm;
+/* harmony export (immutable) */ __webpack_exports__["addClass"] = addClass;
+/* harmony export (immutable) */ __webpack_exports__["removeClass"] = removeClass;
+/* harmony export (immutable) */ __webpack_exports__["toggleClass"] = toggleClass;
+/* harmony export (immutable) */ __webpack_exports__["hide"] = hide;
+/* harmony export (immutable) */ __webpack_exports__["show"] = show;
+/* harmony export (immutable) */ __webpack_exports__["toggleShow"] = toggleShow;
+/* harmony export (immutable) */ __webpack_exports__["makeHiddenInput"] = makeHiddenInput;
+/* harmony export (immutable) */ __webpack_exports__["appendHiddenInput"] = appendHiddenInput;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base__ = __webpack_require__(0);
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
 
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _base = __webpack_require__(0);
-
-var _base2 = _interopRequireDefault(_base);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  /**
-   * add event listener on selector.
-   *
-   * @param {String|Element|NodeList}   selector
-   * @param {String}   type  event type
-   * @param {Function} listener
-   * @param {Boolean}  [ useCapture = false ]
-   */
-  addListener: function addListener(selector, type, listener) {
-    var useCapture = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
-    var elements = _base2.default.getElements(selector);
-    if (!elements.length) return null;
-
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
+/**
+ * Add event listener on every selected elements.
+ * @param  selector   querySelector
+ * @param  type       event-type
+ * @param  listener   listener
+ * @param  useCapture default is false
+ * @return            number of affected
+ */
+function addListener(selector, type, listener, useCapture) {
+    if (useCapture === void 0) { useCapture = false; }
+    var elms = __WEBPACK_IMPORTED_MODULE_0__base__["getElements"](selector);
     try {
-      for (var _iterator = elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var element = _step.value;
-
-        element.addEventListener(type, listener, useCapture);
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
+        for (var elms_1 = __values(elms), elms_1_1 = elms_1.next(); !elms_1_1.done; elms_1_1 = elms_1.next()) {
+            var elm = elms_1_1.value;
+            elm.addEventListener(type, listener, useCapture);
         }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
     }
-
-    return elements.length;
-  },
-
-
-  /**
-   * wrap elements by wrapper, one by one.
-   *
-   * @param  {String|Element|NodeList} selector
-   * @param  {String} className wrapper's class name.
-   * @param  {String} [ tagName = 'DIV' ] wrapper's tag name.
-   * @return {void}
-   */
-  wrap: function wrap(selector, className) {
-    var tagName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'DIV';
-
-    var elements = _base2.default.getElements(selector);
-
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (elms_1_1 && !elms_1_1.done && (_a = elms_1.return)) _a.call(elms_1);
+        }
+        finally { if (e_1) throw e_1.error; }
+    }
+    return elms.length;
+    var e_1, _a;
+}
+/**
+ * Wrapping each element.
+ * @param selector  querySelector
+ * @param className wrapper's class name.
+ * @param tagName   wrapper's tag name, default is 'div'.
+ */
+function wrap(selector, className, tagName) {
+    if (tagName === void 0) { tagName = 'div'; }
+    var elms = __WEBPACK_IMPORTED_MODULE_0__base__["getElements"](selector);
     try {
-      for (var _iterator2 = elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var elm = _step2.value;
-
-        var parent = elm.parentNode;
-        var sibling = elm.nextSibling;
-        var div = document.createElement(tagName);
-        div.classList.add(className);
-        div.appendChild(elm);
-
-        if (sibling) {
-          parent.insertBefore(div, sibling);
-        } else {
-          parent.appendChild(div);
+        for (var elms_2 = __values(elms), elms_2_1 = elms_2.next(); !elms_2_1.done; elms_2_1 = elms_2.next()) {
+            var elm = elms_2_1.value;
+            var parent_1 = elm.parentNode;
+            var sibling = elm.nextSibling;
+            var div = document.createElement(tagName);
+            div.classList.add(className);
+            div.appendChild(elm);
+            if (sibling) {
+                parent_1.insertBefore(div, sibling);
+            }
+            else {
+                parent_1.appendChild(div);
+            }
         }
-      }
-    } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-          _iterator2.return();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
     }
-  },
-
-
-  /**
-   * wrap all elements inside to wrapper.
-   *
-   * @param  {String|Element|NodeList} selector
-   * @param  {String} className wrapper's class name.
-   * @param  {String} [ tagName = 'DIV' ] wrapper's tag name.
-   * @return {void}
-   */
-  wrapAll: function wrapAll(selector, className) {
-    var tagName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'DIV';
-
-    var elements = _base2.default.getElements(selector);
-    var parent = elements[0].parentNode;
-    var sibling = elements[0].nextSibling;
+    catch (e_2_1) { e_2 = { error: e_2_1 }; }
+    finally {
+        try {
+            if (elms_2_1 && !elms_2_1.done && (_a = elms_2.return)) _a.call(elms_2);
+        }
+        finally { if (e_2) throw e_2.error; }
+    }
+    var e_2, _a;
+}
+/**
+ * Wrapping all elements inside a one wrapper.
+ * @param selector  querySelector
+ * @param className wrapper's class name.
+ * @param tagName   wrapper's tag name, default is 'div'.
+ */
+function wrapAll(selector, className, tagName) {
+    if (tagName === void 0) { tagName = 'div'; }
+    var elms = __WEBPACK_IMPORTED_MODULE_0__base__["getElements"](selector);
+    var parent = elms[0].parentNode;
+    var preSibling = elms[0].previousSibling;
     var div = document.createElement(tagName);
     div.classList.add(className);
-
-    elements.forEach(function (elm) {
-      return div.appendChild(elm);
-    });
-
-    if (sibling) {
-      parent.insertBefore(div, sibling);
-    } else {
-      parent.appendChild(div);
+    try {
+        for (var elms_3 = __values(elms), elms_3_1 = elms_3.next(); !elms_3_1.done; elms_3_1 = elms_3.next()) {
+            var elm = elms_3_1.value;
+            div.appendChild(elm);
+        }
     }
-  },
-
-
-  /**
-   * submitConfirm
-   *
-   * @param  {String|Element|NodeList} selector
-   * @param  {String} [ message = 'Are you confirm?' ]
-   * @return {void}
-   */
-  submitConfirm: function submitConfirm(selector) {
-    var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Are you confirm?';
-
-    this.addListener(selector, 'submit', function (event) {
-      if (!confirm(message)) event.preventDefault();
-    }, true); // use capture.
-  },
-
-
-  /**
-   * addClass
-   *
-   * @param  {String|Element} selector
-   * @param  {String} className
-   * @return {void}
-   */
-  addClass: function addClass(selector, className) {
-    var elm = _base2.default.getElement(selector);
+    catch (e_3_1) { e_3 = { error: e_3_1 }; }
+    finally {
+        try {
+            if (elms_3_1 && !elms_3_1.done && (_a = elms_3.return)) _a.call(elms_3);
+        }
+        finally { if (e_3) throw e_3.error; }
+    }
+    if (preSibling) {
+        parent.insertBefore(div, preSibling.nextSibling);
+    }
+    else {
+        parent.appendChild(div);
+    }
+    var e_3, _a;
+}
+/**
+ * Add confirm message listener when 'submit' event.
+ * @param selector querySelector, form element probably.
+ * @param message  confirm message.
+ */
+function submitConfirm(selector, message) {
+    if (message === void 0) { message = 'Are you confirm?'; }
+    addListener(selector, 'submit', function (e) {
+        if (!confirm(message)) {
+            e.preventDefault();
+        }
+    }, true); // this use capture.
+}
+/**
+ * Add confirm message listener when 'submit' event.
+ * @param selector querySelector, form element probably.
+ * @param message  confirm message.
+ */
+function addClass(selector, className) {
+    var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     elm.classList.add(className);
-  },
-
-
-  /**
-   * removeClass
-   *
-   * @param  {String|Element} selector
-   * @param  {String} className
-   * @return {void}
-   */
-  removeClass: function removeClass(selector, className) {
-    var elm = _base2.default.getElement(selector);
+}
+/**
+ * Remove class from element.
+ * @param selector  querySelector
+ * @param className class name.
+ */
+function removeClass(selector, className) {
+    var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     elm.classList.remove(className);
-  },
-
-
-  /**
-   * toggleClass
-   *
-   * @param  {String|Element} selector
-   * @param  {String} className
-   * @return {void}
-   */
-  toggleClass: function toggleClass(selector, className) {
-    var elm = _base2.default.getElement(selector);
+}
+/**
+ * Toggling class to element.
+ * @param selector  querySelector
+ * @param className class name.
+ */
+function toggleClass(selector, className) {
+    var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     elm.classList.toggle(className);
-  },
-
-
-  /**
-   * hide element
-   *
-   * @param  {String|Element} selector
-   * @return {void}
-   */
-  hide: function hide(selector) {
-    var elm = _base2.default.getElement(selector);
+}
+/**
+ * Hide element. It will set element's display to 'none'.
+ * @param selector querySelector
+ */
+function hide(selector) {
+    var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     elm.style.display = 'none';
-  },
-
-
-  /**
-   * show element
-   *
-   * @param  {String|Element} selector
-   * @return {void}
-   */
-  show: function show(selector) {
-    var elm = _base2.default.getElement(selector);
-    if (elm.style.display && elm.style.display == 'none') {
-      elm.style.display = '';
+}
+/**
+ * Show element. It will just remove 'display=none;'.
+ * @param selector querySelector
+ */
+function show(selector) {
+    var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
+    if (elm.style.display && elm.style.display === 'none') {
+        elm.style.display = '';
     }
-  },
-
-
-  /**
-   * toggleShow
-   *
-   * @param  {String|Element} selector
-   * @return {void}
-   */
-  toggleShow: function toggleShow(selector) {
-    var elm = _base2.default.getElement(selector);
-    if (elm.style.display !== 'none') {
-      this.hide(elm);
-    } else {
-      this.show(elm);
-    }
-  },
-
-
-  /**
-   * Make hidden type input.
-   *
-   * @param  {String} name
-   * @param  {String} value
-   * @return {Element}
-   */
-  makeHiddenInput: function makeHiddenInput(name, value) {
+}
+/**
+ * Toggling show/hide element.
+ * @param selector querySelector
+ */
+function toggleShow(selector) {
+    var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
+    elm.style.display !== 'none' ? hide(elm) : show(elm);
+}
+/**
+ * Make a hidden input.
+ * @param  name  name attribute.
+ * @param  value value attribute.
+ * @return
+ */
+function makeHiddenInput(name, value) {
     var input = document.createElement('input');
     input.type = 'hidden';
     input.name = name;
     input.value = value;
     return input;
-  },
-
-
-  /**
-   * Append hidden input to target element.
-   *
-   * @param  {Element|String} target
-   * @param  {String} name
-   * @param  {String} value
-   * @return {void}
-   */
-  appendHiddenInput: function appendHiddenInput(target, name, value) {
-    target = _base2.default.getElement(target);
-
+}
+/**
+ * Makes hidden input, and append to target element. If input[name=".."] already exists, overwrite it.
+ * @param target querySelector
+ * @param name   name attribute.
+ * @param value  value attribute.
+ */
+function appendHiddenInput(target, name, value) {
+    var targetElm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](target);
     // Remove if already has input.
-    _base2.default.removeElements('input[name="' + name + '"]', target);
-    target.appendChild(this.makeHiddenInput(name, value));
-  }
-};
+    __WEBPACK_IMPORTED_MODULE_0__base__["removeElements"]("input[name=\"" + name + "\"]", target);
+    targetElm.appendChild(makeHiddenInput(name, value));
+}
+
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ElementSort = exports.ElementFilter = undefined;
-
-var _base = __webpack_require__(0);
-
-var _base2 = _interopRequireDefault(_base);
-
-var _util = __webpack_require__(1);
-
-var _util2 = _interopRequireDefault(_util);
-
-var _elementFilter = __webpack_require__(3);
-
-var _elementFilter2 = _interopRequireDefault(_elementFilter);
-
-var _elementSort = __webpack_require__(4);
-
-var _elementSort2 = _interopRequireDefault(_elementSort);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var filterMethod = {
-  filter: function filter(selector) {
-    var filter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    var htmlMode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-    var f = new _elementFilter2.default(selector, filter, { htmlMode: htmlMode });
-    f.execute();
-    return f.getHit();
-  }
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__methods_base__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__methods_util__ = __webpack_require__(1);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ElementFilter", function() { return __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ElementSorter", function() { return __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__["a"]; });
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
 };
 
-var sortMethod = {
-  sort: function sort(elm) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    var s = new _elementSort2.default(elm, options);
-    s.execute();
-    return s.getItems();
-  }
-};
 
-var ElementUtil = Object.assign(_base2.default, _util2.default, filterMethod, sortMethod);
 
-exports.default = ElementUtil;
-exports.ElementFilter = _elementFilter2.default;
-exports.ElementSort = _elementSort2.default;
+
+/* harmony default export */ __webpack_exports__["default"] = (__assign({}, __WEBPACK_IMPORTED_MODULE_2__methods_base__, __WEBPACK_IMPORTED_MODULE_3__methods_util__, { 
+    //
+    // Helper methods.
+    //
+    /**
+     * Filtering elements.
+     * @param  selector   querySelector
+     * @param  filter     filter string.
+     * @param  enableHTML using .innerHTML, default is false.
+     * @return            Hit number.
+     */
+    filter: function (selector, filter, enableHTML) {
+        if (filter === void 0) { filter = ''; }
+        if (enableHTML === void 0) { enableHTML = false; }
+        var f = new __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__["a" /* default */](selector, filter, { enableHTML: enableHTML });
+        return f.execute().hit;
+    },
+    /**
+     * Sorting elements.
+     * @param  elm     base element.
+     * @param  options options for ElementSorter.
+     * @return         sorted elements.
+     */
+    sort: function (elm, options) {
+        if (options === void 0) { options = {}; }
+        var s = new __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__["a" /* default */](elm, options);
+        return s.execute().getItems();
+    } }));
+
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _base = __webpack_require__(0);
-
-var _base2 = _interopRequireDefault(_base);
-
-var _util = __webpack_require__(1);
-
-var _util2 = _interopRequireDefault(_util);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ElementFilter = function () {
-  /**
-   * constructor
-   *
-   * @param  {String|Nodelist} selector
-   * @param  {String} [filter = '']
-   * @param  {Object} [options = {}]
-   * @return {ElementFilter}
-   */
-  function ElementFilter(selector) {
-    var filter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-    _classCallCheck(this, ElementFilter);
-
-    this._elms = _base2.default.getElements(selector);
-    this._filter = filter;
-    this._hit = 0;
-    this.options = Object.assign(this.getDefaultOptions(), options);
-  }
-
-  // public
-
-  /**
-   * Returns default options.
-   *
-   * @return {Object}
-   */
-
-
-  _createClass(ElementFilter, [{
-    key: 'getDefaultOptions',
-    value: function getDefaultOptions() {
-      return {
-        htmlMode: false
-      };
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__methods_base__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__methods_util__ = __webpack_require__(1);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
     }
-
-    /**
-     * set filter string.
-     *
-     * @param {String} filter
-     */
-
-  }, {
-    key: 'setFilter',
-    value: function setFilter(filter) {
-      this._filter = filter;
-      return this;
-    }
-
-    /**
-     * Returns number of filtered elements count.
-     *
-     * @return {Number}
-     */
-
-  }, {
-    key: 'getHit',
-    value: function getHit() {
-      return this._hit;
-    }
-
-    /**
-     * Excute filtering.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: 'execute',
-    value: function execute() {
-      if (this._elmsIsTable()) {
-        this._filteringTable();
-      } else {
-        this._filteringNodes(this._elms);
-      }
-    }
-
-    // private
-
-  }, {
-    key: '_filteringTable',
-    value: function _filteringTable() {
-      var table = this._elms[0];
-      var tableRows = _base2.default.getElements('tbody tr', table);
-
-      this._filteringNodes(tableRows);
-    }
-  }, {
-    key: '_filteringNodes',
-    value: function _filteringNodes(nodes) {
-      this._hit = 0;
-      var filter = this._filter.toUpperCase();
-
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = nodes[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var node = _step.value;
-
-          var content = this.options.htmlMode ? node.innerHTML : node.textContent;
-
-          if (content.toUpperCase().indexOf(filter) === -1) {
-            _util2.default.hide(node);
-          } else {
-            _util2.default.show(node);
-            this._hit++;
-          }
+    return t;
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
         }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
+    };
+};
+
+
+var ElementFilter = /** @class */ (function () {
+    /**
+     * constructor
+     * @param selector target elements.
+     * @param filter   a string for filtering.
+     * @param options  enableHTML?: boolean
+     */
+    function ElementFilter(selector, filter, options) {
+        if (filter === void 0) { filter = ''; }
+        if (options === void 0) { options = {}; }
+        this.hit = 0;
+        this.elms = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"](selector);
+        this.filter = filter;
+        this.options = this.getDefaultOptions();
+        this.setOptions(options);
+    }
+    /**
+     * getDefaultOptions
+     * @return filter options object.
+     */
+    ElementFilter.prototype.getDefaultOptions = function () {
+        return {
+            enableHTML: false,
+        };
+    };
+    /**
+     * setOptions
+     * @param  options enableHTML?: boolean
+     * @return
+     */
+    ElementFilter.prototype.setOptions = function (options) {
+        this.options = __assign({}, this.options, options);
+    };
+    /**
+     * setFilter
+     * @param  filter a string for filtering.
+     * @return
+     */
+    ElementFilter.prototype.setFilter = function (filter) {
+        this.filter = filter;
+        return this;
+    };
+    /**
+     * get hit property.
+     * @return
+     */
+    ElementFilter.prototype.getHit = function () {
+        return this.hit;
+    };
+    /**
+     * Executes filtering.
+     * @return
+     */
+    ElementFilter.prototype.execute = function () {
+        if (this.elmsIsTable()) {
+            this.filteringTable();
+        }
+        else {
+            this.filteringNodes(this.elms);
+        }
+        return this;
+    };
+    ElementFilter.prototype.filteringTable = function () {
+        var table = this.elms[0];
+        var tableRows = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"]('tbody tr', table);
+        this.filteringNodes(tableRows);
+    };
+    ElementFilter.prototype.filteringNodes = function (nodes) {
+        this.hit = 0;
+        var filter = this.filter.toUpperCase();
         try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
+            for (var nodes_1 = __values(nodes), nodes_1_1 = nodes_1.next(); !nodes_1_1.done; nodes_1_1 = nodes_1.next()) {
+                var node = nodes_1_1.value;
+                var elm = node;
+                var content = this.options.enableHTML
+                    ? elm.innerHTML
+                    : elm.textContent;
+                if (content.toUpperCase().indexOf(filter) === -1) {
+                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["hide"](elm);
+                }
+                else {
+                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["show"](elm);
+                    this.hit++;
+                }
+            }
         }
-      }
-    }
-  }, {
-    key: '_elmsIsTable',
-    value: function _elmsIsTable() {
-      return this._elms.length === 1 && this._elms[0].tagName === 'TABLE';
-    }
-  }]);
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (nodes_1_1 && !nodes_1_1.done && (_a = nodes_1.return)) _a.call(nodes_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        var e_1, _a;
+    };
+    ElementFilter.prototype.elmsIsTable = function () {
+        var elm = this.elms[0];
+        return this.elms.length === 1 && elm.tagName === 'TABLE';
+    };
+    return ElementFilter;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (ElementFilter);
 
-  return ElementFilter;
-}();
-
-exports.default = ElementFilter;
-;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _base = __webpack_require__(0);
-
-var _base2 = _interopRequireDefault(_base);
-
-var _util = __webpack_require__(1);
-
-var _util2 = _interopRequireDefault(_util);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ElementSort = function () {
-  /**
-   * constructor
-   *
-   * @param  {Element|String} elm  Base element.
-   * @param  {Object} [options={}]
-   * @return {ElementSort}
-   */
-  function ElementSort(elm) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    _classCallCheck(this, ElementSort);
-
-    this.options = Object.assign(this.getDefaultOptions(), options);
-    this._elm = _base2.default.getElement(elm);
-    this.setItems(this.options.items);
-  }
-
-  // public
-
-  /**
-   * Returns default options.
-   *
-   * @return {Object}
-   */
-
-
-  _createClass(ElementSort, [{
-    key: 'getDefaultOptions',
-    value: function getDefaultOptions() {
-      return {
-        items: 'auto', // Items selector: 'auto' | selector | Nodlist | Array
-        datasetName: {
-          sortDirection: 'sortDirection', // data-sort-direction: 'asc' | 'desc'
-          sortType: 'sortType', // data-sort-type: 'string' | 'number' | 'date'
-          sortValue: 'sortValue' // data-sort-value
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__methods_base__ = __webpack_require__(0);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
         }
-      };
+    };
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
     }
-
-    /**
-     * Set base element.
-     *
-     * @param {Element|String} elm
-     */
-
-  }, {
-    key: 'setElement',
-    value: function setElement(elm) {
-      this._elm = _base2.default.getElement(elm);
-      return this;
-    }
-
-    /**
-     * Returns sort target items.
-     *
-     * @return {Array}
-     */
-
-  }, {
-    key: 'getItems',
-    value: function getItems() {
-      return this._items;
-    }
-
-    /**
-     * Set sort target items.
-     *
-     * @param {String|NodeList} items 'auto' | selector | Nodlist | Array
-     */
-
-  }, {
-    key: 'setItems',
-    value: function setItems(items) {
-      if (this._elmIsTable()) {
-        this._items = _base2.default.getElements('tbody tr', this._elm);
-      } else if (items === 'auto') {
-        this._items = _base2.default.nodeListToArray(this._elm.childNodes).filter(function (node) {
-          return node.tagName;
-        });
-      } else {
-        this._items = _base2.default.getElements(items, this._elm);
-      }
-
-      this._items = _base2.default.nodeListToArray(this._items);
-      return this;
-    }
-
-    /**
-     * Excute sorting.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: 'execute',
-    value: function execute() {
-      if (this._elmIsTable()) {
-        this._sortTable();
-      } else {
-        this._sortElements();
-      }
-    }
-
-    // private
-
-  }, {
-    key: '_sortElements',
-    value: function _sortElements() {
-      var _this = this;
-
-      var compareMethod = function compareMethod(a, b) {
-        var aVal = _this._getSortValue(a);
-        var bVal = _this._getSortValue(b);
-        var type = _this._getSortType(_this._elm) || _this._getSortType(a);
-        var asc = _this._getSortDirection(_this._elm) !== 'desc';
-
-        return _this._compare(aVal, bVal, type, asc);
-      };
-
-      this._toggleSortDirection(this._elm);
-      this._sorting(this._items, compareMethod.bind(this));
-    }
-  }, {
-    key: '_sortTable',
-    value: function _sortTable() {
-      var _this2 = this;
-
-      var heads = _base2.default.getElements('thead th', this._elm);
-
-      var _loop = function _loop(i, head) {
-        head.addEventListener('click', function (event) {
-          event.preventDefault();
-          var th = event.currentTarget;
-          _this2._toggleSortDirection(th);
-          _this2._sortingTable(_this2._items, i + 1, _this2._getSortType(th), _this2._getSortDirection(th));
-        });
-      };
-
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = heads.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var _ref = _step.value;
-
-          var _ref2 = _slicedToArray(_ref, 2);
-
-          var i = _ref2[0];
-          var head = _ref2[1];
-
-          _loop(i, head);
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
+    catch (error) { e = { error: error }; }
+    finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
+            if (r && !r.done && (m = i["return"])) m.call(i);
         }
-      }
+        finally { if (e) throw e.error; }
     }
-  }, {
-    key: '_elmIsTable',
-    value: function _elmIsTable() {
-      return this._elm.tagName === 'TABLE';
+    return ar;
+};
+
+var ElementSorter = /** @class */ (function () {
+    /**
+     * constructor
+     * @param elm     Base element. e.g. `<ul>`, `<ol>` or `<table>`..
+     * @param options items: 'auto'|selector|NodeList, datasetName: object
+     */
+    function ElementSorter(elm, options) {
+        if (options === void 0) { options = {}; }
+        this.options = this.getDefaultOptions();
+        this.setOptions(options);
+        this.setElement(elm);
+        this.setItems(this.options.items);
     }
-  }, {
-    key: '_sorting',
-    value: function _sorting(items, compareMethod) {
-      items.sort(compareMethod);
-      items.forEach(function (item) {
-        var parent = item.parentNode;
-        parent.removeChild(item);
-        parent.appendChild(item);
-      });
-    }
-  }, {
-    key: '_sortingTable',
-    value: function _sortingTable(rows, nth, type, direction) {
-      var _this3 = this;
+    /**
+     * getDefaultOptions
+     * @return
+     */
+    ElementSorter.prototype.getDefaultOptions = function () {
+        return {
+            items: 'auto',
+            datasetName: {
+                sortDirection: 'sortDirection',
+                sortType: 'sortType',
+                sortValue: 'sortValue',
+            },
+        };
+    };
+    /**
+     * setOptions
+     * @param  options items: 'auto'|selector|NodeList, datasetName: object
+     * @return
+     */
+    ElementSorter.prototype.setOptions = function (options) {
+        this.options = __assign({}, this.options, options);
+        return this;
+    };
+    /**
+     * set base element.
+     * @param  elm
+     * @return
+     */
+    ElementSorter.prototype.setElement = function (elm) {
+        this.elm = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElement"](elm);
+        return this;
+    };
+    /**
+     * getItems
+     * @return
+     */
+    ElementSorter.prototype.getItems = function () {
+        return this.items;
+    };
+    /**
+     * set items that target for sort.
+     * @param  items
+     * @return
+     */
+    ElementSorter.prototype.setItems = function (items) {
+        if (this.elmIsTable()) {
+            var nodeList = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"]('tbody tr', this.elm);
+            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["nodeListToArray"](nodeList);
+        }
+        else if (items === 'auto') {
+            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["nodeListToArray"](this.elm.childNodes)
+                .filter(function (node) { return node.tagName; });
+        }
+        else {
+            var nodeList = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"](items, this.elm);
+            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["nodeListToArray"](nodeList);
+        }
+        return this;
+    };
+    /**
+     * Execute sort.
+     * @return
+     */
+    ElementSorter.prototype.execute = function () {
+        this.elmIsTable() ? this.sortTable() : this.sortElements();
+        return this;
+    };
+    ElementSorter.prototype.elmIsTable = function () {
+        return this.elm.tagName === 'TABLE';
+    };
+    ElementSorter.prototype.sortElements = function () {
+        var _this = this;
+        var compareMethod = function (a, b) {
+            var aVal = _this.getSortValue(a);
+            var bVal = _this.getSortValue(b);
+            var type = _this.getSortType(_this.elm) || _this.getSortType(a);
+            var asc = _this.getSortDirection(_this.elm) !== 'desc';
+            return _this.compare(aVal, bVal, type, asc);
+        };
+        this.toggleSortDirection(this.elm);
+        this.sorting(this.items, compareMethod.bind(this));
+    };
+    ElementSorter.prototype.sortTable = function () {
+        var _this = this;
+        var heads = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"]('thead th', this.elm);
+        var _loop_1 = function (i, head) {
+            head.addEventListener('click', function (event) {
+                event.preventDefault();
+                var th = event.currentTarget;
+                _this.toggleSortDirection(th);
+                _this.sortingTable(_this.items, i + 1, _this.getSortType(th), _this.getSortDirection(th));
+            });
+        };
+        try {
+            for (var _a = __values(heads.entries()), _b = _a.next(); !_b.done; _b = _a.next()) {
+                var _c = __read(_b.value, 2), i = _c[0], head = _c[1];
+                _loop_1(i, head);
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_b && !_b.done && (_d = _a.return)) _d.call(_a);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        var e_1, _d;
+    };
+    ElementSorter.prototype.sorting = function (items, compareMethod) {
+        items.sort(compareMethod);
+        items.forEach(function (item) {
+            var parent = item.parentNode;
+            parent.removeChild(item);
+            parent.appendChild(item);
+        });
+    };
+    ElementSorter.prototype.sortingTable = function (rows, nth, type, direction) {
+        var _this = this;
+        var compareMethod = function (a, b) {
+            a = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElement"]("td:nth-child(" + nth + ")", a);
+            b = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElement"]("td:nth-child(" + nth + ")", b);
+            var aVal = _this.getSortValue(a);
+            var bVal = _this.getSortValue(b);
+            type = type || _this.getSortType(a);
+            var asc = direction === 'asc';
+            return _this.compare(aVal, bVal, type, asc);
+        };
+        this.sorting(rows, compareMethod.bind(this));
+    };
+    ElementSorter.prototype.getSortValue = function (elm) {
+        var sortValue = elm.dataset[this.options.datasetName.sortValue];
+        if (!sortValue) {
+            sortValue = elm.textContent;
+        }
+        return sortValue.toUpperCase();
+    };
+    ElementSorter.prototype.getSortType = function (elm) {
+        return elm.dataset[this.options.datasetName.sortType] || null;
+    };
+    ElementSorter.prototype.getSortDirection = function (elm) {
+        return elm.dataset[this.options.datasetName.sortDirection];
+    };
+    ElementSorter.prototype.toggleSortDirection = function (elm) {
+        elm.dataset[this.options.datasetName.sortDirection]
+            = this.getSortDirection(elm) === 'asc' ? 'desc' : 'asc';
+    };
+    ElementSorter.prototype.compare = function (a, b, type, asc) {
+        if (asc === void 0) { asc = true; }
+        var compareNumber = function (aVal, bVal) {
+            var aNum = parseFloat(aVal);
+            var bNum = parseFloat(b);
+            return asc ? aNum - bNum : bNum - aNum;
+        };
+        var compareDate = function (aVal, bVal) {
+            var aDate = new Date(aVal);
+            var bDate = new Date(bVal);
+            return asc
+                ? aDate.getTime() - bDate.getTime()
+                : bDate.getTime() - aDate.getTime();
+        };
+        if (type === 'number') {
+            return compareNumber(a, b);
+        }
+        else if (type === 'date') {
+            return compareDate(a, b);
+        }
+        else {
+            // default: compare as string.
+            return asc ? a.localeCompare(b) : b.localeCompare(a);
+        }
+    };
+    return ElementSorter;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (ElementSorter);
 
-      var compareMethod = function compareMethod(a, b) {
-        a = _base2.default.getElement('td:nth-child(' + nth + ')', a);
-        b = _base2.default.getElement('td:nth-child(' + nth + ')', b);
-        var aVal = _this3._getSortValue(a);
-        var bVal = _this3._getSortValue(b);
-        var asc = direction === 'asc';
-        type = type || _this3._getSortType(a);
-
-        return _this3._compare(aVal, bVal, type, asc);
-      };
-
-      this._sorting(rows, compareMethod.bind(this));
-    }
-  }, {
-    key: '_getSortValue',
-    value: function _getSortValue(elm) {
-      var sortValue = elm.dataset[this.options.datasetName.sortValue];
-      if (!sortValue) sortValue = elm.textContent;
-
-      return sortValue.toUpperCase();
-    }
-  }, {
-    key: '_getSortType',
-    value: function _getSortType(elm) {
-      return elm.dataset[this.options.datasetName.sortType];
-    }
-  }, {
-    key: '_getSortDirection',
-    value: function _getSortDirection(elm) {
-      return elm.dataset[this.options.datasetName.sortDirection];
-    }
-  }, {
-    key: '_toggleSortDirection',
-    value: function _toggleSortDirection(elm) {
-      elm.dataset[this.options.datasetName.sortDirection] = elm.dataset[this.options.datasetName.sortDirection] === 'asc' ? 'desc' : 'asc';
-    }
-  }, {
-    key: '_compare',
-    value: function _compare(a, b, type) {
-      var asc = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-
-      if (type === 'number') {
-        return this._compareNumber(a, b, asc);
-      } else if (type === 'date') {
-        return this._compareDate(a, b, asc);
-      } else {
-        // default: string
-        return asc ? a.localeCompare(b) : b.localeCompare(a);
-      }
-    }
-  }, {
-    key: '_compareNumber',
-    value: function _compareNumber(a, b) {
-      var asc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-      a = parseFloat(a);
-      b = parseFloat(b);
-
-      return asc ? a - b : b - a;
-    }
-  }, {
-    key: '_compareDate',
-    value: function _compareDate(a, b) {
-      var asc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-      a = new Date(a);
-      b = new Date(b);
-
-      return asc ? a - b : b - a;
-    }
-  }]);
-
-  return ElementSort;
-}();
-
-exports.default = ElementSort;
-;
 
 /***/ })
 /******/ ]);
+});
 //# sourceMappingURL=element-util.js.map
