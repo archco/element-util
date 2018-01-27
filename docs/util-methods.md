@@ -61,7 +61,7 @@ Add class to an element.
   ElementUtil.addClass(selector, className);
   ```
 - Param  `string`|`Element` selector
-- Param  `string` className
+- Param  `string` className - If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
 - Return `void`
 
 ## removeClass
@@ -73,7 +73,7 @@ Remove class from an element.
   ElementUtil.removeClass(selector, className);
   ```
 - Param `string`|`Element` selector
-- Param `string` className
+- Param `string` className - If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
 - Return `void`
 
 ## toggleClass
@@ -85,7 +85,7 @@ Toggling class.
   ElementUtil.toggleClass(selector, className);
   ```
 - Param `string`|`Element` selector
-- Param `string` className
+- Param `string` className - If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
 - Return `void`
 
 ## hide

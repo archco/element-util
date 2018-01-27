@@ -301,7 +301,7 @@ function wrap(selector, className, tagName) {
             var parent_1 = elm.parentNode;
             var sibling = elm.nextSibling;
             var div = document.createElement(tagName);
-            div.classList.add(className);
+            addClass(div, className);
             div.appendChild(elm);
             if (sibling) {
                 parent_1.insertBefore(div, sibling);
@@ -332,7 +332,7 @@ function wrapAll(selector, className, tagName) {
     var parent = elms[0].parentNode;
     var preSibling = elms[0].previousSibling;
     var div = document.createElement(tagName);
-    div.classList.add(className);
+    addClass(div, className);
     try {
         for (var elms_3 = __values(elms), elms_3_1 = elms_3.next(); !elms_3_1.done; elms_3_1 = elms_3.next()) {
             var elm = elms_3_1.value;
@@ -368,9 +368,9 @@ function submitConfirm(selector, message) {
     }, true); // this use capture.
 }
 /**
- * Add confirm message listener when 'submit' event.
- * @param selector querySelector, form element probably.
- * @param message  confirm message.
+ * Add class to element.
+ * @param selector  querySelector
+ * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 function addClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
@@ -380,7 +380,7 @@ function addClass(selector, className) {
 /**
  * Remove class from element.
  * @param selector  querySelector
- * @param className class name.
+ * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 function removeClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
@@ -390,7 +390,7 @@ function removeClass(selector, className) {
 /**
  * Toggling class to element.
  * @param selector  querySelector
- * @param className class name.
+ * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 function toggleClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);

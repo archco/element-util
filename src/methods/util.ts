@@ -41,7 +41,7 @@ export function wrap(
     const parent = elm.parentNode;
     const sibling = elm.nextSibling;
     const div = document.createElement(tagName);
-    div.classList.add(className);
+    addClass(div, className);
     div.appendChild(elm);
 
     if (sibling) {
@@ -68,7 +68,7 @@ export function wrapAll(
   const parent = elms[0].parentNode;
   const preSibling = elms[0].previousSibling;
   const div = document.createElement(tagName);
-  div.classList.add(className);
+  addClass(div, className);
 
   for (const elm of elms) {
     div.appendChild(elm);
@@ -95,9 +95,9 @@ export function submitConfirm(selector: ElementTarget, message: string = 'Are yo
 }
 
 /**
- * Add confirm message listener when 'submit' event.
- * @param selector querySelector, form element probably.
- * @param message  confirm message.
+ * Add class to element.
+ * @param selector  querySelector
+ * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 export function addClass(selector: ElementTarget, className: string): void {
   const elm = baseMethods.getElement(selector);
@@ -108,7 +108,7 @@ export function addClass(selector: ElementTarget, className: string): void {
 /**
  * Remove class from element.
  * @param selector  querySelector
- * @param className class name.
+ * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 export function removeClass(selector: ElementTarget, className: string): void {
   const elm = baseMethods.getElement(selector);
@@ -119,7 +119,7 @@ export function removeClass(selector: ElementTarget, className: string): void {
 /**
  * Toggling class to element.
  * @param selector  querySelector
- * @param className class name.
+ * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 export function toggleClass(selector: ElementTarget, className: string): void {
   const elm = baseMethods.getElement(selector);
