@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.0] - 2018-01-27
+
 ### Added
 
 - Now available multiple class names in `addClass()`, `removeClass()` and `toggleClass()`. #3
 
 ### Changed
 
-- Migrate to typescript.
+- Migrate to typescript. #4
 - Change class name `ElementSort` -> `ElementSorter`.
 - Rename `htmlMode` to `enableHTML` in ElementFilter.FilterOptions.
 
@@ -53,7 +55,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 First release. Please see [ElementUtil API](https://github.com/archco/element-util/tree/master/docs).
 
-[Unreleased]: https://github.com/archco/element-util/compare/v1.1.3...HEAD
+[Unreleased]: https://github.com/archco/element-util/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/archco/element-util/compare/v1.1.3...v1.2.0
 [1.1.3]: https://github.com/archco/element-util/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/archco/element-util/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/archco/element-util/compare/v1.1.0...v1.1.1
