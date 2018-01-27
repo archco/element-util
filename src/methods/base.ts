@@ -18,6 +18,12 @@ function polyfillForMatches(): void {
   }
 }
 
+/**
+ * Get element.
+ * @param  selector querySelector
+ * @param  base     base element. default is Document.
+ * @return
+ */
 export function getElement(selector: ElementTarget, base: Document|ElementTarget = document): Element {
   base = resolveBase(base);
   if (typeof selector === 'string') {
@@ -31,6 +37,12 @@ export function getElement(selector: ElementTarget, base: Document|ElementTarget
   }
 }
 
+/**
+ * Get elements as NodeList.
+ * @param  selector querySelector
+ * @param  base     base element. default is Document.
+ * @return
+ */
 export function getElements(selector: ElementTarget, base: Document|ElementTarget = document): NodeList {
   base = resolveBase(base);
 
@@ -45,6 +57,12 @@ export function getElements(selector: ElementTarget, base: Document|ElementTarge
   }
 }
 
+/**
+ * Remove elements.
+ * @param  selector querySelector
+ * @param  base     base element. default is Document.
+ * @return          number of removed.
+ */
 export function removeElements(selector: ElementTarget, base: Document|ElementTarget = document): number {
   base = resolveBase(base);
   const elms = getElements(selector, base);
@@ -54,6 +72,11 @@ export function removeElements(selector: ElementTarget, base: Document|ElementTa
   return elms.length;
 }
 
+/**
+ * Convert a single element to NodeList.
+ * @param  elm
+ * @return
+ */
 export function toNodeList(elm: Element|string): NodeList {
   elm = getElement(elm);
   elm.setAttribute('toNodeList', '');
@@ -62,6 +85,11 @@ export function toNodeList(elm: Element|string): NodeList {
   return nodeList;
 }
 
+/**
+ * Convert NodeList to Array.
+ * @param  list
+ * @return
+ */
 export function nodeListToArray(list: NodeList|any[]|string): any[] {
   if (Array.isArray(list)) {
     return list;
@@ -71,6 +99,12 @@ export function nodeListToArray(list: NodeList|any[]|string): any[] {
   }
 }
 
+/**
+ * Find ancestor element.
+ * @param  self
+ * @param  ancestor
+ * @return          Element or null.
+ */
 export function findAncestor(self: ElementTarget, ancestor: ElementTarget): Element|null {
   polyfillForMatches();
   self = getElement(self);

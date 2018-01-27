@@ -4,6 +4,7 @@ import * as utilMethods from '../methods/util';
 type ElementTarget = baseMethods.ElementTarget;
 
 export interface FilterOptions {
+  /** Enable to use `innerHTML`. Default is false, and than use `textContent`. */
   enableHTML?: boolean;
 }
 
@@ -13,6 +14,12 @@ export default class ElementFilter {
   hit: number = 0;
   options: FilterOptions;
 
+  /**
+   * constructor
+   * @param selector target elements.
+   * @param filter   a string for filtering.
+   * @param options  enableHTML?: boolean
+   */
   constructor(selector: ElementTarget, filter: string = '', options: FilterOptions = {}) {
     this.elms = baseMethods.getElements(selector);
     this.filter = filter;
@@ -20,12 +27,21 @@ export default class ElementFilter {
     this.setOptions(options);
   }
 
+  /**
+   * getDefaultOptions
+   * @return filter options object.
+   */
   getDefaultOptions(): FilterOptions {
     return {
       enableHTML: false,
     };
   }
 
+  /**
+   * setOptions
+   * @param  options enableHTML?: boolean
+   * @return
+   */
   setOptions(options: FilterOptions) {
     this.options = {
       ...this.options,
@@ -33,15 +49,28 @@ export default class ElementFilter {
     };
   }
 
+  /**
+   * setFilter
+   * @param  filter a string for filtering.
+   * @return
+   */
   setFilter(filter: string): this {
     this.filter = filter;
     return this;
   }
 
+  /**
+   * get hit property.
+   * @return
+   */
   getHit(): number {
     return this.hit;
   }
 
+  /**
+   * Executes filtering.
+   * @return
+   */
   execute(): this {
     if (this.elmsIsTable()) {
       this.filteringTable();
