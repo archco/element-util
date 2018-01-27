@@ -1,6 +1,7 @@
 # ElementUtil API
 
 ## [Base Methods](base-methods.md)
+
 - [#getElement](base-methods.md#getelement): Get a single element.
 - [#getElements](base-methods.md#getelements): Get elements as NodeList.
 - [#removeElements](base-methods.md#removeelements): Remove elements by selector.
@@ -9,6 +10,7 @@
 - [#findAncestor](base-methods.md#findancestor): Find ancestor from element.
 
 ## [Util Methods](util-methods.md)
+
 - [#addListener](util-methods.md#addlistener): Add event listener on selector.
 - [#wrap](util-methods.md#wrap): Wrap elements by div.wrapper, one by one.
 - [#wrapAll](util-methods.md#wrapall): Wrap all elements inside to div.wrapper.
@@ -23,7 +25,9 @@
 - [#appendHiddenInput](util-methods.md#appendhiddeninput): Append hidden type input to target element.
 
 ## [Element Filter](element-filter.md)
-The functional class for filtering elements in node list.
 
-## [Element Sort](element-sort.md)
-The functional class for sort elements.
+Class for filtering elements.
+
+## [Element Sorter](element-sorter.md)
+
+Class for sort elements.

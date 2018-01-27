@@ -1,59 +1,71 @@
 # Base Methods
 
 ## getElement
+
 Get a single element.
+
 - Syntax
-```javascript
-let element = ElementUtil.getElement(selector, base = document);
-```
-- Param  {String|Element|NodeList} selector
-- Param  {String|Element} [ base = document ]
-- Return {Element}
+  ``` js
+  let element = ElementUtil.getElement(selector, base = document);
+  ```
+- Param  `string`|`Element`|`NodeList` selector
+- Param  `string`|`Element` [ base = document ]
+- Return `Element`
 
 ## getElements
+
 Get elements as NodeList.
+
 - Syntax
-```javascript
-let nodes = ElementUtil.getElements(selector, base = document);
-```
-- Param  {String|Element|NodeList} selector
-- Param  {String|Element} [ base = document ]
-- Return {NodeList}
+  ``` js
+  let nodes = ElementUtil.getElements(selector, base = document);
+  ```
+- Param  `string`|`Element`|`NodeList` selector
+- Param  `string`|`Element` [ base = document ]
+- Return `NodeList`
 
 ## removeElements
+
 Remove elements by selector.
+
 - Syntax
-```javascript
-let number = ElementUtil.removeClass(selector, base = document);
-```
-- Param  {String|Element|NodeList} selector
-- Param  {String|Element} [ base = document ]
-- Return {Number} number of affected.
+  ``` js
+  let number = ElementUtil.removeClass(selector, base = document);
+  ```
+- Param  `string`|`Element`|`NodeList` selector
+- Param  `string`|`Element` [ base = document ]
+- Return `Number` number of affected.
 
 ## toNodeList
+
 Convert a single Element to NodeList.
+
 - Syntax
-```javascript
-let nodeList = ElementUtil.toNodeList(elm);
-```
-- Param  {Element|String} elm
-- Return {NodeList}
+  ``` js
+  let nodeList = ElementUtil.toNodeList(elm);
+  ```
+- Param  `Element`|`string` elm
+- Return `NodeList`
 
 ## nodeListToArray
+
 Convert NodeList to Array.
+
 - Syntax
-```javascript
-let array = ElementUtil.nodeListToArray(nodelist);
-```
-- Param  {NodeList|String|Array} nodelist
-- Return {Array}
+  ``` js
+  let array = ElementUtil.nodeListToArray(nodeList);
+  ```
+- Param  `NodeList`|`string`|`Array` nodeList
+- Return `Array`
 
 ## findAncestor
+
 Find ancestor from element.
+
 - Syntax
-```javascript
-let element = ElementUtil.findAncestor(self, ancestor);
-```
-- Param {Element|String} self - base element.
-- Param {Element|String} ancestor
-- Return {Element|null}
+  ``` js
+  let element = ElementUtil.findAncestor(self, ancestor);
+  ```
+- Param `Element`|`string` self - base element.
+- Param `Element`|`string` ancestor
+- Return `Element`|`null`

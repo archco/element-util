@@ -1,21 +1,23 @@
 # Element Filter
 
-The functional class for filtering elements in node list.
+Class for filtering elements.
 
 ## Usage
 
 ### Helper method
+
 - Syntax
-```javascript
-let hitCount = ElementUtil.filter(selector, filter = '', htmlMode = false);
-```
-- Param  {String|NodeList} selector filtering targets.
-- Param  {String} [ filter = '' ] filter string.
-- Param  {Boolean} [ htmlMode = false ]
-- Return {Number} hit count.
+  ``` js
+  let hitCount = ElementUtil.filter(selector, filter = '', htmlMode = false);
+  ```
+- Param  `string`|`NodeList` selector filtering targets.
+- Param  `string` [ filter = '' ] filter string.
+- Param  `boolean` [ htmlMode = false ]
+- Return `number` hit count.
 
 ### Use class
-```javascript
+
+``` js
 import { ElementFilter } from 'element-util';
 
 let elementFilter = new ElementFilter('ul.country-list li', '');
@@ -26,46 +28,49 @@ let count = elementFilter.getHit();
 ## Class Methods
 
 ### constructor
+
 - Syntax
-```javascript
-let elementFilter = new ElementFilter(selector, filter = '', options = {});
-```
-- Param  {String|NodeList} selector filtering targets.
-- Param  {String} [ filter = '' ] filter string.
-- Param  {Object} [ options = {} ]
-  ```javascript
+  ``` js
+  let elementFilter = new ElementFilter(selector, filter = '', options = {});
+  ```
+- Param  `string`|`NodeList` selector filtering targets.
+- Param  `string` [ filter = '' ] filter string.
+- Param  `object` [ options = {} ]
+  ``` js
   let options = {
-    // Enable html mode option. default is false.
-    // If this value true, filtering on innerHTML. (default on textContent)
-    htmlMode: false,
+    // Enable to use `innerHTML`. Default is false, and than use `textContent`.
+    enableHTML: false,
   };
   ```
-- Return {ElementFilter}
+- Return `ElementFilter`
 
 ### setFilter
+
 Set filter string.
 
 - Syntax
-```javascript
-elementFilter.setFilter(filter);
-```
-- Param  {String} filter
-- Return {ElementFilter}
+  ``` js
+  elementFilter.setFilter(filter);
+  ```
+- Param  `string` filter
+- Return `ElementFilter`
 
 ### getHit
+
 Get count of filtered elements.
 
 - Syntax
-```javascript
-let count = elementFilter.getHit();
-```
-- Return {Number}
+  ``` js
+  let count = elementFilter.getHit();
+  ```
+- Return `number`
 
 ### execute
-Excute filtering.
+
+Execute filtering.
 
 - Syntax
-```javascript
-elementFilter.execute();
-```
-- Return {void}
+  ``` js
+  elementFilter.execute();
+  ```
+- Return `void`
