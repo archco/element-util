@@ -111,6 +111,12 @@ function polyfillForMatches() {
         Element.prototype.matches = Element.prototype.msMatchesSelector;
     }
 }
+/**
+ * Get element.
+ * @param  selector querySelector
+ * @param  base     base element. default is Document.
+ * @return
+ */
 function getElement(selector, base) {
     if (base === void 0) { base = document; }
     base = resolveBase(base);
@@ -127,6 +133,12 @@ function getElement(selector, base) {
         throw new TypeError('selector is must be String or Element');
     }
 }
+/**
+ * Get elements as NodeList.
+ * @param  selector querySelector
+ * @param  base     base element. default is Document.
+ * @return
+ */
 function getElements(selector, base) {
     if (base === void 0) { base = document; }
     base = resolveBase(base);
@@ -143,6 +155,12 @@ function getElements(selector, base) {
         throw new TypeError('selector is must be String or NodeList');
     }
 }
+/**
+ * Remove elements.
+ * @param  selector querySelector
+ * @param  base     base element. default is Document.
+ * @return          number of removed.
+ */
 function removeElements(selector, base) {
     if (base === void 0) { base = document; }
     base = resolveBase(base);
@@ -163,6 +181,11 @@ function removeElements(selector, base) {
     return elms.length;
     var e_1, _a;
 }
+/**
+ * Convert a single element to NodeList.
+ * @param  elm
+ * @return
+ */
 function toNodeList(elm) {
     elm = getElement(elm);
     elm.setAttribute('toNodeList', '');
@@ -170,6 +193,11 @@ function toNodeList(elm) {
     elm.removeAttribute('toNodeList');
     return nodeList;
 }
+/**
+ * Convert NodeList to Array.
+ * @param  list
+ * @return
+ */
 function nodeListToArray(list) {
     if (Array.isArray(list)) {
         return list;
@@ -179,6 +207,12 @@ function nodeListToArray(list) {
         return Array.prototype.slice.call(list);
     }
 }
+/**
+ * Find ancestor element.
+ * @param  self
+ * @param  ancestor
+ * @return          Element or null.
+ */
 function findAncestor(self, ancestor) {
     polyfillForMatches();
     self = getElement(self);
@@ -225,6 +259,14 @@ var __values = (this && this.__values) || function (o) {
     };
 };
 
+/**
+ * Add event listener on every selected elements.
+ * @param  selector   querySelector
+ * @param  type       event-type
+ * @param  listener   listener
+ * @param  useCapture default is false
+ * @return            number of affected
+ */
 function addListener(selector, type, listener, useCapture) {
     if (useCapture === void 0) { useCapture = false; }
     var elms = __WEBPACK_IMPORTED_MODULE_0__base__["getElements"](selector);
@@ -244,6 +286,12 @@ function addListener(selector, type, listener, useCapture) {
     return elms.length;
     var e_1, _a;
 }
+/**
+ * Wrapping each element.
+ * @param selector  querySelector
+ * @param className wrapper's class name.
+ * @param tagName   wrapper's tag name, default is 'div'.
+ */
 function wrap(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
     var elms = __WEBPACK_IMPORTED_MODULE_0__base__["getElements"](selector);
@@ -272,6 +320,12 @@ function wrap(selector, className, tagName) {
     }
     var e_2, _a;
 }
+/**
+ * Wrapping all elements inside a one wrapper.
+ * @param selector  querySelector
+ * @param className wrapper's class name.
+ * @param tagName   wrapper's tag name, default is 'div'.
+ */
 function wrapAll(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
     var elms = __WEBPACK_IMPORTED_MODULE_0__base__["getElements"](selector);
@@ -300,6 +354,11 @@ function wrapAll(selector, className, tagName) {
     }
     var e_3, _a;
 }
+/**
+ * Add confirm message listener when 'submit' event.
+ * @param selector querySelector, form element probably.
+ * @param message  confirm message.
+ */
 function submitConfirm(selector, message) {
     if (message === void 0) { message = 'Are you confirm?'; }
     addListener(selector, 'submit', function (e) {
@@ -308,32 +367,65 @@ function submitConfirm(selector, message) {
         }
     }, true); // this use capture.
 }
+/**
+ * Add confirm message listener when 'submit' event.
+ * @param selector querySelector, form element probably.
+ * @param message  confirm message.
+ */
 function addClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     elm.classList.add(className);
 }
+/**
+ * Remove class from element.
+ * @param selector  querySelector
+ * @param className class name.
+ */
 function removeClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     elm.classList.remove(className);
 }
+/**
+ * Toggling class to element.
+ * @param selector  querySelector
+ * @param className class name.
+ */
 function toggleClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     elm.classList.toggle(className);
 }
+/**
+ * Hide element. It will set element's display to 'none'.
+ * @param selector querySelector
+ */
 function hide(selector) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     elm.style.display = 'none';
 }
+/**
+ * Show element. It will just remove 'display=none;'.
+ * @param selector querySelector
+ */
 function show(selector) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     if (elm.style.display && elm.style.display === 'none') {
         elm.style.display = '';
     }
 }
+/**
+ * Toggling show/hide element.
+ * @param selector querySelector
+ */
 function toggleShow(selector) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
     elm.style.display !== 'none' ? hide(elm) : show(elm);
 }
+/**
+ * Make a hidden input.
+ * @param  name  name attribute.
+ * @param  value value attribute.
+ * @return
+ */
 function makeHiddenInput(name, value) {
     var input = document.createElement('input');
     input.type = 'hidden';
@@ -341,6 +433,12 @@ function makeHiddenInput(name, value) {
     input.value = value;
     return input;
 }
+/**
+ * Makes hidden input, and append to target element. If input[name=".."] already exists, overwrite it.
+ * @param target querySelector
+ * @param name   name attribute.
+ * @param value  value attribute.
+ */
 function appendHiddenInput(target, name, value) {
     var targetElm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](target);
     // Remove if already has input.
@@ -374,12 +472,29 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (__assign({}, __WEBPACK_IMPORTED_MODULE_2__methods_base__, __WEBPACK_IMPORTED_MODULE_3__methods_util__, { filter: function (selector, filter, enableHTML) {
+/* harmony default export */ __webpack_exports__["default"] = (__assign({}, __WEBPACK_IMPORTED_MODULE_2__methods_base__, __WEBPACK_IMPORTED_MODULE_3__methods_util__, { 
+    //
+    // Helper methods.
+    //
+    /**
+     * Filtering elements.
+     * @param  selector   querySelector
+     * @param  filter     filter string.
+     * @param  enableHTML using .innerHTML, default is false.
+     * @return            Hit number.
+     */
+    filter: function (selector, filter, enableHTML) {
         if (filter === void 0) { filter = ''; }
         if (enableHTML === void 0) { enableHTML = false; }
         var f = new __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__["a" /* default */](selector, filter, { enableHTML: enableHTML });
         return f.execute().hit;
     },
+    /**
+     * Sorting elements.
+     * @param  elm     base element.
+     * @param  options options for ElementSorter.
+     * @return         sorted elements.
+     */
     sort: function (elm, options) {
         if (options === void 0) { options = {}; }
         var s = new __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__["a" /* default */](elm, options);
@@ -415,6 +530,12 @@ var __values = (this && this.__values) || function (o) {
 
 
 var ElementFilter = /** @class */ (function () {
+    /**
+     * constructor
+     * @param selector target elements.
+     * @param filter   a string for filtering.
+     * @param options  enableHTML?: boolean
+     */
     function ElementFilter(selector, filter, options) {
         if (filter === void 0) { filter = ''; }
         if (options === void 0) { options = {}; }
@@ -424,21 +545,43 @@ var ElementFilter = /** @class */ (function () {
         this.options = this.getDefaultOptions();
         this.setOptions(options);
     }
+    /**
+     * getDefaultOptions
+     * @return filter options object.
+     */
     ElementFilter.prototype.getDefaultOptions = function () {
         return {
             enableHTML: false,
         };
     };
+    /**
+     * setOptions
+     * @param  options enableHTML?: boolean
+     * @return
+     */
     ElementFilter.prototype.setOptions = function (options) {
         this.options = __assign({}, this.options, options);
     };
+    /**
+     * setFilter
+     * @param  filter a string for filtering.
+     * @return
+     */
     ElementFilter.prototype.setFilter = function (filter) {
         this.filter = filter;
         return this;
     };
+    /**
+     * get hit property.
+     * @return
+     */
     ElementFilter.prototype.getHit = function () {
         return this.hit;
     };
+    /**
+     * Executes filtering.
+     * @return
+     */
     ElementFilter.prototype.execute = function () {
         if (this.elmsIsTable()) {
             this.filteringTable();
@@ -532,6 +675,11 @@ var __read = (this && this.__read) || function (o, n) {
 };
 
 var ElementSorter = /** @class */ (function () {
+    /**
+     * constructor
+     * @param elm     Base element. e.g. `<ul>`, `<ol>` or `<table>`..
+     * @param options items: 'auto'|selector|NodeList, datasetName: object
+     */
     function ElementSorter(elm, options) {
         if (options === void 0) { options = {}; }
         this.options = this.getDefaultOptions();
@@ -539,6 +687,10 @@ var ElementSorter = /** @class */ (function () {
         this.setElement(elm);
         this.setItems(this.options.items);
     }
+    /**
+     * getDefaultOptions
+     * @return
+     */
     ElementSorter.prototype.getDefaultOptions = function () {
         return {
             items: 'auto',
@@ -549,17 +701,36 @@ var ElementSorter = /** @class */ (function () {
             },
         };
     };
+    /**
+     * setOptions
+     * @param  options items: 'auto'|selector|NodeList, datasetName: object
+     * @return
+     */
     ElementSorter.prototype.setOptions = function (options) {
         this.options = __assign({}, this.options, options);
         return this;
     };
+    /**
+     * set base element.
+     * @param  elm
+     * @return
+     */
     ElementSorter.prototype.setElement = function (elm) {
         this.elm = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElement"](elm);
         return this;
     };
+    /**
+     * getItems
+     * @return
+     */
     ElementSorter.prototype.getItems = function () {
         return this.items;
     };
+    /**
+     * set items that target for sort.
+     * @param  items
+     * @return
+     */
     ElementSorter.prototype.setItems = function (items) {
         if (this.elmIsTable()) {
             var nodeList = __WEBPACK_IMPORTED_MODULE_0__methods_base__["getElements"]('tbody tr', this.elm);
@@ -575,6 +746,10 @@ var ElementSorter = /** @class */ (function () {
         }
         return this;
     };
+    /**
+     * Execute sort.
+     * @return
+     */
     ElementSorter.prototype.execute = function () {
         this.elmIsTable() ? this.sortTable() : this.sortElements();
         return this;
