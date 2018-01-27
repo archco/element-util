@@ -1,9 +1,9 @@
 import { ElementTarget } from '../methods/base';
 
 /** Types that can be as target items. */
-declare type ItemsSettable = string|NodeList|HTMLElement[];
+export type ItemsSettable = string|NodeList|HTMLElement[];
 
-declare interface DatasetNames {
+export interface DatasetNames {
   /** Default value is `sortDirection`. It means `data-sort-direction` attribute in html. */
   sortDirection?: string;
   /** Default value is `sortType`. It means `data-sort-type` attribute in html. */
@@ -12,7 +12,7 @@ declare interface DatasetNames {
   sortValue?: string;
 }
 
-declare interface SorterOptions {
+export interface SorterOptions {
   /** Target elements for sorting. */
   items?: ItemsSettable;
   /** Specifying dataset names. type, value and direction. */

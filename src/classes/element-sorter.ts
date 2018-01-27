@@ -1,15 +1,15 @@
 import * as baseMethods from '../methods/base';
 
 type ElementTarget = baseMethods.ElementTarget;
-type ItemsSettable = string|NodeList|HTMLElement[];
+export type ItemsSettable = string|NodeList|HTMLElement[];
 
-interface DatasetNames {
+export interface DatasetNames {
   sortDirection?: string;
   sortType?: string;
   sortValue?: string;
 }
 
-interface SorterOptions {
+export interface SorterOptions {
   items?: ItemsSettable;
   datasetName?: DatasetNames;
 }

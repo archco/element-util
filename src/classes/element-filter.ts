@@ -3,7 +3,7 @@ import * as utilMethods from '../methods/util';
 
 type ElementTarget = baseMethods.ElementTarget;
 
-interface FilterOptions {
+export interface FilterOptions {
   enableHTML?: boolean;
 }
 

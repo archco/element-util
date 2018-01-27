@@ -1,6 +1,6 @@
 import { ElementTarget } from '../methods/base';
 
-declare interface FilterOptions {
+export interface FilterOptions {
   /** Enable to use `innerHTML`. Default is false, and than use `textContent`. */
   enableHTML?: boolean;
 }

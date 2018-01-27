@@ -1,5 +1,5 @@
 import ElementFilter from './classes/element-filter.d';
-import ElementSorter from './classes/element-sorter.d';
+import ElementSorter, { SorterOptions } from './classes/element-sorter.d';
 import { ElementTarget } from './methods/base.d';
 
 export as namespace ElementUtil;
@@ -183,5 +183,5 @@ declare namespace ElementUtil {
    * @param  options options for ElementSorter.
    * @return         sorted elements.
    */
-  export function sort(elm: ElementTarget, options?: object): HTMLElement[];
+  export function sort(elm: ElementTarget, options?: SorterOptions): HTMLElement[];
 }

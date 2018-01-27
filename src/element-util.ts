@@ -1,5 +1,5 @@
 import ElementFilter from './classes/element-filter';
-import ElementSorter from './classes/element-sorter';
+import ElementSorter, { SorterOptions } from './classes/element-sorter';
 import * as BaseMethods from './methods/base';
 import * as UtilMethods from './methods/util';
 
@@ -19,7 +19,7 @@ export default {
     return f.execute().hit;
   },
 
-  sort(elm: ElementTarget, options: object = {}): HTMLElement[] {
+  sort(elm: ElementTarget, options: SorterOptions = {}): HTMLElement[] {
     const s = new ElementSorter(elm, options);
     return s.execute().getItems();
   },
