@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Migrate to typescript. #4
 - Change class name `ElementSort` -> `ElementSorter`.
-- Rename `htmlMode` to `enableHTML` in ElementFilter.FilterOptions.
+- Rename `htmlMode` to `enableHTML` in [ElementFilter.FilterOptions](https://github.com/archco/element-util/blob/master/src/classes/element-filter.ts#L6)
 
 ## [1.1.3] - 2017-12-17
 
