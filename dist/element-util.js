@@ -228,9 +228,6 @@ var __values = (this && this.__values) || function (o) {
 function addListener(selector, type, listener, useCapture) {
     if (useCapture === void 0) { useCapture = false; }
     var elms = __WEBPACK_IMPORTED_MODULE_0__base__["getElements"](selector);
-    if (!elms.length) {
-        return null;
-    }
     try {
         for (var elms_1 = __values(elms), elms_1_1 = elms_1.next(); !elms_1_1.done; elms_1_1 = elms_1.next()) {
             var elm = elms_1_1.value;

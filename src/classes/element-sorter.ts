@@ -4,9 +4,9 @@ type ElementTarget = baseMethods.ElementTarget;
 type ItemsSettable = string|NodeList|HTMLElement[];
 
 interface DatasetNames {
-  sortDirection: string;
-  sortType: string;
-  sortValue: string;
+  sortDirection?: string;
+  sortType?: string;
+  sortValue?: string;
 }
 
 interface SorterOptions {
