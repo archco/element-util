@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Now available multiple class names in `addClass()`, `removeClass()` and `toggleClass()`. #3
+
 ### Changed
 
 - Migrate to typescript.

@@ -101,7 +101,8 @@ export function submitConfirm(selector: ElementTarget, message: string = 'Are yo
  */
 export function addClass(selector: ElementTarget, className: string): void {
   const elm = baseMethods.getElement(selector);
-  elm.classList.add(className);
+  const classes = className.split(' ');
+  classes.forEach(c => elm.classList.add(c));
 }
 
 /**
@@ -111,7 +112,8 @@ export function addClass(selector: ElementTarget, className: string): void {
  */
 export function removeClass(selector: ElementTarget, className: string): void {
   const elm = baseMethods.getElement(selector);
-  elm.classList.remove(className);
+  const classes = className.split(' ');
+  classes.forEach(c => elm.classList.remove(c));
 }
 
 /**
@@ -121,7 +123,8 @@ export function removeClass(selector: ElementTarget, className: string): void {
  */
 export function toggleClass(selector: ElementTarget, className: string): void {
   const elm = baseMethods.getElement(selector);
-  elm.classList.toggle(className);
+  const classes = className.split(' ');
+  classes.forEach(c => elm.classList.toggle(c));
 }
 
 /**

@@ -374,7 +374,8 @@ function submitConfirm(selector, message) {
  */
 function addClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
-    elm.classList.add(className);
+    var classes = className.split(' ');
+    classes.forEach(function (c) { return elm.classList.add(c); });
 }
 /**
  * Remove class from element.
@@ -383,7 +384,8 @@ function addClass(selector, className) {
  */
 function removeClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
-    elm.classList.remove(className);
+    var classes = className.split(' ');
+    classes.forEach(function (c) { return elm.classList.remove(c); });
 }
 /**
  * Toggling class to element.
@@ -392,7 +394,8 @@ function removeClass(selector, className) {
  */
 function toggleClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
-    elm.classList.toggle(className);
+    var classes = className.split(' ');
+    classes.forEach(function (c) { return elm.classList.toggle(c); });
 }
 /**
  * Hide element. It will set element's display to 'none'.

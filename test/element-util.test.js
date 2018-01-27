@@ -132,10 +132,57 @@ describe('ElementUtil', function () {
     });
 
     describe('#addClass', function () {
-      it('Add class to element.', function () {
-        let elm = ElementUtil.getElement('#test');
-        ElementUtil.addClass(elm, 'test-class');
-        expect(elm.classList.contains('test-class')).to.equal(true);
+      it('add class to element.', function () {
+        let div = document.createElement('div');
+        ElementUtil.addClass(div, 'test-class');
+        expect(div.classList.contains('test-class')).to.equal(true);
+      });
+
+      it('addable multiple classes', function () {
+        let div = document.createElement('div');
+        ElementUtil.addClass(div, 'first second');
+        expect(div.classList.contains('first')).to.be.true;
+        expect(div.classList.contains('second')).to.be.true;
+      });
+    });
+
+    describe('#removeClass', function () {
+      it('remove class from element.', function () {
+        let div = document.createElement('div');
+        div.classList.add('test-class');
+        expect(div.classList.contains('test-class')).to.be.true;
+        ElementUtil.removeClass(div, 'test-class');
+        expect(div.classList.contains('test-class')).to.be.false;
+      });
+
+      it('removable multiple classes', function () {
+        let div = document.createElement('div');
+        div.classList.add('first');
+        div.classList.add('second');
+        ElementUtil.removeClass(div, 'first second');
+        expect(div.classList.contains('first')).to.be.false;
+        expect(div.classList.contains('second')).to.be.false;
+      });
+    });
+
+    describe('#toggleClass', function () {
+      it('toggle class on element.', function () {
+        let div = document.createElement('div');
+        ElementUtil.toggleClass(div, 'toggle');
+        expect(div.classList.contains('toggle')).to.be.true;
+        ElementUtil.toggleClass(div, 'toggle');
+        expect(div.classList.contains('toggle')).to.be.false;
+      });
+
+      it('toggle multiple classes.', function () {
+        let div = document.createElement('div');
+        div.classList.add('first');
+        ElementUtil.toggleClass(div, 'first second');
+        expect(div.classList.contains('first')).to.be.false;
+        expect(div.classList.contains('second')).to.be.true;
+        ElementUtil.toggleClass(div, 'first second');
+        expect(div.classList.contains('first')).to.be.true;
+        expect(div.classList.contains('second')).to.be.false;
       });
     });
 
