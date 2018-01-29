@@ -370,7 +370,7 @@ function submitConfirm(selector, message) {
 /**
  * Add class to element.
  * @param selector  querySelector
- * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 function addClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
@@ -380,7 +380,7 @@ function addClass(selector, className) {
 /**
  * Remove class from element.
  * @param selector  querySelector
- * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 function removeClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);
@@ -390,7 +390,7 @@ function removeClass(selector, className) {
 /**
  * Toggling class to element.
  * @param selector  querySelector
- * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 function toggleClass(selector, className) {
     var elm = __WEBPACK_IMPORTED_MODULE_0__base__["getElement"](selector);

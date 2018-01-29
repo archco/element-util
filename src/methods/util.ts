@@ -97,7 +97,7 @@ export function submitConfirm(selector: ElementTarget, message: string = 'Are yo
 /**
  * Add class to element.
  * @param selector  querySelector
- * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 export function addClass(selector: ElementTarget, className: string): void {
   const elm = baseMethods.getElement(selector);
@@ -108,7 +108,7 @@ export function addClass(selector: ElementTarget, className: string): void {
 /**
  * Remove class from element.
  * @param selector  querySelector
- * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 export function removeClass(selector: ElementTarget, className: string): void {
   const elm = baseMethods.getElement(selector);
@@ -119,7 +119,7 @@ export function removeClass(selector: ElementTarget, className: string): void {
 /**
  * Toggling class to element.
  * @param selector  querySelector
- * @param className If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 export function toggleClass(selector: ElementTarget, className: string): void {
   const elm = baseMethods.getElement(selector);
