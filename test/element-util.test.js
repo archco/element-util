@@ -1,8 +1,5 @@
 var expect = window.chai.expect;
-var Module = window.ElementUtil;
-var ElementUtil = Module.default;
-// var ElementFilter = Module.ElementFilter;
-// var ElementSort = Module.ElementSort;
+var ElementUtil = window.ElementUtil;
 
 describe('ElementUtil', function () {
   it('ElementUtil to be an object.', function () {
