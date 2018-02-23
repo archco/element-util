@@ -94,7 +94,7 @@ export function nodeListToArray(list: NodeList|any[]|string): any[] {
   if (Array.isArray(list)) {
     return list;
   } else {
-    list = this.getElements(list);
+    list = getElements(list);
     return Array.prototype.slice.call(list);
   }
 }
