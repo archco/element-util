@@ -22,9 +22,14 @@ This library recommended using polyfill([Polyfill.io](https://cdn.polyfill.io/v2
 ## Usage
 
 ``` js
-import ElementUtil from 'element-util';
+import * as ElementUtil from 'element-util';
 
-let elm = ElementUtil.getElement('#app');
+const elm = ElementUtil.getElement('#app');
+
+// --- or ---
+import { addListener } from 'element-util';
+
+addListener('ul > li', 'click', () => console.log('item clicked!'));
 ```
 
 Please see [ElementUtil API](https://github.com/archco/element-util/tree/master/docs).

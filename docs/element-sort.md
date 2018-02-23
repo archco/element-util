@@ -5,33 +5,36 @@ The functional class for sort elements.
 ## Usage
 
 ### Helper method
+
 - Syntax
-```javascript
-let items = ElementUtil.sort(elm, options = {});
-```
-- Param  {Element|String} elm - base element.
-- Param  {Object} [ options = {} ] - See below options description.
-- Return {Array} Sorted items.
+  ``` js
+  let items = ElementUtil.sort(elm, options = {});
+  ```
+- Param  `Element`|`String` elm - base element.
+- Param  `Object` [ options = {} ] - See below options description.
+- Return `Array` Sorted items.
 
 ### Use class
-```javascript
+
+``` js
 import { ElementSort } from 'element-util';
 
-let elementSort = new ElementSort('ul.country-list');
-elementSort.excute();
-let items = elementSort.getItems();
+const elementSort = new ElementSort('ul.country-list');
+elementSort.execute();
+const items = elementSort.getItems();
 ```
 
 ## Class Methods
 
 ### constructor
+
 - Syntax
-```javascript
-let elementSort = new ElementSort(elm, options = {});
-```
-- Param {Element|String} elm - Base element.
-- Param {Object} [ options = {} ]
-  ```javascript
+  ``` js
+  let elementSort = new ElementSort(elm, options = {});
+  ```
+- Param `Element`|`String` elm - Base element.
+- Param `Object` [ options = {} ]
+  ``` js
   let options = {
     items: 'auto', // Items selector: 'auto' | selector | Nodlist | Array
     datasetName: {
@@ -41,42 +44,46 @@ let elementSort = new ElementSort(elm, options = {});
     },
   };
   ```
-- Return {ElementSort}
+- Return `ElementSort`
 
 ### setElement
+
 Set base element.
 
 - Syntax
-```javascript
-elementSort.getElement(elm);
-```
-- Param  {Element|String} elm
-- Return {ElementSort}
+  ``` js
+  elementSort.getElement(elm);
+  ```
+- Param  `Element`|`String` elm
+- Return `ElementSort`
 
 ### setItems
+
 Set sort target items.
 
 - Syntax
-```javascript
-elementSort.setItems(items);
-```
-- Param  {String|NodeList} items - 'auto' | selector | Nodlist | Array
-- Return {ElementSort}
+  ``` js
+  elementSort.setItems(items);
+  ```
+- Param  `String`|`NodeList` items - 'auto'|selector|NodeList|Array
+- Return `ElementSort`
 
 ### getItems
+
 Get sort target items.
 
 - Syntax
-```javascript
-let items = elementSort.getItems();
-```
-- Return {Array}
+  ``` js
+  let items = elementSort.getItems();
+  ```
+- Return `Array`
 
 ### execute
-Excute sorting.
+
+Execute sorting.
 
 - Syntax
-```javascript
-elementSort.execute();
-```
-- Return {void}
+  ``` js
+  elementSort.execute();
+  ```
+- Return `void`
