@@ -101,14 +101,12 @@ export class ElementSorter {
    */
   setItems(items: ItemsSettable): this {
     if (this.elmIsTable()) {
-      const nodeList = baseMethods.getElements('tbody tr', this.elm);
-      this.items = baseMethods.nodeListToArray(nodeList) as HTMLElement[];
+      this.items = baseMethods.getElementsAsArray('tbody tr', this.elm);
     } else if (items === 'auto') {
       this.items = baseMethods.nodeListToArray(this.elm.childNodes)
         .filter(node => node.tagName) as HTMLElement[];
     } else {
-      const nodeList = baseMethods.getElements(items as ElementTarget, this.elm);
-      this.items = baseMethods.nodeListToArray(nodeList) as HTMLElement[];
+      this.items = baseMethods.getElementsAsArray(items as ElementTarget, this.elm);
     }
     return this;
   }
@@ -139,9 +137,10 @@ export class ElementSorter {
   }
 
   private sortTable() {
-    const heads = baseMethods.getElements('thead th', this.elm);
+    const heads = baseMethods.getElementsAsArray('thead th', this.elm);
 
     for (const [i, head] of heads.entries()) {
+      head.style.cursor = 'pointer'; // Set cursor style to `pointer`.
       head.addEventListener('click', event => {
         event.preventDefault();
         const th = event.currentTarget as HTMLElement;

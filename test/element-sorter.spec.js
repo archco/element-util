@@ -16,5 +16,10 @@ describe('ElementSort', function () {
         .textContent;
       expect(firstRowDate).to.equal('1444-05-01');
     });
+
+    it('cursor style of table-header to be "pointer".', () => {
+      const th = ElementUtil.getElement('table.sort thead th:nth-child(1)');
+      expect(th.style.cursor).to.equal('pointer');
+    });
   });
 });

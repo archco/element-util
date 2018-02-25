@@ -759,16 +759,14 @@ var ElementSorter = /** @class */ (function () {
      */
     ElementSorter.prototype.setItems = function (items) {
         if (this.elmIsTable()) {
-            var nodeList = __WEBPACK_IMPORTED_MODULE_0__methods_base__["c" /* getElements */]('tbody tr', this.elm);
-            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["e" /* nodeListToArray */](nodeList);
+            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["d" /* getElementsAsArray */]('tbody tr', this.elm);
         }
         else if (items === 'auto') {
             this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["e" /* nodeListToArray */](this.elm.childNodes)
                 .filter(function (node) { return node.tagName; });
         }
         else {
-            var nodeList = __WEBPACK_IMPORTED_MODULE_0__methods_base__["c" /* getElements */](items, this.elm);
-            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["e" /* nodeListToArray */](nodeList);
+            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["d" /* getElementsAsArray */](items, this.elm);
         }
         return this;
     };
@@ -797,8 +795,9 @@ var ElementSorter = /** @class */ (function () {
     };
     ElementSorter.prototype.sortTable = function () {
         var _this = this;
-        var heads = __WEBPACK_IMPORTED_MODULE_0__methods_base__["c" /* getElements */]('thead th', this.elm);
+        var heads = __WEBPACK_IMPORTED_MODULE_0__methods_base__["d" /* getElementsAsArray */]('thead th', this.elm);
         var _loop_1 = function (i, head) {
+            head.style.cursor = 'pointer'; // Set cursor style to `pointer`.
             head.addEventListener('click', function (event) {
                 event.preventDefault();
                 var th = event.currentTarget;
