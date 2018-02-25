@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.3.1] - 2018-02-25
+
 ### Added
 
 - Add base method `getElementsAsArray()`. #6
+
+### Changed
+
+- `ElementSorter`: Set cursor style of table-header when sorting table. #7
 
 ## [1.3.0] - 2018-02-23
 
@@ -65,7 +71,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 First release. Please see [ElementUtil API](https://github.com/archco/element-util/tree/master/docs).
 
-[Unreleased]: https://github.com/archco/element-util/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/archco/element-util/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/archco/element-util/compare/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/archco/element-util/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/archco/element-util/compare/v1.1.3...v1.2.0
 [1.1.3]: https://github.com/archco/element-util/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/archco/element-util/compare/v1.1.1...v1.1.2
