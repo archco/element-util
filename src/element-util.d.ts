@@ -23,6 +23,15 @@ export function getElement(selector: ElementTarget, base?: Document|ElementTarge
 export function getElements(selector: ElementTarget, base?: Document|ElementTarget): NodeList;
 
 /**
+ * Get elements as array of HTMLElement.
+ *
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=Document]
+ * @returns {HTMLElement[]}
+ */
+export function getElementsAsArray(selector: ElementTarget, base?: Document|ElementTarget): HTMLElement[];
+
+/**
  * Remove elements.
  * @param  selector querySelector
  * @param  base     base element. default is Document.

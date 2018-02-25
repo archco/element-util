@@ -80,9 +80,10 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["b"] = getElement;
 /* harmony export (immutable) */ __webpack_exports__["c"] = getElements;
-/* harmony export (immutable) */ __webpack_exports__["e"] = removeElements;
-/* harmony export (immutable) */ __webpack_exports__["f"] = toNodeList;
-/* harmony export (immutable) */ __webpack_exports__["d"] = nodeListToArray;
+/* harmony export (immutable) */ __webpack_exports__["d"] = getElementsAsArray;
+/* harmony export (immutable) */ __webpack_exports__["f"] = removeElements;
+/* harmony export (immutable) */ __webpack_exports__["g"] = toNodeList;
+/* harmony export (immutable) */ __webpack_exports__["e"] = nodeListToArray;
 /* harmony export (immutable) */ __webpack_exports__["a"] = findAncestor;
 var __values = (this && this.__values) || function (o) {
     var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
@@ -153,6 +154,18 @@ function getElements(selector, base) {
     else {
         throw new TypeError('selector is must be String or NodeList');
     }
+}
+/**
+ * Get elements as array of HTMLElement.
+ *
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document]
+ * @returns {HTMLElement[]}
+ */
+function getElementsAsArray(selector, base) {
+    if (base === void 0) { base = document; }
+    var nodeList = getElements(selector, base);
+    return nodeListToArray(nodeList);
 }
 /**
  * Remove elements.
@@ -443,7 +456,7 @@ function makeHiddenInput(name, value) {
 function appendHiddenInput(target, name, value) {
     var targetElm = __WEBPACK_IMPORTED_MODULE_0__base__["b" /* getElement */](target);
     // Remove if already has input.
-    __WEBPACK_IMPORTED_MODULE_0__base__["e" /* removeElements */]("input[name=\"" + name + "\"]", target);
+    __WEBPACK_IMPORTED_MODULE_0__base__["f" /* removeElements */]("input[name=\"" + name + "\"]", target);
     targetElm.appendChild(makeHiddenInput(name, value));
 }
 
@@ -457,9 +470,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__methods_base__ = __webpack_require__(0);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["b"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getElements", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "removeElements", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "toNodeList", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "nodeListToArray", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getElementsAsArray", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "removeElements", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["f"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "toNodeList", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["g"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "nodeListToArray", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["e"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "findAncestor", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__methods_util__ = __webpack_require__(1);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "addListener", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["b"]; });
@@ -746,15 +760,15 @@ var ElementSorter = /** @class */ (function () {
     ElementSorter.prototype.setItems = function (items) {
         if (this.elmIsTable()) {
             var nodeList = __WEBPACK_IMPORTED_MODULE_0__methods_base__["c" /* getElements */]('tbody tr', this.elm);
-            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["d" /* nodeListToArray */](nodeList);
+            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["e" /* nodeListToArray */](nodeList);
         }
         else if (items === 'auto') {
-            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["d" /* nodeListToArray */](this.elm.childNodes)
+            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["e" /* nodeListToArray */](this.elm.childNodes)
                 .filter(function (node) { return node.tagName; });
         }
         else {
             var nodeList = __WEBPACK_IMPORTED_MODULE_0__methods_base__["c" /* getElements */](items, this.elm);
-            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["d" /* nodeListToArray */](nodeList);
+            this.items = __WEBPACK_IMPORTED_MODULE_0__methods_base__["e" /* nodeListToArray */](nodeList);
         }
         return this;
     };
