@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Add base method `getElementsAsArray()`. #6
+
 ## [1.3.0] - 2018-02-23
 
 ### Changed

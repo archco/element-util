@@ -12,7 +12,7 @@ Class for sort elements.
   ```
 - Param  `Element`|`string` elm - base element.
 - Param  `object` [ options = {} ] - See below options description.
-- Return `array` Sorted items.
+- Return `HTMLElement[]` Sorted items.
 
 ### Use class
 
@@ -76,7 +76,7 @@ Get sort target items.
   ``` js
   let items = elementSorter.getItems();
   ```
-- Return `array`
+- Return `HTMLElement[]`
 
 ### execute
 

@@ -24,6 +24,18 @@ Get elements as NodeList.
 - Param  `string`|`Element` [ base = document ]
 - Return `NodeList`
 
+## getElementsAsArray
+
+Get elements as array of HTMLElement.
+
+- Syntax
+  ``` js
+  let elms = ElementUtil.getElementsAsArray(selector, base = document);
+  ```
+- Param  `string`|`Element`|`NodeList` selector
+- Param  `string`|`Element` [ base = document ]
+- Return `HTMLElement[]`
+
 ## removeElements
 
 Remove elements by selector.
@@ -55,8 +67,8 @@ Convert NodeList to Array.
   ``` js
   let array = ElementUtil.nodeListToArray(nodeList);
   ```
-- Param  `NodeList`|`string`|`Array` nodeList
-- Return `Array`
+- Param  `NodeList`|`string`|`any[]` nodeList
+- Return `any[]`
 
 ## findAncestor
 

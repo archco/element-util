@@ -4,6 +4,7 @@
 
 - [#getElement](base-methods.md#getelement): Get a single element.
 - [#getElements](base-methods.md#getelements): Get elements as NodeList.
+- [#getElementsAsArray](base-methods.md#getelementsasarray): Get elements as array of HTMLElement.
 - [#removeElements](base-methods.md#removeelements): Remove elements by selector.
 - [#toNodeList](base-methods.md#tonodelist): Convert a single Element to NodeList.
 - [#nodeListToArray](base-methods.md#nodelisttoarray): Convert NodeList to Array.
