@@ -8,7 +8,19 @@ export interface FilterOptions {
   enableHTML?: boolean;
 }
 
-export default class ElementFilter {
+/**
+ * Filtering elements. (helper method)
+ * @param  selector   querySelector
+ * @param  str     filter string.
+ * @param  enableHTML using .innerHTML, default is false.
+ * @return            Hit number.
+ */
+export function filter(selector: ElementTarget, str: string = '', enableHTML: boolean = false): number {
+  const f = new ElementFilter(selector, str, { enableHTML });
+  return f.execute().hit;
+}
+
+export class ElementFilter {
   elms: NodeList;
   filter: string;
   hit: number = 0;
@@ -17,12 +29,12 @@ export default class ElementFilter {
   /**
    * constructor
    * @param selector target elements.
-   * @param filter   a string for filtering.
+   * @param str   a string for filtering.
    * @param options  enableHTML?: boolean
    */
-  constructor(selector: ElementTarget, filter: string = '', options: FilterOptions = {}) {
+  constructor(selector: ElementTarget, str: string = '', options: FilterOptions = {}) {
     this.elms = baseMethods.getElements(selector);
-    this.filter = filter;
+    this.filter = str;
     this.options = this.getDefaultOptions();
     this.setOptions(options);
   }
@@ -54,8 +66,8 @@ export default class ElementFilter {
    * @param  filter a string for filtering.
    * @return
    */
-  setFilter(filter: string): this {
-    this.filter = filter;
+  setFilter(str: string): this {
+    this.filter = str;
     return this;
   }
 
@@ -88,14 +100,14 @@ export default class ElementFilter {
 
   private filteringNodes(nodes: NodeList): void {
     this.hit = 0;
-    const filter = this.filter.toUpperCase();
+    const str = this.filter.toUpperCase();
 
     for (const node of nodes) {
       const elm = node as HTMLElement;
       const content = this.options.enableHTML
         ? elm.innerHTML
         : elm.textContent;
-      if (content.toUpperCase().indexOf(filter) === -1) {
+      if (content.toUpperCase().indexOf(str) === -1) {
         utilMethods.hide(elm);
       } else {
         utilMethods.show(elm);

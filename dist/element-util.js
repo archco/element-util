@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -230,137 +230,6 @@ function findAncestor(self, ancestor) {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__methods_base__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__methods_util__ = __webpack_require__(2);
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-
-
-var ElementFilter = /** @class */ (function () {
-    /**
-     * constructor
-     * @param selector target elements.
-     * @param filter   a string for filtering.
-     * @param options  enableHTML?: boolean
-     */
-    function ElementFilter(selector, filter, options) {
-        if (filter === void 0) { filter = ''; }
-        if (options === void 0) { options = {}; }
-        this.hit = 0;
-        this.elms = __WEBPACK_IMPORTED_MODULE_0__methods_base__["c" /* getElements */](selector);
-        this.filter = filter;
-        this.options = this.getDefaultOptions();
-        this.setOptions(options);
-    }
-    /**
-     * getDefaultOptions
-     * @return filter options object.
-     */
-    ElementFilter.prototype.getDefaultOptions = function () {
-        return {
-            enableHTML: false,
-        };
-    };
-    /**
-     * setOptions
-     * @param  options enableHTML?: boolean
-     * @return
-     */
-    ElementFilter.prototype.setOptions = function (options) {
-        this.options = __assign({}, this.options, options);
-    };
-    /**
-     * setFilter
-     * @param  filter a string for filtering.
-     * @return
-     */
-    ElementFilter.prototype.setFilter = function (filter) {
-        this.filter = filter;
-        return this;
-    };
-    /**
-     * get hit property.
-     * @return
-     */
-    ElementFilter.prototype.getHit = function () {
-        return this.hit;
-    };
-    /**
-     * Executes filtering.
-     * @return
-     */
-    ElementFilter.prototype.execute = function () {
-        if (this.elmsIsTable()) {
-            this.filteringTable();
-        }
-        else {
-            this.filteringNodes(this.elms);
-        }
-        return this;
-    };
-    ElementFilter.prototype.filteringTable = function () {
-        var table = this.elms[0];
-        var tableRows = __WEBPACK_IMPORTED_MODULE_0__methods_base__["c" /* getElements */]('tbody tr', table);
-        this.filteringNodes(tableRows);
-    };
-    ElementFilter.prototype.filteringNodes = function (nodes) {
-        this.hit = 0;
-        var filter = this.filter.toUpperCase();
-        try {
-            for (var nodes_1 = __values(nodes), nodes_1_1 = nodes_1.next(); !nodes_1_1.done; nodes_1_1 = nodes_1.next()) {
-                var node = nodes_1_1.value;
-                var elm = node;
-                var content = this.options.enableHTML
-                    ? elm.innerHTML
-                    : elm.textContent;
-                if (content.toUpperCase().indexOf(filter) === -1) {
-                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["d" /* hide */](elm);
-                }
-                else {
-                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["g" /* show */](elm);
-                    this.hit++;
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (nodes_1_1 && !nodes_1_1.done && (_a = nodes_1.return)) _a.call(nodes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        var e_1, _a;
-    };
-    ElementFilter.prototype.elmsIsTable = function () {
-        var elm = this.elms[0];
-        return this.elms.length === 1 && elm.tagName === 'TABLE';
-    };
-    return ElementFilter;
-}());
-/* harmony default export */ __webpack_exports__["a"] = (ElementFilter);
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -580,10 +449,196 @@ function appendHiddenInput(target, name, value) {
 
 
 /***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__methods_base__ = __webpack_require__(0);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getElements", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["c"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "removeElements", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["e"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "toNodeList", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["f"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "nodeListToArray", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "findAncestor", function() { return __WEBPACK_IMPORTED_MODULE_0__methods_base__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__methods_util__ = __webpack_require__(1);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "addListener", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "wrap", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["k"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "wrapAll", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["l"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "submitConfirm", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["h"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "addClass", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "removeClass", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["f"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "toggleClass", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["i"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "hide", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "show", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["g"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "toggleShow", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["j"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "makeHiddenInput", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["e"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "appendHiddenInput", function() { return __WEBPACK_IMPORTED_MODULE_1__methods_util__["c"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_element_filter__ = __webpack_require__(3);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "filter", function() { return __WEBPACK_IMPORTED_MODULE_2__classes_element_filter__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ElementFilter", function() { return __WEBPACK_IMPORTED_MODULE_2__classes_element_filter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_element_sorter__ = __webpack_require__(4);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "sort", function() { return __WEBPACK_IMPORTED_MODULE_3__classes_element_sorter__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ElementSorter", function() { return __WEBPACK_IMPORTED_MODULE_3__classes_element_sorter__["a"]; });
+
+
+
+
+
+
+/***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["b"] = filter;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ElementFilter; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__methods_base__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__methods_util__ = __webpack_require__(1);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+
+
+/**
+ * Filtering elements. (helper method)
+ * @param  selector   querySelector
+ * @param  str     filter string.
+ * @param  enableHTML using .innerHTML, default is false.
+ * @return            Hit number.
+ */
+function filter(selector, str, enableHTML) {
+    if (str === void 0) { str = ''; }
+    if (enableHTML === void 0) { enableHTML = false; }
+    var f = new ElementFilter(selector, str, { enableHTML: enableHTML });
+    return f.execute().hit;
+}
+var ElementFilter = /** @class */ (function () {
+    /**
+     * constructor
+     * @param selector target elements.
+     * @param str   a string for filtering.
+     * @param options  enableHTML?: boolean
+     */
+    function ElementFilter(selector, str, options) {
+        if (str === void 0) { str = ''; }
+        if (options === void 0) { options = {}; }
+        this.hit = 0;
+        this.elms = __WEBPACK_IMPORTED_MODULE_0__methods_base__["c" /* getElements */](selector);
+        this.filter = str;
+        this.options = this.getDefaultOptions();
+        this.setOptions(options);
+    }
+    /**
+     * getDefaultOptions
+     * @return filter options object.
+     */
+    ElementFilter.prototype.getDefaultOptions = function () {
+        return {
+            enableHTML: false,
+        };
+    };
+    /**
+     * setOptions
+     * @param  options enableHTML?: boolean
+     * @return
+     */
+    ElementFilter.prototype.setOptions = function (options) {
+        this.options = __assign({}, this.options, options);
+    };
+    /**
+     * setFilter
+     * @param  filter a string for filtering.
+     * @return
+     */
+    ElementFilter.prototype.setFilter = function (str) {
+        this.filter = str;
+        return this;
+    };
+    /**
+     * get hit property.
+     * @return
+     */
+    ElementFilter.prototype.getHit = function () {
+        return this.hit;
+    };
+    /**
+     * Executes filtering.
+     * @return
+     */
+    ElementFilter.prototype.execute = function () {
+        if (this.elmsIsTable()) {
+            this.filteringTable();
+        }
+        else {
+            this.filteringNodes(this.elms);
+        }
+        return this;
+    };
+    ElementFilter.prototype.filteringTable = function () {
+        var table = this.elms[0];
+        var tableRows = __WEBPACK_IMPORTED_MODULE_0__methods_base__["c" /* getElements */]('tbody tr', table);
+        this.filteringNodes(tableRows);
+    };
+    ElementFilter.prototype.filteringNodes = function (nodes) {
+        this.hit = 0;
+        var str = this.filter.toUpperCase();
+        try {
+            for (var nodes_1 = __values(nodes), nodes_1_1 = nodes_1.next(); !nodes_1_1.done; nodes_1_1 = nodes_1.next()) {
+                var node = nodes_1_1.value;
+                var elm = node;
+                var content = this.options.enableHTML
+                    ? elm.innerHTML
+                    : elm.textContent;
+                if (content.toUpperCase().indexOf(str) === -1) {
+                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["d" /* hide */](elm);
+                }
+                else {
+                    __WEBPACK_IMPORTED_MODULE_1__methods_util__["g" /* show */](elm);
+                    this.hit++;
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (nodes_1_1 && !nodes_1_1.done && (_a = nodes_1.return)) _a.call(nodes_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        var e_1, _a;
+    };
+    ElementFilter.prototype.elmsIsTable = function () {
+        var elm = this.elms[0];
+        return this.elms.length === 1 && elm.tagName === 'TABLE';
+    };
+    return ElementFilter;
+}());
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["b"] = sort;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ElementSorter; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__methods_base__ = __webpack_require__(0);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -620,6 +675,17 @@ var __read = (this && this.__read) || function (o, n) {
     return ar;
 };
 
+/**
+ * Sorting elements. (helper method)
+ * @param  elm     base element.
+ * @param  options options for ElementSorter.
+ * @return         sorted elements.
+ */
+function sort(elm, options) {
+    if (options === void 0) { options = {}; }
+    var s = new ElementSorter(elm, options);
+    return s.execute().getItems();
+}
 var ElementSorter = /** @class */ (function () {
     /**
      * constructor
@@ -806,74 +872,7 @@ var ElementSorter = /** @class */ (function () {
     };
     return ElementSorter;
 }());
-/* harmony default export */ __webpack_exports__["a"] = (ElementSorter);
 
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (immutable) */ __webpack_exports__["filter"] = filter;
-/* harmony export (immutable) */ __webpack_exports__["sort"] = sort;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__methods_base__ = __webpack_require__(0);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return __WEBPACK_IMPORTED_MODULE_2__methods_base__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getElements", function() { return __WEBPACK_IMPORTED_MODULE_2__methods_base__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "removeElements", function() { return __WEBPACK_IMPORTED_MODULE_2__methods_base__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "toNodeList", function() { return __WEBPACK_IMPORTED_MODULE_2__methods_base__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "nodeListToArray", function() { return __WEBPACK_IMPORTED_MODULE_2__methods_base__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "findAncestor", function() { return __WEBPACK_IMPORTED_MODULE_2__methods_base__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__methods_util__ = __webpack_require__(2);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "addListener", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "wrap", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["k"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "wrapAll", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["l"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "submitConfirm", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["h"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "addClass", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "removeClass", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "toggleClass", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["i"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "hide", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "show", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["g"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "toggleShow", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["j"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "makeHiddenInput", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "appendHiddenInput", function() { return __WEBPACK_IMPORTED_MODULE_3__methods_util__["c"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ElementFilter", function() { return __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ElementSorter", function() { return __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__["a"]; });
-
-
-
-
-
-
-//
-// Helper methods.
-//
-/**
- * Filtering elements.
- * @param  selector   querySelector
- * @param  str     filter string.
- * @param  enableHTML using .innerHTML, default is false.
- * @return            Hit number.
- */
-function filter(selector, str, enableHTML) {
-    if (str === void 0) { str = ''; }
-    if (enableHTML === void 0) { enableHTML = false; }
-    var f = new __WEBPACK_IMPORTED_MODULE_0__classes_element_filter__["a" /* default */](selector, str, { enableHTML: enableHTML });
-    return f.execute().hit;
-}
-/**
- * Sorting elements.
- * @param  elm     base element.
- * @param  options options for ElementSorter.
- * @return         sorted elements.
- */
-function sort(elm, options) {
-    if (options === void 0) { options = {}; }
-    var s = new __WEBPACK_IMPORTED_MODULE_1__classes_element_sorter__["a" /* default */](elm, options);
-    return s.execute().getItems();
-}
 
 
 /***/ })

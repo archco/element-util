@@ -150,27 +150,6 @@ export function makeHiddenInput(name: string, value: string): HTMLInputElement;
 export function appendHiddenInput(target: ElementTarget, name: string, value: string): void;
 
 //
-// Helper methods.
-//
-
-/**
- * Filtering elements.
- * @param  selector   querySelector
- * @param  filter     filter string.
- * @param  enableHTML using .innerHTML, default is false.
- * @return            Hit number.
- */
-export function filter(selector: ElementTarget, filter?: string, enableHTML?: boolean): number;
-
-/**
- * Sorting elements.
- * @param  elm     base element.
- * @param  options options for ElementSorter.
- * @return         sorted elements.
- */
-export function sort(elm: ElementTarget, options?: SorterOptions): HTMLElement[];
-
-//
 // ElementFilter
 //
 
@@ -178,6 +157,15 @@ declare interface FilterOptions {
   /** Enable to use `innerHTML`. Default is false, and than use `textContent`. */
   enableHTML?: boolean;
 }
+
+/**
+ * Filtering elements. (helper method)
+ * @param  selector   querySelector
+ * @param  str     filter string.
+ * @param  enableHTML using .innerHTML, default is false.
+ * @return            Hit number.
+ */
+export function filter(selector: ElementTarget, str?: string, enableHTML?: boolean): number;
 
 export class ElementFilter {
   elms: NodeList;
@@ -188,10 +176,10 @@ export class ElementFilter {
   /**
    * constructor
    * @param selector target elements.
-   * @param filter   a string for filtering.
+   * @param str   a string for filtering.
    * @param options  enableHTML?: boolean
    */
-  constructor(selector: ElementTarget, filter?: string, options?: FilterOptions);
+  constructor(selector: ElementTarget, str?: string, options?: FilterOptions);
 
   /**
    * getDefaultOptions
@@ -208,10 +196,10 @@ export class ElementFilter {
 
   /**
    * setFilter
-   * @param  filter a string for filtering.
+   * @param  str a string for filtering.
    * @return
    */
-  setFilter(filter: string): this;
+  setFilter(str: string): this;
 
   /**
    * get hit property.
@@ -248,6 +236,14 @@ declare interface SorterOptions {
   /** Specifying dataset names. type, value and direction. */
   datasetName?: DatasetNames;
 }
+
+/**
+ * Sorting elements. (helper method)
+ * @param  elm     base element.
+ * @param  options options for ElementSorter.
+ * @return         sorted elements.
+ */
+export function sort(elm: ElementTarget, options?: SorterOptions): HTMLElement[];
 
 export class ElementSorter {
   elm: HTMLElement;

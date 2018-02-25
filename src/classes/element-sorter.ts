@@ -20,7 +20,18 @@ export interface SorterOptions {
   datasetName?: DatasetNames;
 }
 
-export default class ElementSorter {
+/**
+ * Sorting elements. (helper method)
+ * @param  elm     base element.
+ * @param  options options for ElementSorter.
+ * @return         sorted elements.
+ */
+export function sort(elm: ElementTarget, options: SorterOptions = {}): HTMLElement[] {
+  const s = new ElementSorter(elm, options);
+  return s.execute().getItems();
+}
+
+export class ElementSorter {
   elm: HTMLElement;
   items: HTMLElement[];
   options: SorterOptions;
