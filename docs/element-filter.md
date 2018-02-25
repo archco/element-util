@@ -8,10 +8,10 @@ Class for filtering elements.
 
 - Syntax
   ``` js
-  let hitCount = ElementUtil.filter(selector, filter = '', htmlMode = false);
+  let hitCount = ElementUtil.filter(selector, str = '', htmlMode = false);
   ```
 - Param  `string`|`NodeList` selector filtering targets.
-- Param  `string` [ filter = '' ] filter string.
+- Param  `string` [ str = '' ] filter string.
 - Param  `boolean` [ htmlMode = false ]
 - Return `number` hit count.
 
@@ -31,10 +31,10 @@ let count = elementFilter.getHit();
 
 - Syntax
   ``` js
-  let elementFilter = new ElementFilter(selector, filter = '', options = {});
+  let elementFilter = new ElementFilter(selector, str = '', options = {});
   ```
 - Param  `string`|`NodeList` selector filtering targets.
-- Param  `string` [ filter = '' ] filter string.
+- Param  `string` [ str = '' ] filter string.
 - Param  `object` [ options = {} ]
   ``` js
   let options = {
@@ -50,9 +50,9 @@ Set filter string.
 
 - Syntax
   ``` js
-  elementFilter.setFilter(filter);
+  elementFilter.setFilter(str);
   ```
-- Param  `string` filter
+- Param  `string` str
 - Return `ElementFilter`
 
 ### getHit
