@@ -1,24 +1,22 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const merge = require('webpack-merge');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-module.exports = {
-  entry: {
-    'element-util': './src/element-util.ts',
-    'element-util.min': './src/element-util.ts',
-  },
+const dev = {
+  entry: './src/element-util.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: 'element-util.js',
     library: 'ElementUtil',
     libraryTarget: 'umd',
+    globalObject: 'this',
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: 'awesome-typescript-loader',
+        use: 'ts-loader',
       },
       {
         test: /\.js$/,
@@ -30,16 +28,24 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts'],
   },
+  devtool: 'source-map',
+};
+
+const min = merge(dev, {
+  output: {
+    filename: 'element-util.min.js',
+  },
+  optimization: {
+    minimize: true,
+  },
+  devtool: false,
   plugins: [
-    new UglifyJsPlugin({
-      sourceMap: false,
-      include: /\.min\.js$/,
-    }),
     new WebpackNotifierPlugin({
       title: 'Webpack',
       alwaysNotify: true,
       sound: false,
     }),
   ],
-  devtool: 'source-map',
-};
+});
+
+module.exports = [dev, min];
