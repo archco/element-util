@@ -1,6 +1,10 @@
-import * as baseMethods from '../methods/base';
+import {
+  ElementTarget,
+  getElement,
+  getElementsAsArray,
+  nodeListToArray,
+} from '../methods/base';
 
-type ElementTarget = baseMethods.ElementTarget;
 /** Types that can be as target items. */
 export type ItemsSettable = string|NodeList|HTMLElement[];
 
@@ -82,7 +86,7 @@ export class ElementSorter {
    * @return
    */
   setElement(elm: ElementTarget): this {
-    this.elm = baseMethods.getElement(elm) as HTMLElement;
+    this.elm = getElement(elm) as HTMLElement;
     return this;
   }
 
@@ -101,12 +105,12 @@ export class ElementSorter {
    */
   setItems(items: ItemsSettable): this {
     if (this.elmIsTable()) {
-      this.items = baseMethods.getElementsAsArray('tbody tr', this.elm);
+      this.items = getElementsAsArray('tbody tr', this.elm);
     } else if (items === 'auto') {
-      this.items = baseMethods.nodeListToArray(this.elm.childNodes)
+      this.items = nodeListToArray(this.elm.childNodes)
         .filter(node => node.tagName) as HTMLElement[];
     } else {
-      this.items = baseMethods.getElementsAsArray(items as ElementTarget, this.elm);
+      this.items = getElementsAsArray(items as ElementTarget, this.elm);
     }
     return this;
   }
@@ -137,9 +141,8 @@ export class ElementSorter {
   }
 
   private sortTable() {
-    const heads = baseMethods.getElementsAsArray('thead th', this.elm);
-
-    for (const [i, head] of heads.entries()) {
+    const heads = getElementsAsArray('thead th', this.elm);
+    heads.forEach((head, i) => {
       head.style.cursor = 'pointer'; // Set cursor style to `pointer`.
       head.addEventListener('click', event => {
         event.preventDefault();
@@ -152,7 +155,7 @@ export class ElementSorter {
           this.getSortDirection(th),
         );
       });
-    }
+    });
   }
 
   private sorting(items: HTMLElement[], compareMethod: (a: any, b: any) => number) {
@@ -166,8 +169,8 @@ export class ElementSorter {
 
   private sortingTable(rows: HTMLElement[], nth: number, type: string, direction: string) {
     const compareMethod = (a: HTMLElement, b: HTMLElement): number => {
-      a = baseMethods.getElement(`td:nth-child(${nth})`, a) as HTMLElement;
-      b = baseMethods.getElement(`td:nth-child(${nth})`, b) as HTMLElement;
+      a = getElement(`td:nth-child(${nth})`, a) as HTMLElement;
+      b = getElement(`td:nth-child(${nth})`, b) as HTMLElement;
       const aVal = this.getSortValue(a);
       const bVal = this.getSortValue(b);
       type = type || this.getSortType(a);
