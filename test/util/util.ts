@@ -24,10 +24,10 @@ export function makeElement(tag: string, {id, className, dataset, text}: Element
   return elm;
 }
 
-export function makeElements(count: number, tag: string, {id, className}: ElementOptions = {}): HTMLElement[] {
+export function makeElements(count: number, tag: string, options: ElementOptions = {}): HTMLElement[] {
   const elms: HTMLElement[] = [];
   for (let i = 0; i < count; i++) {
-    elms.push(makeElement(tag, {id, className}));
+    elms.push(makeElement(tag, options));
   }
   return elms;
 }

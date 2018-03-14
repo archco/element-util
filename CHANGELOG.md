@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Changed main testing tool to [ts-jest](https://github.com/kulshekhar/ts-jest). The browser tests is only for the checking compatibility. #8
+- Changed `tsconfig.json`. Polyfill is not required any more. #9
+
 ## [1.3.1] - 2018-02-25
 
 ### Added

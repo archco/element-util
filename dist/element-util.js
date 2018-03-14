@@ -102,16 +102,6 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
     }
     return t;
 };
-var __values = (undefined && undefined.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 
 
 /**
@@ -138,7 +128,7 @@ var ElementFilter = /** @class */ (function () {
         if (str === void 0) { str = ''; }
         if (options === void 0) { options = {}; }
         this.hit = 0;
-        this.elms = _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElements"](selector);
+        this.elms = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElements"])(selector);
         this.filter = str;
         this.options = this.getDefaultOptions();
         this.setOptions(options);
@@ -191,36 +181,26 @@ var ElementFilter = /** @class */ (function () {
     };
     ElementFilter.prototype.filteringTable = function () {
         var table = this.elms[0];
-        var tableRows = _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElements"]('tbody tr', table);
+        var tableRows = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElements"])('tbody tr', table);
         this.filteringNodes(tableRows);
     };
     ElementFilter.prototype.filteringNodes = function (nodes) {
         this.hit = 0;
         var str = this.filter.toUpperCase();
-        try {
-            for (var nodes_1 = __values(nodes), nodes_1_1 = nodes_1.next(); !nodes_1_1.done; nodes_1_1 = nodes_1.next()) {
-                var node = nodes_1_1.value;
-                var elm = node;
-                var content = this.options.enableHTML
-                    ? elm.innerHTML
-                    : elm.textContent;
-                if (content.toUpperCase().indexOf(str) === -1) {
-                    _methods_util__WEBPACK_IMPORTED_MODULE_1__["hide"](elm);
-                }
-                else {
-                    _methods_util__WEBPACK_IMPORTED_MODULE_1__["show"](elm);
-                    this.hit++;
-                }
+        var elms = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["nodeListToArray"])(nodes);
+        for (var _i = 0, elms_1 = elms; _i < elms_1.length; _i++) {
+            var elm = elms_1[_i];
+            var content = this.options.enableHTML
+                ? elm.innerHTML
+                : elm.textContent;
+            if (content.toUpperCase().indexOf(str) === -1) {
+                Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["hide"])(elm);
+            }
+            else {
+                Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["show"])(elm);
+                this.hit++;
             }
         }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (nodes_1_1 && !nodes_1_1.done && (_a = nodes_1.return)) _a.call(nodes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        var e_1, _a;
     };
     ElementFilter.prototype.elmsIsTable = function () {
         var elm = this.elms[0];
@@ -252,32 +232,6 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
             t[p] = s[p];
     }
     return t;
-};
-var __values = (undefined && undefined.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-var __read = (undefined && undefined.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
 };
 
 /**
@@ -333,7 +287,7 @@ var ElementSorter = /** @class */ (function () {
      * @return
      */
     ElementSorter.prototype.setElement = function (elm) {
-        this.elm = _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"](elm);
+        this.elm = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(elm);
         return this;
     };
     /**
@@ -350,14 +304,14 @@ var ElementSorter = /** @class */ (function () {
      */
     ElementSorter.prototype.setItems = function (items) {
         if (this.elmIsTable()) {
-            this.items = _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"]('tbody tr', this.elm);
+            this.items = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])('tbody tr', this.elm);
         }
         else if (items === 'auto') {
-            this.items = _methods_base__WEBPACK_IMPORTED_MODULE_0__["nodeListToArray"](this.elm.childNodes)
+            this.items = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["nodeListToArray"])(this.elm.childNodes)
                 .filter(function (node) { return node.tagName; });
         }
         else {
-            this.items = _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"](items, this.elm);
+            this.items = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(items, this.elm);
         }
         return this;
     };
@@ -386,8 +340,8 @@ var ElementSorter = /** @class */ (function () {
     };
     ElementSorter.prototype.sortTable = function () {
         var _this = this;
-        var heads = _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"]('thead th', this.elm);
-        var _loop_1 = function (i, head) {
+        var heads = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])('thead th', this.elm);
+        heads.forEach(function (head, i) {
             head.style.cursor = 'pointer'; // Set cursor style to `pointer`.
             head.addEventListener('click', function (event) {
                 event.preventDefault();
@@ -395,21 +349,7 @@ var ElementSorter = /** @class */ (function () {
                 _this.toggleSortDirection(th);
                 _this.sortingTable(_this.items, i + 1, _this.getSortType(th), _this.getSortDirection(th));
             });
-        };
-        try {
-            for (var _a = __values(heads.entries()), _b = _a.next(); !_b.done; _b = _a.next()) {
-                var _c = __read(_b.value, 2), i = _c[0], head = _c[1];
-                _loop_1(i, head);
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_b && !_b.done && (_d = _a.return)) _d.call(_a);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        var e_1, _d;
+        });
     };
     ElementSorter.prototype.sorting = function (items, compareMethod) {
         items.sort(compareMethod);
@@ -422,8 +362,8 @@ var ElementSorter = /** @class */ (function () {
     ElementSorter.prototype.sortingTable = function (rows, nth, type, direction) {
         var _this = this;
         var compareMethod = function (a, b) {
-            a = _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"]("td:nth-child(" + nth + ")", a);
-            b = _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"]("td:nth-child(" + nth + ")", b);
+            a = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])("td:nth-child(" + nth + ")", a);
+            b = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])("td:nth-child(" + nth + ")", b);
             var aVal = _this.getSortValue(a);
             var bVal = _this.getSortValue(b);
             type = type || _this.getSortType(a);
@@ -564,16 +504,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toNodeList", function() { return toNodeList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nodeListToArray", function() { return nodeListToArray; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findAncestor", function() { return findAncestor; });
-var __values = (undefined && undefined.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 function resolveBase(base) {
     base = base === document ? base : getElement(base);
     if (!base) {
@@ -655,22 +585,9 @@ function getElementsAsArray(selector, base) {
 function removeElements(selector, base) {
     if (base === void 0) { base = document; }
     base = resolveBase(base);
-    var elms = getElements(selector, base);
-    try {
-        for (var elms_1 = __values(elms), elms_1_1 = elms_1.next(); !elms_1_1.done; elms_1_1 = elms_1.next()) {
-            var elm = elms_1_1.value;
-            elm.parentNode.removeChild(elm);
-        }
-    }
-    catch (e_1_1) { e_1 = { error: e_1_1 }; }
-    finally {
-        try {
-            if (elms_1_1 && !elms_1_1.done && (_a = elms_1.return)) _a.call(elms_1);
-        }
-        finally { if (e_1) throw e_1.error; }
-    }
+    var elms = getElementsAsArray(selector, base);
+    elms.forEach(function (elm) { return elm.parentElement.removeChild(elm); });
     return elms.length;
-    var e_1, _a;
 }
 /**
  * Convert a single element to NodeList.
@@ -695,7 +612,7 @@ function nodeListToArray(list) {
     }
     else {
         list = getElements(list);
-        return Array.prototype.slice.call(list);
+        return [].slice.call(list);
     }
 }
 /**
@@ -744,16 +661,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeHiddenInput", function() { return makeHiddenInput; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appendHiddenInput", function() { return appendHiddenInput; });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/methods/base.ts");
-var __values = (undefined && undefined.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 
 /**
  * Add event listener on every selected elements.
@@ -765,22 +672,9 @@ var __values = (undefined && undefined.__values) || function (o) {
  */
 function addListener(selector, type, listener, useCapture) {
     if (useCapture === void 0) { useCapture = false; }
-    var elms = _base__WEBPACK_IMPORTED_MODULE_0__["getElements"](selector);
-    try {
-        for (var elms_1 = __values(elms), elms_1_1 = elms_1.next(); !elms_1_1.done; elms_1_1 = elms_1.next()) {
-            var elm = elms_1_1.value;
-            elm.addEventListener(type, listener, useCapture);
-        }
-    }
-    catch (e_1_1) { e_1 = { error: e_1_1 }; }
-    finally {
-        try {
-            if (elms_1_1 && !elms_1_1.done && (_a = elms_1.return)) _a.call(elms_1);
-        }
-        finally { if (e_1) throw e_1.error; }
-    }
+    var elms = _base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"](selector);
+    elms.forEach(function (elm) { return elm.addEventListener(type, listener, useCapture); });
     return elms.length;
-    var e_1, _a;
 }
 /**
  * Wrapping each element.
@@ -790,31 +684,21 @@ function addListener(selector, type, listener, useCapture) {
  */
 function wrap(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
-    var elms = _base__WEBPACK_IMPORTED_MODULE_0__["getElements"](selector);
-    try {
-        for (var elms_2 = __values(elms), elms_2_1 = elms_2.next(); !elms_2_1.done; elms_2_1 = elms_2.next()) {
-            var elm = elms_2_1.value;
-            var parent_1 = elm.parentNode;
-            var sibling = elm.nextSibling;
-            var div = document.createElement(tagName);
-            addClass(div, className);
-            div.appendChild(elm);
-            if (sibling) {
-                parent_1.insertBefore(div, sibling);
-            }
-            else {
-                parent_1.appendChild(div);
-            }
+    var elms = _base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"](selector);
+    for (var _i = 0, elms_1 = elms; _i < elms_1.length; _i++) {
+        var elm = elms_1[_i];
+        var parent_1 = elm.parentNode;
+        var sibling = elm.nextSibling;
+        var div = document.createElement(tagName);
+        addClass(div, className);
+        div.appendChild(elm);
+        if (sibling) {
+            parent_1.insertBefore(div, sibling);
+        }
+        else {
+            parent_1.appendChild(div);
         }
     }
-    catch (e_2_1) { e_2 = { error: e_2_1 }; }
-    finally {
-        try {
-            if (elms_2_1 && !elms_2_1.done && (_a = elms_2.return)) _a.call(elms_2);
-        }
-        finally { if (e_2) throw e_2.error; }
-    }
-    var e_2, _a;
 }
 /**
  * Wrapping all elements inside a one wrapper.
@@ -824,23 +708,14 @@ function wrap(selector, className, tagName) {
  */
 function wrapAll(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
-    var elms = _base__WEBPACK_IMPORTED_MODULE_0__["getElements"](selector);
+    var elms = _base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"](selector);
     var parent = elms[0].parentNode;
     var preSibling = elms[0].previousSibling;
     var div = document.createElement(tagName);
     addClass(div, className);
-    try {
-        for (var elms_3 = __values(elms), elms_3_1 = elms_3.next(); !elms_3_1.done; elms_3_1 = elms_3.next()) {
-            var elm = elms_3_1.value;
-            div.appendChild(elm);
-        }
-    }
-    catch (e_3_1) { e_3 = { error: e_3_1 }; }
-    finally {
-        try {
-            if (elms_3_1 && !elms_3_1.done && (_a = elms_3.return)) _a.call(elms_3);
-        }
-        finally { if (e_3) throw e_3.error; }
+    for (var _i = 0, elms_2 = elms; _i < elms_2.length; _i++) {
+        var elm = elms_2[_i];
+        div.appendChild(elm);
     }
     if (preSibling) {
         parent.insertBefore(div, preSibling.nextSibling);
@@ -848,7 +723,6 @@ function wrapAll(selector, className, tagName) {
     else {
         parent.appendChild(div);
     }
-    var e_3, _a;
 }
 /**
  * Add confirm message listener when 'submit' event.
