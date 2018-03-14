@@ -5,9 +5,11 @@
 Get a single element.
 
 - Syntax
+
   ``` js
   let element = ElementUtil.getElement(selector, base = document);
   ```
+
 - Param  `string`|`Element`|`NodeList` selector
 - Param  `string`|`Element` [ base = document ]
 - Return `Element`
@@ -17,9 +19,11 @@ Get a single element.
 Get elements as NodeList.
 
 - Syntax
+
   ``` js
   let nodes = ElementUtil.getElements(selector, base = document);
   ```
+
 - Param  `string`|`Element`|`NodeList` selector
 - Param  `string`|`Element` [ base = document ]
 - Return `NodeList`
@@ -29,9 +33,11 @@ Get elements as NodeList.
 Get elements as array of HTMLElement.
 
 - Syntax
+
   ``` js
   let elms = ElementUtil.getElementsAsArray(selector, base = document);
   ```
+
 - Param  `string`|`Element`|`NodeList` selector
 - Param  `string`|`Element` [ base = document ]
 - Return `HTMLElement[]`
@@ -41,9 +47,11 @@ Get elements as array of HTMLElement.
 Remove elements by selector.
 
 - Syntax
+
   ``` js
   let number = ElementUtil.removeClass(selector, base = document);
   ```
+
 - Param  `string`|`Element`|`NodeList` selector
 - Param  `string`|`Element` [ base = document ]
 - Return `Number` number of affected.
@@ -53,9 +61,11 @@ Remove elements by selector.
 Convert a single Element to NodeList.
 
 - Syntax
+
   ``` js
   let nodeList = ElementUtil.toNodeList(elm);
   ```
+
 - Param  `Element`|`string` elm
 - Return `NodeList`
 
@@ -64,9 +74,11 @@ Convert a single Element to NodeList.
 Convert NodeList to Array.
 
 - Syntax
+
   ``` js
   let array = ElementUtil.nodeListToArray(nodeList);
   ```
+
 - Param  `NodeList`|`string`|`any[]` nodeList
 - Return `any[]`
 
@@ -75,9 +87,11 @@ Convert NodeList to Array.
 Find ancestor from element.
 
 - Syntax
+
   ``` js
   let element = ElementUtil.findAncestor(self, ancestor);
   ```
+
 - Param `Element`|`string` self - base element.
 - Param `Element`|`string` ancestor
 - Return `Element`|`null`

@@ -7,9 +7,11 @@ Class for sort elements.
 ### Helper method
 
 - Syntax
+
   ``` js
   let items = ElementUtil.sort(elm, options = {});
   ```
+
 - Param  `Element`|`string` elm - base element.
 - Param  `object` [ options = {} ] - See below options description.
 - Return `HTMLElement[]` Sorted items.
@@ -29,14 +31,18 @@ let items = elementSorter.getItems();
 ### constructor
 
 - Syntax
+
   ``` js
   let elementSorter = new ElementSorter(elm, options = {});
   ```
+
 - Param `Element`|`string` elm - Base element.
 - Param `object` [ options = {} ]
+
   ``` js
   let options = {
     items: 'auto', // Items selector: 'auto'|selector|NodeList|array
+  
     datasetName: {
       sortDirection: 'sortDirection', // data-sort-direction: 'asc'|'desc'
       sortType: 'sortType', // data-sort-type: 'string'|'number'|'date'
@@ -44,6 +50,7 @@ let items = elementSorter.getItems();
     },
   };
   ```
+
 - Return `ElementSorter`
 
 ### setElement
@@ -51,9 +58,11 @@ let items = elementSorter.getItems();
 Set base element.
 
 - Syntax
+
   ``` js
   elementSorter.getElement(elm);
   ```
+
 - Param  `Element`|`string` elm
 - Return `ElementSorter`
 
@@ -62,9 +71,11 @@ Set base element.
 Set sort target items.
 
 - Syntax
+
   ``` js
   elementSorter.setItems(items);
   ```
+
 - Param  `string`|`NodeList` items - 'auto'|selector|NodeList|array
 - Return `ElementSorter`
 
@@ -73,9 +84,11 @@ Set sort target items.
 Get sort target items.
 
 - Syntax
+
   ``` js
   let items = elementSorter.getItems();
   ```
+
 - Return `HTMLElement[]`
 
 ### execute
@@ -83,7 +96,9 @@ Get sort target items.
 Execute sort.
 
 - Syntax
+
   ``` js
   elementSorter.execute();
   ```
+
 - Return `void`

@@ -7,9 +7,11 @@ Class for filtering elements.
 ### Helper method
 
 - Syntax
+
   ``` js
   let hitCount = ElementUtil.filter(selector, str = '', htmlMode = false);
   ```
+
 - Param  `string`|`NodeList` selector filtering targets.
 - Param  `string` [ str = '' ] filter string.
 - Param  `boolean` [ htmlMode = false ]
@@ -30,18 +32,23 @@ let count = elementFilter.getHit();
 ### constructor
 
 - Syntax
+
   ``` js
   let elementFilter = new ElementFilter(selector, str = '', options = {});
   ```
+
 - Param  `string`|`NodeList` selector filtering targets.
 - Param  `string` [ str = '' ] filter string.
 - Param  `object` [ options = {} ]
+
   ``` js
   let options = {
     // Enable to use `innerHTML`. Default is false, and than use `textContent`.
+  
     enableHTML: false,
   };
   ```
+
 - Return `ElementFilter`
 
 ### setFilter
@@ -49,9 +56,11 @@ let count = elementFilter.getHit();
 Set filter string.
 
 - Syntax
+
   ``` js
   elementFilter.setFilter(str);
   ```
+
 - Param  `string` str
 - Return `ElementFilter`
 
@@ -60,9 +69,11 @@ Set filter string.
 Get count of filtered elements.
 
 - Syntax
+
   ``` js
   let count = elementFilter.getHit();
   ```
+
 - Return `number`
 
 ### execute
@@ -70,7 +81,9 @@ Get count of filtered elements.
 Execute filtering.
 
 - Syntax
+
   ``` js
   elementFilter.execute();
   ```
+
 - Return `void`
