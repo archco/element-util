@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/archco/element-util.svg?branch=master)](https://travis-ci.org/archco/element-util)
 [![npm version](https://badge.fury.io/js/element-util.svg)](https://www.npmjs.com/package/element-util)
-[![npm](https://img.shields.io/npm/dm/element-util.svg)](https://www.npmjs.com/package/element-util)
+[![Downloads](https://img.shields.io/npm/dm/element-util.svg)](https://www.npmjs.com/package/element-util)
 
 The javascript library for using DOM Elements conveniently.
 
