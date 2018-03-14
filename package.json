@@ -48,6 +48,10 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testPathIgnorePatterns": [
+      "<rootDir>/test/browser/",
+      "<rootDir>/node_modules/"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
