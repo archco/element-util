@@ -17,10 +17,8 @@ export function addListener(
   useCapture: boolean = false,
 ): number {
 
-  const elms: NodeList = baseMethods.getElements(selector);
-  for (const elm of elms) {
-    elm.addEventListener(type, listener, useCapture);
-  }
+  const elms = baseMethods.getElementsAsArray(selector);
+  elms.forEach(elm => elm.addEventListener(type, listener, useCapture));
   return elms.length;
 }
 
@@ -36,7 +34,7 @@ export function wrap(
   tagName: string = 'div',
 ): void {
 
-  const elms = baseMethods.getElements(selector);
+  const elms = baseMethods.getElementsAsArray(selector);
   for (const elm of elms) {
     const parent = elm.parentNode;
     const sibling = elm.nextSibling;
@@ -64,7 +62,7 @@ export function wrapAll(
   tagName: string = 'div',
 ): void {
 
-  const elms = baseMethods.getElements(selector);
+  const elms = baseMethods.getElementsAsArray(selector);
   const parent = elms[0].parentNode;
   const preSibling = elms[0].previousSibling;
   const div = document.createElement(tagName);

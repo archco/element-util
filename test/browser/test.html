@@ -2,10 +2,10 @@
 <html>
   <head>
     <title>ElementUtil Tests</title>
-    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+    <link rel="stylesheet" href="../../node_modules/mocha/mocha.css">
     <style>
       #mocha {
-        z-index: 10;
+        z-index: 1;
       }
       #test {
         z-index: -1;
@@ -79,18 +79,14 @@
       </table>
       <div class="show-target" style="display: none;">Hello</div>
     </div>
-    <script src="../node_modules/mocha/mocha.js"></script>
-    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
     <script>
       mocha.setup('bdd');
     </script>
 
-    <!-- polyfill -->
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
-
     <!-- load code you want to test here -->
-    <script src="../dist/element-util.js"></script>
+    <script src="../../dist/element-util.js"></script>
 
     <!-- load your test files here -->
     <script src="base.spec.js"></script>

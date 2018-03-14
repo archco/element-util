@@ -1,5 +1,5 @@
-var expect = window.chai.expect;
 var ElementUtil = window.ElementUtil;
+var expect = window.chai.expect;
 
 describe('ElementFilter', function () {
   describe('#filter', function () {

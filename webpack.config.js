@@ -4,6 +4,7 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 
 const dev = {
   entry: './src/element-util.ts',
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'element-util.js',

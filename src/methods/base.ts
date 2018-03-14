@@ -77,10 +77,8 @@ export function getElementsAsArray(selector: ElementTarget, base: Document|Eleme
  */
 export function removeElements(selector: ElementTarget, base: Document|ElementTarget = document): number {
   base = resolveBase(base);
-  const elms = getElements(selector, base);
-  for (const elm of elms) {
-    elm.parentNode.removeChild(elm);
-  }
+  const elms = getElementsAsArray(selector, base);
+  elms.forEach(elm => elm.parentElement.removeChild(elm));
   return elms.length;
 }
 
@@ -107,7 +105,7 @@ export function nodeListToArray(list: NodeList|any[]|string): any[] {
     return list;
   } else {
     list = getElements(list);
-    return Array.prototype.slice.call(list);
+    return [].slice.call(list);
   }
 }
 
