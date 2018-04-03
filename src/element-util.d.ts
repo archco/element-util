@@ -4,7 +4,7 @@ export as namespace ElementUtil;
 // Base methods.
 //
 
-declare type ElementTarget = string|Element|NodeList;
+export type ElementTarget = string|Element|NodeList;
 
 /**
  * Get element.
@@ -162,7 +162,7 @@ export function appendHiddenInput(target: ElementTarget, name: string, value: st
 // ElementFilter
 //
 
-declare interface FilterOptions {
+export interface FilterOptions {
   /** Enable to use `innerHTML`. Default is false, and than use `textContent`. */
   enableHTML?: boolean;
 }
@@ -228,9 +228,9 @@ export class ElementFilter {
 //
 
 /** Types that can be as target items. */
-declare type ItemsSettable = string|NodeList|HTMLElement[];
+export type ItemsSettable = string|NodeList|HTMLElement[];
 
-declare interface DatasetNames {
+export interface DatasetNames {
   /** Default value is `sortDirection`. It means `data-sort-direction` attribute in html. */
   sortDirection?: string;
   /** Default value is `sortType`. It means `data-sort-type` attribute in html. */
@@ -239,7 +239,7 @@ declare interface DatasetNames {
   sortValue?: string;
 }
 
-declare interface SorterOptions {
+export interface SorterOptions {
   /** Target elements for sorting. */
   items?: ItemsSettable;
   /** Specifying dataset names. type, value and direction. */
