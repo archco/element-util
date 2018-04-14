@@ -3,7 +3,7 @@
   "version": "1.4.1",
   "description": "The javascript library for using DOM Elements conveniently.",
   "main": "dist/element-util.js",
-  "types": "src/element-util.d.ts",
+  "types": "element-util.d.ts",
   "directories": {
     "dist": "dist",
     "doc": "docs",

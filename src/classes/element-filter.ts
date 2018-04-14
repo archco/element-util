@@ -1,4 +1,8 @@
-import { ElementTarget, getElements, nodeListToArray } from '../methods/base';
+import {
+  ElementTarget,
+  getElements,
+  nodeListToArray,
+} from '../methods/base';
 import { hide, show } from '../methods/util';
 
 export interface FilterOptions {

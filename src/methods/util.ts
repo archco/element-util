@@ -1,6 +1,9 @@
-import * as baseMethods from './base';
-
-type ElementTarget = baseMethods.ElementTarget;
+import {
+  ElementTarget,
+  getElement,
+  getElementsAsArray,
+  removeElements,
+} from './base';
 
 /**
  * Add event listener on every selected elements.
@@ -17,7 +20,7 @@ export function addListener(
   useCapture: boolean = false,
 ): number {
 
-  const elms = baseMethods.getElementsAsArray(selector);
+  const elms = getElementsAsArray(selector);
   elms.forEach(elm => elm.addEventListener(type, listener, useCapture));
   return elms.length;
 }
@@ -34,7 +37,7 @@ export function wrap(
   tagName: string = 'div',
 ): void {
 
-  const elms = baseMethods.getElementsAsArray(selector);
+  const elms = getElementsAsArray(selector);
   for (const elm of elms) {
     const parent = elm.parentNode;
     const sibling = elm.nextSibling;
@@ -62,7 +65,7 @@ export function wrapAll(
   tagName: string = 'div',
 ): void {
 
-  const elms = baseMethods.getElementsAsArray(selector);
+  const elms = getElementsAsArray(selector);
   const parent = elms[0].parentNode;
   const preSibling = elms[0].previousSibling;
   const div = document.createElement(tagName);
@@ -98,7 +101,7 @@ export function submitConfirm(selector: ElementTarget, message: string = 'Are yo
  * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 export function addClass(selector: ElementTarget, className: string): void {
-  const elm = baseMethods.getElement(selector);
+  const elm = getElement(selector);
   const classes = className.split(' ');
   classes.forEach(c => elm.classList.add(c));
 }
@@ -109,7 +112,7 @@ export function addClass(selector: ElementTarget, className: string): void {
  * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 export function removeClass(selector: ElementTarget, className: string): void {
-  const elm = baseMethods.getElement(selector);
+  const elm = getElement(selector);
   const classes = className.split(' ');
   classes.forEach(c => elm.classList.remove(c));
 }
@@ -120,7 +123,7 @@ export function removeClass(selector: ElementTarget, className: string): void {
  * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 export function toggleClass(selector: ElementTarget, className: string): void {
-  const elm = baseMethods.getElement(selector);
+  const elm = getElement(selector);
   const classes = className.split(' ');
   classes.forEach(c => elm.classList.toggle(c));
 }
@@ -130,7 +133,7 @@ export function toggleClass(selector: ElementTarget, className: string): void {
  * @param selector querySelector
  */
 export function hide(selector: ElementTarget): void {
-  const elm = baseMethods.getElement(selector) as HTMLElement;
+  const elm = getElement(selector) as HTMLElement;
   elm.style.display = 'none';
 }
 
@@ -139,7 +142,7 @@ export function hide(selector: ElementTarget): void {
  * @param selector querySelector
  */
 export function show(selector: ElementTarget): void {
-  const elm = baseMethods.getElement(selector) as HTMLElement;
+  const elm = getElement(selector) as HTMLElement;
   if (elm.style.display && elm.style.display === 'none') {
     elm.style.display = '';
   }
@@ -150,7 +153,7 @@ export function show(selector: ElementTarget): void {
  * @param selector querySelector
  */
 export function toggleShow(selector: ElementTarget): void {
-  const elm = baseMethods.getElement(selector) as HTMLElement;
+  const elm = getElement(selector) as HTMLElement;
   elm.style.display !== 'none' ? hide(elm) : show(elm);
 }
 
@@ -175,9 +178,9 @@ export function makeHiddenInput(name: string, value: string): HTMLInputElement {
  * @param value  value attribute.
  */
 export function appendHiddenInput(target: ElementTarget, name: string, value: string): void {
-  const targetElm = baseMethods.getElement(target);
+  const targetElm = getElement(target);
 
   // Remove if already has input.
-  baseMethods.removeElements(`input[name="${name}"]`, target);
+  removeElements(`input[name="${name}"]`, target);
   targetElm.appendChild(makeHiddenInput(name, value));
 }
