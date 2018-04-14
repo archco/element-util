@@ -2,9 +2,21 @@
 
 Class for sort elements.
 
+### Table of contents
+
+- [Usage](#usage)
+  - [Via helper method](#via-helper-method)
+  - [Via class](#via-class)
+- [Types](#types)
+- [Class Methods](#class-methods)
+  - [constructor](#constructor)
+  - [setItems](#setitems)
+  - [getItems](#getitems)
+  - [execute](#execute)
+
 ## Usage
 
-### Helper method
+### Via helper method
 
 - Syntax
 
@@ -14,9 +26,9 @@ Class for sort elements.
 
 - Param  `Element`|`string` elm - base element.
 - Param  `object` [ options = {} ] - See below options description.
-- Return `HTMLElement[]` Sorted items.
+- Returns `HTMLElement[]` Sorted items.
 
-### Use class
+### Via class
 
 ``` js
 import { ElementSorter } from 'element-util';
@@ -24,6 +36,39 @@ import { ElementSorter } from 'element-util';
 let elementSorter = new ElementSorter('ul.country-list');
 elementSorter.execute();
 let items = elementSorter.getItems();
+```
+
+## Types
+
+### ItemsSettable
+
+``` ts
+/** Types that can be as target items. */
+type ItemsSettable = string|NodeList|HTMLElement[];
+```
+
+### DatasetNames
+
+``` ts
+interface DatasetNames {
+  /** Default value is `sortDirection`. It means `data-sort-direction` attribute in html. */
+  sortDirection?: string;
+  /** Default value is `sortType`. It means `data-sort-type` attribute in html. */
+  sortType?: string;
+  /** Default value is `sortValue`. It means `data-sort-value` attribute in html. */
+  sortValue?: string;
+}
+```
+
+### SorterOptions
+
+``` ts
+interface SorterOptions {
+  /** Target elements for sorting. */
+  items?: ItemsSettable;
+  /** Specifying dataset names. type, value and direction. */
+  datasetName?: DatasetNames;
+}
 ```
 
 ## Class Methods
@@ -37,21 +82,7 @@ let items = elementSorter.getItems();
   ```
 
 - Param `Element`|`string` elm - Base element.
-- Param `object` [ options = {} ]
-
-  ``` js
-  let options = {
-    items: 'auto', // Items selector: 'auto'|selector|NodeList|array
-  
-    datasetName: {
-      sortDirection: 'sortDirection', // data-sort-direction: 'asc'|'desc'
-      sortType: 'sortType', // data-sort-type: 'string'|'number'|'date'
-      sortValue: 'sortValue', // data-sort-value
-    },
-  };
-  ```
-
-- Return `ElementSorter`
+- Param [`SorterOptions`](#sorteroptions) [ options = {} ]
 
 ### setElement
 
@@ -60,11 +91,11 @@ Set base element.
 - Syntax
 
   ``` js
-  elementSorter.getElement(elm);
+  elementSorter.setElement(elm);
   ```
 
 - Param  `Element`|`string` elm
-- Return `ElementSorter`
+- Returns `this`
 
 ### setItems
 
@@ -77,7 +108,7 @@ Set sort target items.
   ```
 
 - Param  `string`|`NodeList` items - 'auto'|selector|NodeList|array
-- Return `ElementSorter`
+- Returns `this`
 
 ### getItems
 
@@ -89,7 +120,7 @@ Get sort target items.
   let items = elementSorter.getItems();
   ```
 
-- Return `HTMLElement[]`
+- Returns `HTMLElement[]`
 
 ### execute
 
@@ -101,4 +132,4 @@ Execute sort.
   elementSorter.execute();
   ```
 
-- Return `void`
+- Returns `this`

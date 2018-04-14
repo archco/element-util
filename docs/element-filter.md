@@ -2,9 +2,21 @@
 
 Class for filtering elements.
 
+### Table of contents
+
+- [Usage](#usage)
+  - [Via helper method](#via-helper-method)
+  - [Via class](#via-class)
+- [Types](#types)
+- [Class methods](#class-methods)
+  - [constructor](#constructor)
+  - [setFilter](#setfilter)
+  - [getHit](#gethit)
+  - [execute](#execute)
+
 ## Usage
 
-### Helper method
+### Via helper method
 
 - Syntax
 
@@ -15,9 +27,9 @@ Class for filtering elements.
 - Param  `string`|`NodeList` selector filtering targets.
 - Param  `string` [ str = '' ] filter string.
 - Param  `boolean` [ htmlMode = false ]
-- Return `number` hit count.
+- Returns `number` The number of hit.
 
-### Use class
+### Via class
 
 ``` js
 import { ElementFilter } from 'element-util';
@@ -25,6 +37,17 @@ import { ElementFilter } from 'element-util';
 let elementFilter = new ElementFilter('ul.country-list li', '');
 elementFilter.setFilter('den').execute();
 let count = elementFilter.getHit();
+```
+
+## Types
+
+### FilterOptions
+
+``` ts
+interface FilterOptions {
+  /** Enable to use `innerHTML`. Default is false, and than use `textContent`. */
+  enableHTML?: boolean;
+}
 ```
 
 ## Class Methods
@@ -39,17 +62,7 @@ let count = elementFilter.getHit();
 
 - Param  `string`|`NodeList` selector filtering targets.
 - Param  `string` [ str = '' ] filter string.
-- Param  `object` [ options = {} ]
-
-  ``` js
-  let options = {
-    // Enable to use `innerHTML`. Default is false, and than use `textContent`.
-  
-    enableHTML: false,
-  };
-  ```
-
-- Return `ElementFilter`
+- Param  [`FilterOptions`](#filteroptions) [ options = {} ]
 
 ### setFilter
 
@@ -62,7 +75,7 @@ Set filter string.
   ```
 
 - Param  `string` str
-- Return `ElementFilter`
+- Returns `this`
 
 ### getHit
 
@@ -74,7 +87,7 @@ Get count of filtered elements.
   let count = elementFilter.getHit();
   ```
 
-- Return `number`
+- Returns `number`
 
 ### execute
 
@@ -86,4 +99,4 @@ Execute filtering.
   elementFilter.execute();
   ```
 
-- Return `void`
+- Returns `this`

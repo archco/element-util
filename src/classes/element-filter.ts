@@ -11,11 +11,13 @@ export interface FilterOptions {
 }
 
 /**
- * Filtering elements. (helper method)
- * @param  selector   querySelector
- * @param  str     filter string.
- * @param  enableHTML using .innerHTML, default is false.
- * @return            Hit number.
+ * Filtering elements. (It's helper method of the ElementFilter.)
+ *
+ * @export
+ * @param {ElementTarget} selector target elements.
+ * @param {string} [str=''] filter string.
+ * @param {boolean} [enableHTML=false] using .innerHTML, default is false.
+ * @returns {number} The number of hit.
  */
 export function filter(selector: ElementTarget, str: string = '', enableHTML: boolean = false): number {
   const f = new ElementFilter(selector, str, { enableHTML });
@@ -29,10 +31,11 @@ export class ElementFilter {
   options: FilterOptions;
 
   /**
-   * constructor
-   * @param selector target elements.
-   * @param str   a string for filtering.
-   * @param options  enableHTML?: boolean
+   * Creates an instance of ElementFilter.
+   * @param {ElementTarget} selector target elements.
+   * @param {string} [str=''] a string for filtering.
+   * @param {FilterOptions} [options={}]
+   * @memberof ElementFilter
    */
   constructor(selector: ElementTarget, str: string = '', options: FilterOptions = {}) {
     this.elms = getElements(selector);
@@ -42,8 +45,10 @@ export class ElementFilter {
   }
 
   /**
-   * getDefaultOptions
-   * @return filter options object.
+   * Get default options.
+   *
+   * @returns {FilterOptions}
+   * @memberof ElementFilter
    */
   getDefaultOptions(): FilterOptions {
     return {
@@ -52,9 +57,10 @@ export class ElementFilter {
   }
 
   /**
-   * setOptions
-   * @param  options enableHTML?: boolean
-   * @return
+   * Set options.
+   *
+   * @param {FilterOptions} options
+   * @memberof ElementFilter
    */
   setOptions(options: FilterOptions) {
     this.options = {
@@ -64,9 +70,11 @@ export class ElementFilter {
   }
 
   /**
-   * setFilter
-   * @param  filter a string for filtering.
-   * @return
+   * Set filter string.
+   *
+   * @param {string} str string for filtering.
+   * @returns {this}
+   * @memberof ElementFilter
    */
   setFilter(str: string): this {
     this.filter = str;
@@ -74,16 +82,20 @@ export class ElementFilter {
   }
 
   /**
-   * get hit property.
-   * @return
+   * Get hit.
+   *
+   * @returns {number} The number of hit.
+   * @memberof ElementFilter
    */
   getHit(): number {
     return this.hit;
   }
 
   /**
-   * Executes filtering.
-   * @return
+   * Execute filtering.
+   *
+   * @returns {this}
+   * @memberof ElementFilter
    */
   execute(): this {
     if (this.elmsIsTable()) {
@@ -94,13 +106,13 @@ export class ElementFilter {
     return this;
   }
 
-  private filteringTable(): void {
+  protected filteringTable(): void {
     const table = this.elms[0] as HTMLElement;
     const tableRows = getElements('tbody tr', table);
     this.filteringNodes(tableRows);
   }
 
-  private filteringNodes(nodes: NodeList): void {
+  protected filteringNodes(nodes: NodeList): void {
     this.hit = 0;
     const str = this.filter.toUpperCase();
     const elms = nodeListToArray(nodes) as HTMLElement[];
@@ -118,7 +130,7 @@ export class ElementFilter {
     }
   }
 
-  private elmsIsTable(): boolean {
+  protected elmsIsTable(): boolean {
     const elm = this.elms[0] as HTMLElement;
     return this.elms.length === 1 && elm.tagName === 'TABLE';
   }

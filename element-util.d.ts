@@ -168,11 +168,13 @@ export interface FilterOptions {
 }
 
 /**
- * Filtering elements. (helper method)
- * @param  selector   querySelector
- * @param  str     filter string.
- * @param  enableHTML using .innerHTML, default is false.
- * @return            Hit number.
+ * Filtering elements. (It's helper method of the ElementFilter.)
+ *
+ * @export
+ * @param {ElementTarget} selector target elements.
+ * @param {string} [str=''] filter string.
+ * @param {boolean} [enableHTML=false] using .innerHTML, default is false.
+ * @returns {number} The number of hit.
  */
 export function filter(selector: ElementTarget, str?: string, enableHTML?: boolean): number;
 
@@ -183,42 +185,52 @@ export class ElementFilter {
   options: FilterOptions;
 
   /**
-   * constructor
-   * @param selector target elements.
-   * @param str   a string for filtering.
-   * @param options  enableHTML?: boolean
+   * Creates an instance of ElementFilter.
+   * @param {ElementTarget} selector target elements.
+   * @param {string} [str=''] a string for filtering.
+   * @param {FilterOptions} [options={}]
+   * @memberof ElementFilter
    */
   constructor(selector: ElementTarget, str?: string, options?: FilterOptions);
 
   /**
-   * getDefaultOptions
-   * @return filter options object.
+   * Get default options.
+   *
+   * @returns {FilterOptions}
+   * @memberof ElementFilter
    */
   getDefaultOptions(): FilterOptions;
 
   /**
-   * setOptions
-   * @param  options enableHTML?: boolean
-   * @return
+   * Set options.
+   *
+   * @param {FilterOptions} options
+   * @memberof ElementFilter
    */
   setOptions(options: FilterOptions): this;
 
   /**
-   * setFilter
-   * @param  str a string for filtering.
-   * @return
+   * Set filter string.
+   *
+   * @param {string} str string for filtering.
+   * @returns {this}
+   * @memberof ElementFilter
    */
   setFilter(str: string): this;
 
   /**
-   * get hit property.
-   * @return
+   * Get hit.
+   *
+   * @returns {number} The number of hit.
+   * @memberof ElementFilter
    */
   getHit(): number;
 
   /**
-   * Executes filtering.
-   * @return
+   * Execute filtering.
+   *
+   * @returns {this}
+   * @memberof ElementFilter
    */
   execute(): this;
 }
@@ -247,10 +259,12 @@ export interface SorterOptions {
 }
 
 /**
- * Sorting elements. (helper method)
- * @param  elm     base element.
- * @param  options options for ElementSorter.
- * @return         sorted elements.
+ * Sorting elements. (It's helper method of the ElementSorter.)
+ *
+ * @export
+ * @param {ElementTarget} elm base element.
+ * @param {SorterOptions} [options={}] options for ElementSorter.
+ * @returns {HTMLElement[]} sorted elements.
  */
 export function sort(elm: ElementTarget, options?: SorterOptions): HTMLElement[];
 
@@ -260,48 +274,61 @@ export class ElementSorter {
   options: SorterOptions;
 
   /**
-   * constructor
-   * @param elm     Base element. e.g. `<ul>`, `<ol>` or `<table>`..
-   * @param options items: 'auto'|selector|NodeList, datasetName: object
+   * Creates an instance of ElementSorter.
+   * @param {ElementTarget} elm Base element. e.g. `<ul>`, `<ol>` or `<table>`..
+   * @param {SorterOptions} [options={}] items: 'auto'|selector|NodeList, datasetName: object
+   * @memberof ElementSorter
    */
   constructor(elm: ElementTarget, options: SorterOptions);
 
   /**
-   * getDefaultOptions
-   * @return
+   * Get default options.
+   *
+   * @returns {SorterOptions}
+   * @memberof ElementSorter
    */
   getDefaultOptions(): SorterOptions;
 
   /**
-   * setOptions
-   * @param  options items: 'auto'|selector|NodeList, datasetName: object
-   * @return
+   * Set options.
+   *
+   * @param {SorterOptions} options items: 'auto'|selector|NodeList, datasetName: object
+   * @returns {this}
+   * @memberof ElementSorter
    */
   setOptions(options: SorterOptions): this;
 
   /**
-   * set base element.
-   * @param  elm
-   * @return
+   * Set base element.
+   *
+   * @param {ElementTarget} elm
+   * @returns {this}
+   * @memberof ElementSorter
    */
   setElement(elm: ElementTarget): this;
 
   /**
-   * getItems
-   * @return
+   * Get items.
+   *
+   * @returns {HTMLElement[]}
+   * @memberof ElementSorter
    */
   getItems(): HTMLElement[];
 
   /**
-   * set items that target for sort.
-   * @param  items
-   * @return
+   * Set target items for to be sorted.
+   *
+   * @param {ItemsSettable} items
+   * @returns {this}
+   * @memberof ElementSorter
    */
   setItems(items: ItemsSettable): this;
 
   /**
    * Execute sort.
-   * @return
+   *
+   * @returns {this}
+   * @memberof ElementSorter
    */
   execute(): this;
 }

@@ -25,10 +25,12 @@ export interface SorterOptions {
 }
 
 /**
- * Sorting elements. (helper method)
- * @param  elm     base element.
- * @param  options options for ElementSorter.
- * @return         sorted elements.
+ * Sorting elements. (It's helper method of the ElementSorter.)
+ *
+ * @export
+ * @param {ElementTarget} elm base element.
+ * @param {SorterOptions} [options={}] options for ElementSorter.
+ * @returns {HTMLElement[]} sorted elements.
  */
 export function sort(elm: ElementTarget, options: SorterOptions = {}): HTMLElement[] {
   const s = new ElementSorter(elm, options);
@@ -41,9 +43,10 @@ export class ElementSorter {
   options: SorterOptions;
 
   /**
-   * constructor
-   * @param elm     Base element. e.g. `<ul>`, `<ol>` or `<table>`..
-   * @param options items: 'auto'|selector|NodeList, datasetName: object
+   * Creates an instance of ElementSorter.
+   * @param {ElementTarget} elm Base element. e.g. `<ul>`, `<ol>` or `<table>`..
+   * @param {SorterOptions} [options={}] items: 'auto'|selector|NodeList, datasetName: object
+   * @memberof ElementSorter
    */
   constructor(elm: ElementTarget, options: SorterOptions = {}) {
     this.options = this.getDefaultOptions();
@@ -53,8 +56,10 @@ export class ElementSorter {
   }
 
   /**
-   * getDefaultOptions
-   * @return
+   * Get default options.
+   *
+   * @returns {SorterOptions}
+   * @memberof ElementSorter
    */
   getDefaultOptions(): SorterOptions {
     return {
@@ -68,9 +73,11 @@ export class ElementSorter {
   }
 
   /**
-   * setOptions
-   * @param  options items: 'auto'|selector|NodeList, datasetName: object
-   * @return
+   * Set options.
+   *
+   * @param {SorterOptions} options items: 'auto'|selector|NodeList, datasetName: object
+   * @returns {this}
+   * @memberof ElementSorter
    */
   setOptions(options: SorterOptions): this {
     this.options = {
@@ -81,9 +88,11 @@ export class ElementSorter {
   }
 
   /**
-   * set base element.
-   * @param  elm
-   * @return
+   * Set base element.
+   *
+   * @param {ElementTarget} elm
+   * @returns {this}
+   * @memberof ElementSorter
    */
   setElement(elm: ElementTarget): this {
     this.elm = getElement(elm) as HTMLElement;
@@ -91,17 +100,21 @@ export class ElementSorter {
   }
 
   /**
-   * getItems
-   * @return
+   * Get items.
+   *
+   * @returns {HTMLElement[]}
+   * @memberof ElementSorter
    */
   getItems(): HTMLElement[] {
     return this.items;
   }
 
   /**
-   * set items that target for sort.
-   * @param  items
-   * @return
+   * Set target items for to be sorted.
+   *
+   * @param {ItemsSettable} items
+   * @returns {this}
+   * @memberof ElementSorter
    */
   setItems(items: ItemsSettable): this {
     if (this.elmIsTable()) {
@@ -117,18 +130,20 @@ export class ElementSorter {
 
   /**
    * Execute sort.
-   * @return
+   *
+   * @returns {this}
+   * @memberof ElementSorter
    */
   execute(): this {
     this.elmIsTable() ? this.sortTable() : this.sortElements();
     return this;
   }
 
-  private elmIsTable() {
+  protected elmIsTable() {
     return this.elm.tagName === 'TABLE';
   }
 
-  private sortElements() {
+  protected sortElements() {
     const compareMethod = (a: any, b: any): number => {
       const aVal = this.getSortValue(a);
       const bVal = this.getSortValue(b);
@@ -140,7 +155,7 @@ export class ElementSorter {
     this.sorting(this.items, compareMethod.bind(this));
   }
 
-  private sortTable() {
+  protected sortTable() {
     const heads = getElementsAsArray('thead th', this.elm);
     heads.forEach((head, i) => {
       head.style.cursor = 'pointer'; // Set cursor style to `pointer`.
@@ -158,7 +173,7 @@ export class ElementSorter {
     });
   }
 
-  private sorting(items: HTMLElement[], compareMethod: (a: any, b: any) => number) {
+  protected sorting(items: HTMLElement[], compareMethod: (a: any, b: any) => number) {
     items.sort(compareMethod);
     items.forEach(item => {
       const parent = item.parentNode;
@@ -167,7 +182,7 @@ export class ElementSorter {
     });
   }
 
-  private sortingTable(rows: HTMLElement[], nth: number, type: string, direction: string) {
+  protected sortingTable(rows: HTMLElement[], nth: number, type: string, direction: string) {
     const compareMethod = (a: HTMLElement, b: HTMLElement): number => {
       a = getElement(`td:nth-child(${nth})`, a) as HTMLElement;
       b = getElement(`td:nth-child(${nth})`, b) as HTMLElement;
@@ -180,7 +195,7 @@ export class ElementSorter {
     this.sorting(rows, compareMethod.bind(this));
   }
 
-  private getSortValue(elm: HTMLElement): string {
+  protected getSortValue(elm: HTMLElement): string {
     let sortValue: any = elm.dataset[this.options.datasetName.sortValue];
     if (!sortValue) {
       sortValue = elm.textContent;
@@ -188,20 +203,20 @@ export class ElementSorter {
     return sortValue.toUpperCase();
   }
 
-  private getSortType(elm: HTMLElement): string|null {
+  protected getSortType(elm: HTMLElement): string|null {
     return elm.dataset[this.options.datasetName.sortType] || null;
   }
 
-  private getSortDirection(elm: HTMLElement): string {
+  protected getSortDirection(elm: HTMLElement): string {
     return elm.dataset[this.options.datasetName.sortDirection];
   }
 
-  private toggleSortDirection(elm: HTMLElement): void {
+  protected toggleSortDirection(elm: HTMLElement): void {
     elm.dataset[this.options.datasetName.sortDirection]
       = this.getSortDirection(elm) === 'asc' ? 'desc' : 'asc';
   }
 
-  private compare(a: string, b: string, type: string, asc: boolean = true): number {
+  protected compare(a: string, b: string, type: string, asc: boolean = true): number {
     const compareNumber = (aVal: string, bVal: string): number => {
       const aNum = parseFloat(aVal);
       const bNum = parseFloat(b);
