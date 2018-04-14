@@ -672,7 +672,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 function addListener(selector, type, listener, useCapture) {
     if (useCapture === void 0) { useCapture = false; }
-    var elms = _base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"](selector);
+    var elms = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
     elms.forEach(function (elm) { return elm.addEventListener(type, listener, useCapture); });
     return elms.length;
 }
@@ -684,7 +684,7 @@ function addListener(selector, type, listener, useCapture) {
  */
 function wrap(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
-    var elms = _base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"](selector);
+    var elms = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
     for (var _i = 0, elms_1 = elms; _i < elms_1.length; _i++) {
         var elm = elms_1[_i];
         var parent_1 = elm.parentNode;
@@ -708,7 +708,7 @@ function wrap(selector, className, tagName) {
  */
 function wrapAll(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
-    var elms = _base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"](selector);
+    var elms = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
     var parent = elms[0].parentNode;
     var preSibling = elms[0].previousSibling;
     var div = document.createElement(tagName);
@@ -743,7 +743,7 @@ function submitConfirm(selector, message) {
  * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 function addClass(selector, className) {
-    var elm = _base__WEBPACK_IMPORTED_MODULE_0__["getElement"](selector);
+    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
     var classes = className.split(' ');
     classes.forEach(function (c) { return elm.classList.add(c); });
 }
@@ -753,7 +753,7 @@ function addClass(selector, className) {
  * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 function removeClass(selector, className) {
-    var elm = _base__WEBPACK_IMPORTED_MODULE_0__["getElement"](selector);
+    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
     var classes = className.split(' ');
     classes.forEach(function (c) { return elm.classList.remove(c); });
 }
@@ -763,7 +763,7 @@ function removeClass(selector, className) {
  * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
  */
 function toggleClass(selector, className) {
-    var elm = _base__WEBPACK_IMPORTED_MODULE_0__["getElement"](selector);
+    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
     var classes = className.split(' ');
     classes.forEach(function (c) { return elm.classList.toggle(c); });
 }
@@ -772,7 +772,7 @@ function toggleClass(selector, className) {
  * @param selector querySelector
  */
 function hide(selector) {
-    var elm = _base__WEBPACK_IMPORTED_MODULE_0__["getElement"](selector);
+    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
     elm.style.display = 'none';
 }
 /**
@@ -780,7 +780,7 @@ function hide(selector) {
  * @param selector querySelector
  */
 function show(selector) {
-    var elm = _base__WEBPACK_IMPORTED_MODULE_0__["getElement"](selector);
+    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
     if (elm.style.display && elm.style.display === 'none') {
         elm.style.display = '';
     }
@@ -790,7 +790,7 @@ function show(selector) {
  * @param selector querySelector
  */
 function toggleShow(selector) {
-    var elm = _base__WEBPACK_IMPORTED_MODULE_0__["getElement"](selector);
+    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
     elm.style.display !== 'none' ? hide(elm) : show(elm);
 }
 /**
@@ -813,9 +813,9 @@ function makeHiddenInput(name, value) {
  * @param value  value attribute.
  */
 function appendHiddenInput(target, name, value) {
-    var targetElm = _base__WEBPACK_IMPORTED_MODULE_0__["getElement"](target);
+    var targetElm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(target);
     // Remove if already has input.
-    _base__WEBPACK_IMPORTED_MODULE_0__["removeElements"]("input[name=\"" + name + "\"]", target);
+    Object(_base__WEBPACK_IMPORTED_MODULE_0__["removeElements"])("input[name=\"" + name + "\"]", target);
     targetElm.appendChild(makeHiddenInput(name, value));
 }
 
