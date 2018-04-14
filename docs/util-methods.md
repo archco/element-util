@@ -1,8 +1,17 @@
 # Util Methods
 
+## Types
+
+### ElementTarget
+
+``` ts
+/** The target that can converted to Element. */
+type ElementTarget = string|Element|NodeList;
+```
+
 ## addListener
 
-Add event listener on every selected elements.
+Add event listener for each item.
 
 - Syntax
 
@@ -10,15 +19,15 @@ Add event listener on every selected elements.
   let effected = ElementUtil.addListener(selector, type, listener, useCapture = false);
   ```
 
-- Param `string`|`Element`|`NodeList` selector
+- Param [`ElementTarget`] selector
 - Param `string` type - event type.
 - Param `Function` listener
-- Param `Boolean` [ useCapture = false ]
-- Return `Number` - length of elements.
+- Param `boolean` [ useCapture = false ]
+- Returns `number` - length of elements.
 
 ## wrap
 
-Wrapping each element.
+Wrap for each element.
 
 - Syntax
 
@@ -26,14 +35,14 @@ Wrapping each element.
   ElementUtil.wrap(selector, className, tagName = 'DIV');
   ```
 
-- Param `string`|`Element`|`NodeList` selector
+- Param [`ElementTarget`] selector
 - Param `string` className - wrapper's class name.
 - Param `string` [ tagName = 'DIV' ] - wrapper's tag name.
-- Return `void`
+- Returns `void`
 
 ## wrapAll
 
-Wrapping all elements inside a one wrapper.
+Wrap all elements to inside a one wrapper.
 
 - Syntax
 
@@ -41,14 +50,14 @@ Wrapping all elements inside a one wrapper.
   ElementUtil.wrapAll(selector, className, tagName = 'DIV');
   ```
 
-- Param `string`|`Element`|`NodeList` selector
+- Param [`ElementTarget`] selector
 - Param `string` className - wrapper's class name.
 - Param `string` [ tagName = 'DIV' ] - wrapper's tag name.
-- Return `void`
+- Returns `void`
 
 ## submitConfirm
 
-Add confirm message listener when `submit` event.
+Add confirm on the 'submit' event.
 
 - Syntax
 
@@ -56,13 +65,13 @@ Add confirm message listener when `submit` event.
   ElementUtil.submitConfirm(selector, message = 'Are you confirm?');
   ```
 
-- Param `string`|`Element`|`NodeList` selector
+- Param [`ElementTarget`] selector
 - Param `string` [ message = 'Are you confirm?' ]
-- Return `void`
+- Returns `void`
 
 ## addClass
 
-Add class to an element.
+Add classes to element.
 
 - Syntax
 
@@ -70,13 +79,13 @@ Add class to an element.
   ElementUtil.addClass(selector, className);
   ```
 
-- Param  `string`|`Element` selector
+- Param  [`ElementTarget`] selector
 - Param  `string` className - If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
-- Return `void`
+- Returns `void`
 
 ## removeClass
 
-Remove class from an element.
+Remove classes from element.
 
 - Syntax
 
@@ -84,13 +93,13 @@ Remove class from an element.
   ElementUtil.removeClass(selector, className);
   ```
 
-- Param `string`|`Element` selector
+- Param [`ElementTarget`] selector
 - Param `string` className - If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
-- Return `void`
+- Returns `void`
 
 ## toggleClass
 
-Toggling class.
+Toggling classes to element.
 
 - Syntax
 
@@ -98,13 +107,13 @@ Toggling class.
   ElementUtil.toggleClass(selector, className);
   ```
 
-- Param `string`|`Element` selector
+- Param [`ElementTarget`] selector
 - Param `string` className - If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
-- Return `void`
+- Returns `void`
 
 ## hide
 
-Hide an element. use css `display: none;`
+Hide element. It will set value of `style.display` to `none`.
 
 - Syntax
 
@@ -112,12 +121,12 @@ Hide an element. use css `display: none;`
   ElementUtil.hide(selector);
   ```
 
-- Param `string`|`Element` selector
-- Return `void`
+- Param [`ElementTarget`] selector
+- Returns `void`
 
 ## show
 
-Remove `display: none;`
+Show element. It will just remove `display: none;`.
 
 - Syntax
 
@@ -125,8 +134,8 @@ Remove `display: none;`
   ElementUtil.show(selector);
   ```
 
-- Param `string`|`Element` selector
-- Return `void`
+- Param [`ElementTarget`] selector
+- Returns `void`
 
 ## toggleShow
 
@@ -138,8 +147,8 @@ Toggling show/hide element.
   ElementUtil.toggleShow(selector);
   ```
 
-- Param `string`|`Element` selector
-- Return `void`
+- Param [`ElementTarget`] selector
+- Returns `void`
 
 ## makeHiddenInput
 
@@ -153,7 +162,7 @@ Make a hidden input.
 
 - Param  `string` name - input name.
 - Param  `string` value - input value.
-- Return `Element`
+- Returns `Element`
 
 ## appendHiddenInput
 
@@ -165,7 +174,9 @@ Makes hidden input, and append to target element. If input[name=".."] already ex
   ElementUtil.appendHiddenInput(target, name, value);
   ```
 
-- Param  `Element`|`string` target - target element.
+- Param  [`ElementTarget`] target - target element.
 - Param  `string` name - input name.
 - Param  `string` value - input value.
-- Return `void`
+- Returns `void`
+
+[`ElementTarget`]: #elementtarget

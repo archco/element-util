@@ -1,3 +1,4 @@
+/** The target that can converted to Element. */
 export type ElementTarget = string|Element|NodeList;
 
 function resolveBase(base: Document|ElementTarget): Document|Element {
@@ -19,10 +20,12 @@ function polyfillForMatches(): void {
 }
 
 /**
- * Get element.
- * @param  selector querySelector
- * @param  base     base element. default is Document.
- * @return
+ * Get a single element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @returns {Element}
  */
 export function getElement(selector: ElementTarget, base: Document|ElementTarget = document): Element {
   base = resolveBase(base);
@@ -39,9 +42,11 @@ export function getElement(selector: ElementTarget, base: Document|ElementTarget
 
 /**
  * Get elements as NodeList.
- * @param  selector querySelector
- * @param  base     base element. default is Document.
- * @return
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @returns {NodeList}
  */
 export function getElements(selector: ElementTarget, base: Document|ElementTarget = document): NodeList {
   base = resolveBase(base);
@@ -58,10 +63,11 @@ export function getElements(selector: ElementTarget, base: Document|ElementTarge
 }
 
 /**
- * Get elements as array of HTMLElement.
+ * Get elements as array of HTMLElements.
  *
+ * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document]
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
  * @returns {HTMLElement[]}
  */
 export function getElementsAsArray(selector: ElementTarget, base: Document|ElementTarget = document): HTMLElement[] {
@@ -71,9 +77,11 @@ export function getElementsAsArray(selector: ElementTarget, base: Document|Eleme
 
 /**
  * Remove elements.
- * @param  selector querySelector
- * @param  base     base element. default is Document.
- * @return          number of removed.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @returns {number} The number of removed.
  */
 export function removeElements(selector: ElementTarget, base: Document|ElementTarget = document): number {
   base = resolveBase(base);
@@ -83,9 +91,11 @@ export function removeElements(selector: ElementTarget, base: Document|ElementTa
 }
 
 /**
- * Convert a single element to NodeList.
- * @param  elm
- * @return
+ * Converts a single element to NodeList.
+ *
+ * @export
+ * @param {(Element|string)} elm
+ * @returns {NodeList}
  */
 export function toNodeList(elm: Element|string): NodeList {
   elm = getElement(elm);
@@ -96,9 +106,11 @@ export function toNodeList(elm: Element|string): NodeList {
 }
 
 /**
- * Convert NodeList to Array.
- * @param  list
- * @return
+ * Converts NodeList to Array.
+ *
+ * @export
+ * @param {(NodeList|any[]|string)} list
+ * @returns {any[]}
  */
 export function nodeListToArray(list: NodeList|any[]|string): any[] {
   if (Array.isArray(list)) {
@@ -111,9 +123,11 @@ export function nodeListToArray(list: NodeList|any[]|string): any[] {
 
 /**
  * Find ancestor element.
- * @param  self
- * @param  ancestor
- * @return          Element or null.
+ *
+ * @export
+ * @param {ElementTarget} self
+ * @param {ElementTarget} ancestor
+ * @returns {(Element|null)}
  */
 export function findAncestor(self: ElementTarget, ancestor: ElementTarget): Element|null {
   polyfillForMatches();

@@ -4,60 +4,74 @@ export as namespace ElementUtil;
 // Base methods.
 //
 
+/** The target that can converted to Element. */
 export type ElementTarget = string|Element|NodeList;
 
 /**
- * Get element.
- * @param  selector querySelector
- * @param  base     base element. default is Document.
- * @return
+ * Get a single element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @returns {Element}
  */
 export function getElement(selector: ElementTarget, base?: Document|ElementTarget): Element;
 
 /**
  * Get elements as NodeList.
- * @param  selector querySelector
- * @param  base     base element. default is Document.
- * @return
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @returns {NodeList}
  */
 export function getElements(selector: ElementTarget, base?: Document|ElementTarget): NodeList;
 
 /**
- * Get elements as array of HTMLElement.
+ * Get elements as array of HTMLElements.
  *
+ * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=Document]
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
  * @returns {HTMLElement[]}
  */
 export function getElementsAsArray(selector: ElementTarget, base?: Document|ElementTarget): HTMLElement[];
 
 /**
  * Remove elements.
- * @param  selector querySelector
- * @param  base     base element. default is Document.
- * @return          number of removed.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @returns {number} The number of removed.
  */
 export function removeElements(selector: ElementTarget, base?: Document|ElementTarget): number;
 
 /**
- * Convert a single element to NodeList.
- * @param  elm
- * @return
+ * Converts a single element to NodeList.
+ *
+ * @export
+ * @param {(Element|string)} elm
+ * @returns {NodeList}
  */
 export function toNodeList(elm: Element|string): NodeList;
 
 /**
- * Convert NodeList to Array.
- * @param  list
- * @return
+ * Converts NodeList to Array.
+ *
+ * @export
+ * @param {(NodeList|any[]|string)} list
+ * @returns {any[]}
  */
 export function nodeListToArray(list: NodeList|any[]|string): any[];
 
 /**
  * Find ancestor element.
- * @param  self
- * @param  ancestor
- * @return          Element or null.
+ *
+ * @export
+ * @param {ElementTarget} self
+ * @param {ElementTarget} ancestor
+ * @returns {(Element|null)}
  */
 export function findAncestor(self: ElementTarget, ancestor: ElementTarget): Element|null;
 
@@ -66,12 +80,14 @@ export function findAncestor(self: ElementTarget, ancestor: ElementTarget): Elem
 //
 
 /**
- * Add event listener on every selected elements.
- * @param  selector   querySelector
- * @param  type       event-type
- * @param  listener   listener
- * @param  useCapture default is false
- * @return            number of affected
+ * Add event listener for each item.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} type event-type
+ * @param {EventListener} listener
+ * @param {boolean} [useCapture=false]
+ * @returns {number} the number of affected.
  */
 export function addListener(
   selector: ElementTarget,
@@ -81,80 +97,102 @@ export function addListener(
 ): number;
 
 /**
- * Wrapping each element.
- * @param selector  querySelector
- * @param className wrapper's class name.
- * @param tagName   wrapper's tag name, default is 'div'.
+ * Wrap for each element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className wrapper's class name.
+ * @param {string} [tagName='div'] wrapper's tag name.
  */
 export function wrap(selector: ElementTarget, className: string, tagName?: string): void;
 
 /**
- * Wrapping all elements inside a one wrapper.
- * @param selector  querySelector
- * @param className wrapper's class name.
- * @param tagName   wrapper's tag name, default is 'div'.
+ * Wrap all elements to inside a one wrapper.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className wrapper's class name.
+ * @param {string} [tagName='div'] wrapper's tag name.
  */
 export function wrapAll(selector: ElementTarget, className: string, tagName?: string): void;
 
 /**
- * Add confirm message listener when 'submit' event.
- * @param selector querySelector, form element probably.
- * @param message  confirm message.
+ * Add confirm on the 'submit' event.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} [message='Are you confirm?'] confirm message.
  */
 export function submitConfirm(selector: ElementTarget, message?: string): void;
 
 /**
- * Add class to element.
- * @param selector  querySelector
- * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * Add classes to element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className
  */
 export function addClass(selector: ElementTarget, className: string): void;
 
 /**
- * Remove class from element.
- * @param selector  querySelector
- * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * Remove classes from element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className
  */
 export function removeClass(selector: ElementTarget, className: string): void;
 
 /**
- * Toggling class to element.
- * @param selector  querySelector
- * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * Toggling classes to element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className
  */
 export function toggleClass(selector: ElementTarget, className: string): void;
 
 /**
- * Hide element. It will set element's display to 'none'.
- * @param selector querySelector
+ * Hide element. It will set value of style.display to 'none'.
+ *
+ * @export
+ * @param {ElementTarget} selector
  */
 export function hide(selector: ElementTarget): void;
 
 /**
- * Show element. It will just remove 'display=none;'.
- * @param selector querySelector
+ * Show element. It will just remove 'display: none;'.
+ *
+ * @export
+ * @param {ElementTarget} selector
  */
 export function show(selector: ElementTarget): void;
 
 /**
  * Toggling show/hide element.
- * @param selector querySelector
+ *
+ * @export
+ * @param {ElementTarget} selector
  */
 export function toggleShow(selector: ElementTarget): void;
 
 /**
  * Make a hidden input.
- * @param  name  name attribute.
- * @param  value value attribute.
- * @return
+ *
+ * @export
+ * @param {string} name name attribute.
+ * @param {string} value value attribute.
+ * @returns {HTMLInputElement}
  */
 export function makeHiddenInput(name: string, value: string): HTMLInputElement;
 
 /**
  * Makes hidden input, and append to target element. If input[name=".."] already exists, overwrite it.
- * @param target querySelector
- * @param name   name attribute.
- * @param value  value attribute.
+ *
+ * @export
+ * @param {ElementTarget} target
+ * @param {string} name name attribute.
+ * @param {string} value value attribute.
  */
 export function appendHiddenInput(target: ElementTarget, name: string, value: string): void;
 

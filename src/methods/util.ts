@@ -6,12 +6,14 @@ import {
 } from './base';
 
 /**
- * Add event listener on every selected elements.
- * @param  selector   querySelector
- * @param  type       event-type
- * @param  listener   listener
- * @param  useCapture default is false
- * @return            number of affected
+ * Add event listener for each item.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} type event-type
+ * @param {EventListener} listener
+ * @param {boolean} [useCapture=false]
+ * @returns {number} the number of affected.
  */
 export function addListener(
   selector: ElementTarget,
@@ -26,10 +28,12 @@ export function addListener(
 }
 
 /**
- * Wrapping each element.
- * @param selector  querySelector
- * @param className wrapper's class name.
- * @param tagName   wrapper's tag name, default is 'div'.
+ * Wrap for each element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className wrapper's class name.
+ * @param {string} [tagName='div'] wrapper's tag name.
  */
 export function wrap(
   selector: ElementTarget,
@@ -54,10 +58,12 @@ export function wrap(
 }
 
 /**
- * Wrapping all elements inside a one wrapper.
- * @param selector  querySelector
- * @param className wrapper's class name.
- * @param tagName   wrapper's tag name, default is 'div'.
+ * Wrap all elements to inside a one wrapper.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className wrapper's class name.
+ * @param {string} [tagName='div'] wrapper's tag name.
  */
 export function wrapAll(
   selector: ElementTarget,
@@ -83,9 +89,11 @@ export function wrapAll(
 }
 
 /**
- * Add confirm message listener when 'submit' event.
- * @param selector querySelector, form element probably.
- * @param message  confirm message.
+ * Add confirm on the 'submit' event.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} [message='Are you confirm?'] confirm message.
  */
 export function submitConfirm(selector: ElementTarget, message: string = 'Are you confirm?'): void {
   addListener(selector, 'submit', e => {
@@ -96,9 +104,11 @@ export function submitConfirm(selector: ElementTarget, message: string = 'Are yo
 }
 
 /**
- * Add class to element.
- * @param selector  querySelector
- * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * Add classes to element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className
  */
 export function addClass(selector: ElementTarget, className: string): void {
   const elm = getElement(selector);
@@ -107,9 +117,11 @@ export function addClass(selector: ElementTarget, className: string): void {
 }
 
 /**
- * Remove class from element.
- * @param selector  querySelector
- * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * Remove classes from element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className
  */
 export function removeClass(selector: ElementTarget, className: string): void {
   const elm = getElement(selector);
@@ -118,9 +130,11 @@ export function removeClass(selector: ElementTarget, className: string): void {
 }
 
 /**
- * Toggling class to element.
- * @param selector  querySelector
- * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * Toggling classes to element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className
  */
 export function toggleClass(selector: ElementTarget, className: string): void {
   const elm = getElement(selector);
@@ -129,8 +143,10 @@ export function toggleClass(selector: ElementTarget, className: string): void {
 }
 
 /**
- * Hide element. It will set element's display to 'none'.
- * @param selector querySelector
+ * Hide element. It will set value of style.display to 'none'.
+ *
+ * @export
+ * @param {ElementTarget} selector
  */
 export function hide(selector: ElementTarget): void {
   const elm = getElement(selector) as HTMLElement;
@@ -138,8 +154,10 @@ export function hide(selector: ElementTarget): void {
 }
 
 /**
- * Show element. It will just remove 'display=none;'.
- * @param selector querySelector
+ * Show element. It will just remove 'display: none;'.
+ *
+ * @export
+ * @param {ElementTarget} selector
  */
 export function show(selector: ElementTarget): void {
   const elm = getElement(selector) as HTMLElement;
@@ -150,7 +168,9 @@ export function show(selector: ElementTarget): void {
 
 /**
  * Toggling show/hide element.
- * @param selector querySelector
+ *
+ * @export
+ * @param {ElementTarget} selector
  */
 export function toggleShow(selector: ElementTarget): void {
   const elm = getElement(selector) as HTMLElement;
@@ -159,9 +179,11 @@ export function toggleShow(selector: ElementTarget): void {
 
 /**
  * Make a hidden input.
- * @param  name  name attribute.
- * @param  value value attribute.
- * @return
+ *
+ * @export
+ * @param {string} name name attribute.
+ * @param {string} value value attribute.
+ * @returns {HTMLInputElement}
  */
 export function makeHiddenInput(name: string, value: string): HTMLInputElement {
   const input = document.createElement('input');
@@ -173,9 +195,11 @@ export function makeHiddenInput(name: string, value: string): HTMLInputElement {
 
 /**
  * Makes hidden input, and append to target element. If input[name=".."] already exists, overwrite it.
- * @param target querySelector
- * @param name   name attribute.
- * @param value  value attribute.
+ *
+ * @export
+ * @param {ElementTarget} target
+ * @param {string} name name attribute.
+ * @param {string} value value attribute.
  */
 export function appendHiddenInput(target: ElementTarget, name: string, value: string): void {
   const targetElm = getElement(target);

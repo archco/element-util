@@ -1,5 +1,14 @@
 # Base Methods
 
+## Types 
+
+### ElementTarget
+
+``` ts
+/** The target that can converted to Element. */
+type ElementTarget = string|Element|NodeList;
+```
+
 ## getElement
 
 Get a single element.
@@ -10,9 +19,9 @@ Get a single element.
   let element = ElementUtil.getElement(selector, base = document);
   ```
 
-- Param  `string`|`Element`|`NodeList` selector
-- Param  `string`|`Element` [ base = document ]
-- Return `Element`
+- Param  [`ElementTarget`] selector
+- Param  `Document`|[`ElementTarget`] [ base = document ]
+- Returns `Element`
 
 ## getElements
 
@@ -24,9 +33,9 @@ Get elements as NodeList.
   let nodes = ElementUtil.getElements(selector, base = document);
   ```
 
-- Param  `string`|`Element`|`NodeList` selector
-- Param  `string`|`Element` [ base = document ]
-- Return `NodeList`
+- Param  [`ElementTarget`] selector
+- Param  `Document`|[`ElementTarget`] [ base = document ]
+- Returns `NodeList`
 
 ## getElementsAsArray
 
@@ -38,8 +47,8 @@ Get elements as array of HTMLElement.
   let elms = ElementUtil.getElementsAsArray(selector, base = document);
   ```
 
-- Param  `string`|`Element`|`NodeList` selector
-- Param  `string`|`Element` [ base = document ]
+- Param  [`ElementTarget`] selector
+- Param  `Document`|[`ElementTarget`] [ base = document ]
 - Return `HTMLElement[]`
 
 ## removeElements
@@ -52,9 +61,9 @@ Remove elements by selector.
   let number = ElementUtil.removeClass(selector, base = document);
   ```
 
-- Param  `string`|`Element`|`NodeList` selector
-- Param  `string`|`Element` [ base = document ]
-- Return `Number` number of affected.
+- Param  [`ElementTarget`] selector
+- Param  `Document`|[`ElementTarget`] [ base = document ]
+- Return `number` The number of removed.
 
 ## toNodeList
 
@@ -92,6 +101,8 @@ Find ancestor from element.
   let element = ElementUtil.findAncestor(self, ancestor);
   ```
 
-- Param `Element`|`string` self - base element.
-- Param `Element`|`string` ancestor
+- Param [`ElementTarget`] self - base element.
+- Param [`ElementTarget`] ancestor
 - Return `Element`|`null`
+
+[`ElementTarget`]: #elementtarget
