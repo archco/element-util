@@ -24,7 +24,7 @@ Class for sort elements.
   let items = ElementUtil.sort(elm, options = {});
   ```
 
-- Param  `Element`|`string` elm - base element.
+- Param  [`ElementTarget`] elm - base element.
 - Param  `object` [ options = {} ] - See below options description.
 - Returns `HTMLElement[]` Sorted items.
 
@@ -39,6 +39,13 @@ let items = elementSorter.getItems();
 ```
 
 ## Types
+
+### ElementTarget
+
+``` ts
+/** The target that can converted to Element. */
+type ElementTarget = string|Element|NodeList;
+```
 
 ### ItemsSettable
 
@@ -81,7 +88,7 @@ interface SorterOptions {
   let elementSorter = new ElementSorter(elm, options = {});
   ```
 
-- Param `Element`|`string` elm - Base element.
+- Param [`ElementTarget`] elm - Base element.
 - Param [`SorterOptions`](#sorteroptions) [ options = {} ]
 
 ### setElement
@@ -94,7 +101,7 @@ Set base element.
   elementSorter.setElement(elm);
   ```
 
-- Param  `Element`|`string` elm
+- Param  [`ElementTarget`] elm
 - Returns `this`
 
 ### setItems
@@ -107,7 +114,7 @@ Set sort target items.
   elementSorter.setItems(items);
   ```
 
-- Param  `string`|`NodeList` items - 'auto'|selector|NodeList|array
+- Param  [`ItemsSettable`](#itemssettable) items - 'auto'|selector|NodeList|array
 - Returns `this`
 
 ### getItems
@@ -133,3 +140,5 @@ Execute sort.
   ```
 
 - Returns `this`
+
+[`ElementTarget`]: #elementtarget

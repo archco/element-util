@@ -105,11 +105,13 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
 
 
 /**
- * Filtering elements. (helper method)
- * @param  selector   querySelector
- * @param  str     filter string.
- * @param  enableHTML using .innerHTML, default is false.
- * @return            Hit number.
+ * Filtering elements. (It's helper method of the ElementFilter.)
+ *
+ * @export
+ * @param {ElementTarget} selector target elements.
+ * @param {string} [str=''] filter string.
+ * @param {boolean} [enableHTML=false] using .innerHTML, default is false.
+ * @returns {number} The number of hit.
  */
 function filter(selector, str, enableHTML) {
     if (str === void 0) { str = ''; }
@@ -119,10 +121,11 @@ function filter(selector, str, enableHTML) {
 }
 var ElementFilter = /** @class */ (function () {
     /**
-     * constructor
-     * @param selector target elements.
-     * @param str   a string for filtering.
-     * @param options  enableHTML?: boolean
+     * Creates an instance of ElementFilter.
+     * @param {ElementTarget} selector target elements.
+     * @param {string} [str=''] a string for filtering.
+     * @param {FilterOptions} [options={}]
+     * @memberof ElementFilter
      */
     function ElementFilter(selector, str, options) {
         if (str === void 0) { str = ''; }
@@ -134,8 +137,10 @@ var ElementFilter = /** @class */ (function () {
         this.setOptions(options);
     }
     /**
-     * getDefaultOptions
-     * @return filter options object.
+     * Get default options.
+     *
+     * @returns {FilterOptions}
+     * @memberof ElementFilter
      */
     ElementFilter.prototype.getDefaultOptions = function () {
         return {
@@ -143,32 +148,39 @@ var ElementFilter = /** @class */ (function () {
         };
     };
     /**
-     * setOptions
-     * @param  options enableHTML?: boolean
-     * @return
+     * Set options.
+     *
+     * @param {FilterOptions} options
+     * @memberof ElementFilter
      */
     ElementFilter.prototype.setOptions = function (options) {
         this.options = __assign({}, this.options, options);
     };
     /**
-     * setFilter
-     * @param  filter a string for filtering.
-     * @return
+     * Set filter string.
+     *
+     * @param {string} str string for filtering.
+     * @returns {this}
+     * @memberof ElementFilter
      */
     ElementFilter.prototype.setFilter = function (str) {
         this.filter = str;
         return this;
     };
     /**
-     * get hit property.
-     * @return
+     * Get hit.
+     *
+     * @returns {number} The number of hit.
+     * @memberof ElementFilter
      */
     ElementFilter.prototype.getHit = function () {
         return this.hit;
     };
     /**
-     * Executes filtering.
-     * @return
+     * Execute filtering.
+     *
+     * @returns {this}
+     * @memberof ElementFilter
      */
     ElementFilter.prototype.execute = function () {
         if (this.elmsIsTable()) {
@@ -235,10 +247,12 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
 };
 
 /**
- * Sorting elements. (helper method)
- * @param  elm     base element.
- * @param  options options for ElementSorter.
- * @return         sorted elements.
+ * Sorting elements. (It's helper method of the ElementSorter.)
+ *
+ * @export
+ * @param {ElementTarget} elm base element.
+ * @param {SorterOptions} [options={}] options for ElementSorter.
+ * @returns {HTMLElement[]} sorted elements.
  */
 function sort(elm, options) {
     if (options === void 0) { options = {}; }
@@ -247,9 +261,10 @@ function sort(elm, options) {
 }
 var ElementSorter = /** @class */ (function () {
     /**
-     * constructor
-     * @param elm     Base element. e.g. `<ul>`, `<ol>` or `<table>`..
-     * @param options items: 'auto'|selector|NodeList, datasetName: object
+     * Creates an instance of ElementSorter.
+     * @param {ElementTarget} elm Base element. e.g. `<ul>`, `<ol>` or `<table>`..
+     * @param {SorterOptions} [options={}] items: 'auto'|selector|NodeList, datasetName: object
+     * @memberof ElementSorter
      */
     function ElementSorter(elm, options) {
         if (options === void 0) { options = {}; }
@@ -259,8 +274,10 @@ var ElementSorter = /** @class */ (function () {
         this.setItems(this.options.items);
     }
     /**
-     * getDefaultOptions
-     * @return
+     * Get default options.
+     *
+     * @returns {SorterOptions}
+     * @memberof ElementSorter
      */
     ElementSorter.prototype.getDefaultOptions = function () {
         return {
@@ -273,34 +290,42 @@ var ElementSorter = /** @class */ (function () {
         };
     };
     /**
-     * setOptions
-     * @param  options items: 'auto'|selector|NodeList, datasetName: object
-     * @return
+     * Set options.
+     *
+     * @param {SorterOptions} options items: 'auto'|selector|NodeList, datasetName: object
+     * @returns {this}
+     * @memberof ElementSorter
      */
     ElementSorter.prototype.setOptions = function (options) {
         this.options = __assign({}, this.options, options);
         return this;
     };
     /**
-     * set base element.
-     * @param  elm
-     * @return
+     * Set base element.
+     *
+     * @param {ElementTarget} elm
+     * @returns {this}
+     * @memberof ElementSorter
      */
     ElementSorter.prototype.setElement = function (elm) {
         this.elm = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(elm);
         return this;
     };
     /**
-     * getItems
-     * @return
+     * Get items.
+     *
+     * @returns {HTMLElement[]}
+     * @memberof ElementSorter
      */
     ElementSorter.prototype.getItems = function () {
         return this.items;
     };
     /**
-     * set items that target for sort.
-     * @param  items
-     * @return
+     * Set target items for to be sorted.
+     *
+     * @param {ItemsSettable} items
+     * @returns {this}
+     * @memberof ElementSorter
      */
     ElementSorter.prototype.setItems = function (items) {
         if (this.elmIsTable()) {
@@ -317,7 +342,9 @@ var ElementSorter = /** @class */ (function () {
     };
     /**
      * Execute sort.
-     * @return
+     *
+     * @returns {this}
+     * @memberof ElementSorter
      */
     ElementSorter.prototype.execute = function () {
         this.elmIsTable() ? this.sortTable() : this.sortElements();
@@ -521,10 +548,12 @@ function polyfillForMatches() {
     }
 }
 /**
- * Get element.
- * @param  selector querySelector
- * @param  base     base element. default is Document.
- * @return
+ * Get a single element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @returns {Element}
  */
 function getElement(selector, base) {
     if (base === void 0) { base = document; }
@@ -544,9 +573,11 @@ function getElement(selector, base) {
 }
 /**
  * Get elements as NodeList.
- * @param  selector querySelector
- * @param  base     base element. default is Document.
- * @return
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @returns {NodeList}
  */
 function getElements(selector, base) {
     if (base === void 0) { base = document; }
@@ -565,10 +596,11 @@ function getElements(selector, base) {
     }
 }
 /**
- * Get elements as array of HTMLElement.
+ * Get elements as array of HTMLElements.
  *
+ * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document]
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
  * @returns {HTMLElement[]}
  */
 function getElementsAsArray(selector, base) {
@@ -578,9 +610,11 @@ function getElementsAsArray(selector, base) {
 }
 /**
  * Remove elements.
- * @param  selector querySelector
- * @param  base     base element. default is Document.
- * @return          number of removed.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @returns {number} The number of removed.
  */
 function removeElements(selector, base) {
     if (base === void 0) { base = document; }
@@ -590,9 +624,11 @@ function removeElements(selector, base) {
     return elms.length;
 }
 /**
- * Convert a single element to NodeList.
- * @param  elm
- * @return
+ * Converts a single element to NodeList.
+ *
+ * @export
+ * @param {(Element|string)} elm
+ * @returns {NodeList}
  */
 function toNodeList(elm) {
     elm = getElement(elm);
@@ -602,9 +638,11 @@ function toNodeList(elm) {
     return nodeList;
 }
 /**
- * Convert NodeList to Array.
- * @param  list
- * @return
+ * Converts NodeList to Array.
+ *
+ * @export
+ * @param {(NodeList|any[]|string)} list
+ * @returns {any[]}
  */
 function nodeListToArray(list) {
     if (Array.isArray(list)) {
@@ -617,9 +655,11 @@ function nodeListToArray(list) {
 }
 /**
  * Find ancestor element.
- * @param  self
- * @param  ancestor
- * @return          Element or null.
+ *
+ * @export
+ * @param {ElementTarget} self
+ * @param {ElementTarget} ancestor
+ * @returns {(Element|null)}
  */
 function findAncestor(self, ancestor) {
     polyfillForMatches();
@@ -663,12 +703,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/methods/base.ts");
 
 /**
- * Add event listener on every selected elements.
- * @param  selector   querySelector
- * @param  type       event-type
- * @param  listener   listener
- * @param  useCapture default is false
- * @return            number of affected
+ * Add event listener for each item.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} type event-type
+ * @param {EventListener} listener
+ * @param {boolean} [useCapture=false]
+ * @returns {number} the number of affected.
  */
 function addListener(selector, type, listener, useCapture) {
     if (useCapture === void 0) { useCapture = false; }
@@ -677,10 +719,12 @@ function addListener(selector, type, listener, useCapture) {
     return elms.length;
 }
 /**
- * Wrapping each element.
- * @param selector  querySelector
- * @param className wrapper's class name.
- * @param tagName   wrapper's tag name, default is 'div'.
+ * Wrap for each element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className wrapper's class name.
+ * @param {string} [tagName='div'] wrapper's tag name.
  */
 function wrap(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
@@ -701,10 +745,12 @@ function wrap(selector, className, tagName) {
     }
 }
 /**
- * Wrapping all elements inside a one wrapper.
- * @param selector  querySelector
- * @param className wrapper's class name.
- * @param tagName   wrapper's tag name, default is 'div'.
+ * Wrap all elements to inside a one wrapper.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className wrapper's class name.
+ * @param {string} [tagName='div'] wrapper's tag name.
  */
 function wrapAll(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
@@ -725,9 +771,11 @@ function wrapAll(selector, className, tagName) {
     }
 }
 /**
- * Add confirm message listener when 'submit' event.
- * @param selector querySelector, form element probably.
- * @param message  confirm message.
+ * Add confirm on the 'submit' event.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} [message='Are you confirm?'] confirm message.
  */
 function submitConfirm(selector, message) {
     if (message === void 0) { message = 'Are you confirm?'; }
@@ -738,9 +786,11 @@ function submitConfirm(selector, message) {
     }, true); // this use capture.
 }
 /**
- * Add class to element.
- * @param selector  querySelector
- * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * Add classes to element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className
  */
 function addClass(selector, className) {
     var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
@@ -748,9 +798,11 @@ function addClass(selector, className) {
     classes.forEach(function (c) { return elm.classList.add(c); });
 }
 /**
- * Remove class from element.
- * @param selector  querySelector
- * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * Remove classes from element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className
  */
 function removeClass(selector, className) {
     var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
@@ -758,9 +810,11 @@ function removeClass(selector, className) {
     classes.forEach(function (c) { return elm.classList.remove(c); });
 }
 /**
- * Toggling class to element.
- * @param selector  querySelector
- * @param className class name. If you want give multiple classes, separates classes by whitespace. e.g. 'first second'
+ * Toggling classes to element.
+ *
+ * @export
+ * @param {ElementTarget} selector
+ * @param {string} className
  */
 function toggleClass(selector, className) {
     var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
@@ -768,16 +822,20 @@ function toggleClass(selector, className) {
     classes.forEach(function (c) { return elm.classList.toggle(c); });
 }
 /**
- * Hide element. It will set element's display to 'none'.
- * @param selector querySelector
+ * Hide element. It will set value of style.display to 'none'.
+ *
+ * @export
+ * @param {ElementTarget} selector
  */
 function hide(selector) {
     var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
     elm.style.display = 'none';
 }
 /**
- * Show element. It will just remove 'display=none;'.
- * @param selector querySelector
+ * Show element. It will just remove 'display: none;'.
+ *
+ * @export
+ * @param {ElementTarget} selector
  */
 function show(selector) {
     var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
@@ -787,7 +845,9 @@ function show(selector) {
 }
 /**
  * Toggling show/hide element.
- * @param selector querySelector
+ *
+ * @export
+ * @param {ElementTarget} selector
  */
 function toggleShow(selector) {
     var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
@@ -795,9 +855,11 @@ function toggleShow(selector) {
 }
 /**
  * Make a hidden input.
- * @param  name  name attribute.
- * @param  value value attribute.
- * @return
+ *
+ * @export
+ * @param {string} name name attribute.
+ * @param {string} value value attribute.
+ * @returns {HTMLInputElement}
  */
 function makeHiddenInput(name, value) {
     var input = document.createElement('input');
@@ -808,9 +870,11 @@ function makeHiddenInput(name, value) {
 }
 /**
  * Makes hidden input, and append to target element. If input[name=".."] already exists, overwrite it.
- * @param target querySelector
- * @param name   name attribute.
- * @param value  value attribute.
+ *
+ * @export
+ * @param {ElementTarget} target
+ * @param {string} name name attribute.
+ * @param {string} value value attribute.
  */
 function appendHiddenInput(target, name, value) {
     var targetElm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(target);

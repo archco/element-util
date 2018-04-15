@@ -24,7 +24,7 @@ Class for filtering elements.
   let hitCount = ElementUtil.filter(selector, str = '', htmlMode = false);
   ```
 
-- Param  `string`|`NodeList` selector filtering targets.
+- Param  [`ElementTarget`] selector filtering targets.
 - Param  `string` [ str = '' ] filter string.
 - Param  `boolean` [ htmlMode = false ]
 - Returns `number` The number of hit.
@@ -40,6 +40,13 @@ let count = elementFilter.getHit();
 ```
 
 ## Types
+
+### ElementTarget
+
+``` ts
+/** The target that can converted to Element. */
+type ElementTarget = string|Element|NodeList;
+```
 
 ### FilterOptions
 
@@ -60,7 +67,7 @@ interface FilterOptions {
   let elementFilter = new ElementFilter(selector, str = '', options = {});
   ```
 
-- Param  `string`|`NodeList` selector filtering targets.
+- Param  [`ElementTarget`] selector filtering targets.
 - Param  `string` [ str = '' ] filter string.
 - Param  [`FilterOptions`](#filteroptions) [ options = {} ]
 
@@ -100,3 +107,5 @@ Execute filtering.
   ```
 
 - Returns `this`
+
+[`ElementTarget`]: #elementtarget
