@@ -28,6 +28,32 @@ export function addListener(
 }
 
 /**
+ * Add listener for the event that occurs outer of the element.
+ *
+ * @export
+ * @param {(Window|ElementTarget)} base the event target.
+ * @param {ElementTarget} target the target element that will be ignored an event.
+ * @param {string} type event type.
+ * @param {EventListener} listener
+ */
+export function addOuterListener(
+  base: Window|ElementTarget,
+  target: ElementTarget,
+  type: string,
+  listener: EventListener,
+): void {
+  const root = base === window ? window : getElement(base as ElementTarget);
+  const targetElm = getElement(target) as HTMLElement;
+  root.addEventListener(type, event => {
+    const eventTarget = event.target as Element;
+    if (targetElm !== eventTarget
+      && !targetElm.contains(eventTarget)) {
+      listener(event);
+    }
+  });
+}
+
+/**
  * Wrap for each element.
  *
  * @export
