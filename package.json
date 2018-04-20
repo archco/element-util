@@ -33,12 +33,12 @@
     "@types/jest": "^22.2.3",
     "chai": "^4.1.2",
     "jest": "^22.4.3",
-    "mocha": "^5.1.0",
+    "mocha": "^5.1.1",
     "source-map-loader": "^0.2.3",
-    "ts-jest": "^22.4.3",
+    "ts-jest": "^22.4.4",
     "ts-loader": "^4.2.0",
-    "typescript": "^2.8.1",
-    "webpack": "^4.5.0",
+    "typescript": "^2.8.3",
+    "webpack": "^4.6.0",
     "webpack-cli": "^2.0.14",
     "webpack-merge": "^4.1.2",
     "webpack-notifier": "^1.6.0"
@@ -51,6 +51,11 @@
     "testPathIgnorePatterns": [
       "<rootDir>/test/browser/",
       "<rootDir>/node_modules/"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/element-util.ts"
     ],
     "moduleFileExtensions": [
       "ts",
