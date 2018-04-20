@@ -97,6 +97,22 @@ export function addListener(
 ): number;
 
 /**
+ * Add listener for the event that occurs outer of the target element.
+ *
+ * @export
+ * @param {(Window|ElementTarget)} base the event target.
+ * @param {ElementTarget} target the target element that will be ignored an event.
+ * @param {string} type event type.
+ * @param {EventListener} listener
+ */
+export function addOuterListener(
+  base: Window|ElementTarget,
+  target: ElementTarget,
+  type: string,
+  listener: EventListener,
+): void;
+
+/**
  * Wrap for each element.
  *
  * @export
@@ -307,8 +323,28 @@ export interface SorterOptions {
 export function sort(elm: ElementTarget, options?: SorterOptions): HTMLElement[];
 
 export class ElementSorter {
+  /**
+   * Base element.
+   *
+   * @type {HTMLElement}
+   * @memberof ElementSorter
+   */
   elm: HTMLElement;
+
+  /**
+   * The element items that will be sorted.
+   *
+   * @type {HTMLElement[]}
+   * @memberof ElementSorter
+   */
   items: HTMLElement[];
+
+  /**
+   * Current options.
+   *
+   * @type {SorterOptions}
+   * @memberof ElementSorter
+   */
   options: SorterOptions;
 
   /**
