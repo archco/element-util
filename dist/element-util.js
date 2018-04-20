@@ -452,7 +452,7 @@ var ElementSorter = /** @class */ (function () {
 /*!*****************************!*\
   !*** ./src/element-util.ts ***!
   \*****************************/
-/*! exports provided: getElement, getElements, getElementsAsArray, removeElements, toNodeList, nodeListToArray, findAncestor, addListener, wrap, wrapAll, submitConfirm, addClass, removeClass, toggleClass, hide, show, toggleShow, makeHiddenInput, appendHiddenInput, filter, ElementFilter, sort, ElementSorter */
+/*! exports provided: getElement, getElements, getElementsAsArray, removeElements, toNodeList, nodeListToArray, findAncestor, addListener, addOuterListener, wrap, wrapAll, submitConfirm, addClass, removeClass, toggleClass, hide, show, toggleShow, makeHiddenInput, appendHiddenInput, filter, ElementFilter, sort, ElementSorter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -474,6 +474,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _methods_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./methods/util */ "./src/methods/util.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addListener", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["addListener"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addOuterListener", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["addOuterListener"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "wrap", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["wrap"]; });
 
@@ -683,12 +685,13 @@ function findAncestor(self, ancestor) {
 /*!*****************************!*\
   !*** ./src/methods/util.ts ***!
   \*****************************/
-/*! exports provided: addListener, wrap, wrapAll, submitConfirm, addClass, removeClass, toggleClass, hide, show, toggleShow, makeHiddenInput, appendHiddenInput */
+/*! exports provided: addListener, addOuterListener, wrap, wrapAll, submitConfirm, addClass, removeClass, toggleClass, hide, show, toggleShow, makeHiddenInput, appendHiddenInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addListener", function() { return addListener; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOuterListener", function() { return addOuterListener; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "wrap", function() { return wrap; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "wrapAll", function() { return wrapAll; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitConfirm", function() { return submitConfirm; });
@@ -717,6 +720,26 @@ function addListener(selector, type, listener, useCapture) {
     var elms = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
     elms.forEach(function (elm) { return elm.addEventListener(type, listener, useCapture); });
     return elms.length;
+}
+/**
+ * Add listener for the event that occurs outer of the target element.
+ *
+ * @export
+ * @param {(Window|ElementTarget)} base the event target.
+ * @param {ElementTarget} target the target element that will be ignored an event.
+ * @param {string} type event type.
+ * @param {EventListener} listener
+ */
+function addOuterListener(base, target, type, listener) {
+    var root = base === window ? window : Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(base);
+    var targetElm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(target);
+    root.addEventListener(type, function (event) {
+        var eventTarget = event.target;
+        if (targetElm !== eventTarget
+            && !targetElm.contains(eventTarget)) {
+            listener(event);
+        }
+    });
 }
 /**
  * Wrap for each element.
