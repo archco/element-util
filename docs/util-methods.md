@@ -25,6 +25,34 @@ Add event listener for each item.
 - Param `boolean` [ useCapture = false ]
 - Returns `number` - length of elements.
 
+## addOuterListener
+
+Add listener for the event that occurs outer of the target element.
+
+- Syntax
+
+  ``` js
+  ElementUtil.addOuterListener(base, target, type, listener);
+  ```
+
+- Param `Window`|[`ElementTarget`] base - the event target.
+- Param [`ElementTarget`] target - the target element that will be ignored an event.
+- Param `string` type - event type.
+- Param `EventListener` listener - listener function.
+- Returns `void`
+
+### Example
+
+``` js
+// basic usage.
+addOuterListener(window, '#target', 'click', () => {
+  console.log('You have clicked the outer of the target.');
+});
+
+// specify base.
+addOuterListener('#app', '.not-me', 'mouseover', onOuterOverHandler);
+```
+
 ## wrap
 
 Wrap for each element.

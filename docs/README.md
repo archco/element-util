@@ -13,6 +13,7 @@
 ## [Util Methods](util-methods.md)
 
 - [addListener](util-methods.md#addlistener): Add event listener on selector.
+- [addOuterListener](util-methods.md#addouterlistener): Add listener for the event that occurs outer of the target element.
 - [wrap](util-methods.md#wrap): Wrap elements by div.wrapper, one by one.
 - [wrapAll](util-methods.md#wrapall): Wrap all elements inside to div.wrapper.
 - [submitConfirm](util-methods.md#submitconfirm): Add confirm message on 'submit' event.

@@ -28,7 +28,7 @@ export function addListener(
 }
 
 /**
- * Add listener for the event that occurs outer of the element.
+ * Add listener for the event that occurs outer of the target element.
  *
  * @export
  * @param {(Window|ElementTarget)} base the event target.
