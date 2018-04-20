@@ -15,8 +15,13 @@ Add event listener for each item.
 
 - Syntax
 
-  ``` js
-  let effected = ElementUtil.addListener(selector, type, listener, useCapture = false);
+  ``` ts
+  function addListener(
+    selector: ElementTarget,
+    type: string,
+    listener: EventListener,
+    useCapture?: boolean,
+  ): number;
   ```
 
 - Param [`ElementTarget`] selector
@@ -31,8 +36,13 @@ Add listener for the event that occurs outer of the target element.
 
 - Syntax
 
-  ``` js
-  ElementUtil.addOuterListener(base, target, type, listener);
+  ``` ts
+  function addOuterListener(
+    base: Window|ElementTarget,
+    target: ElementTarget,
+    type: string,
+    listener: EventListener,
+  ): void;
   ```
 
 - Param `Window`|[`ElementTarget`] base - the event target.
@@ -59,8 +69,8 @@ Wrap for each element.
 
 - Syntax
 
-  ``` js
-  ElementUtil.wrap(selector, className, tagName = 'DIV');
+  ``` ts
+  function wrap(selector: ElementTarget, className: string, tagName?: string): void;
   ```
 
 - Param [`ElementTarget`] selector
@@ -74,8 +84,8 @@ Wrap all elements to inside a one wrapper.
 
 - Syntax
 
-  ``` js
-  ElementUtil.wrapAll(selector, className, tagName = 'DIV');
+  ``` ts
+  function wrapAll(selector: ElementTarget, className: string, tagName?: string): void;
   ```
 
 - Param [`ElementTarget`] selector
@@ -89,8 +99,8 @@ Add confirm on the 'submit' event.
 
 - Syntax
 
-  ``` js
-  ElementUtil.submitConfirm(selector, message = 'Are you confirm?');
+  ``` ts
+  function submitConfirm(selector: ElementTarget, message?: string): void;
   ```
 
 - Param [`ElementTarget`] selector
@@ -103,8 +113,8 @@ Add classes to element.
 
 - Syntax
 
-  ``` js
-  ElementUtil.addClass(selector, className);
+  ``` ts
+  function addClass(selector: ElementTarget, className: string): void;
   ```
 
 - Param  [`ElementTarget`] selector
@@ -117,8 +127,8 @@ Remove classes from element.
 
 - Syntax
 
-  ``` js
-  ElementUtil.removeClass(selector, className);
+  ``` ts
+  function removeClass(selector: ElementTarget, className: string): void;
   ```
 
 - Param [`ElementTarget`] selector
@@ -131,8 +141,8 @@ Toggling classes to element.
 
 - Syntax
 
-  ``` js
-  ElementUtil.toggleClass(selector, className);
+  ``` ts
+  function toggleClass(selector: ElementTarget, className: string): void;
   ```
 
 - Param [`ElementTarget`] selector
@@ -145,8 +155,8 @@ Hide element. It will set value of `style.display` to `none`.
 
 - Syntax
 
-  ``` js
-  ElementUtil.hide(selector);
+  ``` ts
+  function hide(selector: ElementTarget): void;
   ```
 
 - Param [`ElementTarget`] selector
@@ -158,8 +168,8 @@ Show element. It will just remove `display: none;`.
 
 - Syntax
 
-  ``` js
-  ElementUtil.show(selector);
+  ``` ts
+  function show(selector: ElementTarget): void;
   ```
 
 - Param [`ElementTarget`] selector
@@ -171,8 +181,8 @@ Toggling show/hide element.
 
 - Syntax
 
-  ``` js
-  ElementUtil.toggleShow(selector);
+  ``` ts
+  function toggleShow(selector: ElementTarget): void;
   ```
 
 - Param [`ElementTarget`] selector
@@ -184,8 +194,8 @@ Make a hidden input.
 
 - Syntax
 
-  ``` js
-  let input = ElementUtil.makeHiddenInput(name, value);
+  ``` ts
+  function makeHiddenInput(name: string, value: string): HTMLInputElement;
   ```
 
 - Param  `string` name - input name.
@@ -198,8 +208,8 @@ Makes hidden input, and append to target element. If input[name=".."] already ex
 
 - Syntax
 
-  ``` js
-  ElementUtil.appendHiddenInput(target, name, value);
+  ``` ts
+  function appendHiddenInput(target: ElementTarget, name: string, value: string): void;
   ```
 
 - Param  [`ElementTarget`] target - target element.

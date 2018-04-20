@@ -20,8 +20,8 @@ Class for sort elements.
 
 - Syntax
 
-  ``` js
-  let items = ElementUtil.sort(elm, options = {});
+  ``` ts
+  function sort(elm: ElementTarget, options?: SorterOptions): HTMLElement[];
   ```
 
 - Param  [`ElementTarget`] elm - base element.
@@ -33,9 +33,9 @@ Class for sort elements.
 ``` js
 import { ElementSorter } from 'element-util';
 
-let elementSorter = new ElementSorter('ul.country-list');
+const elementSorter = new ElementSorter('ul.country-list');
 elementSorter.execute();
-let items = elementSorter.getItems();
+const items = elementSorter.getItems();
 ```
 
 ## Types
@@ -78,18 +78,26 @@ interface SorterOptions {
 }
 ```
 
-## Class Methods
+## Class Members
+
+### Properties
+
+- elm `HTMLElement` - base element. e.g. `<ul>` or `<table>`..
+- items `HTMLElement[]` - the element items that will be sorted.
+- options [`SorterOptions`] - current options.
 
 ### constructor
 
 - Syntax
 
-  ``` js
-  let elementSorter = new ElementSorter(elm, options = {});
+  ``` ts
+  class ElementSorter {
+    constructor(elm: ElementTarget, options: SorterOptions);
+  }
   ```
 
 - Param [`ElementTarget`] elm - Base element.
-- Param [`SorterOptions`](#sorteroptions) [ options = {} ]
+- Param [`SorterOptions`] [ options = {} ]
 
 ### setElement
 
@@ -97,8 +105,8 @@ Set base element.
 
 - Syntax
 
-  ``` js
-  elementSorter.setElement(elm);
+  ``` ts
+  elementSorter.setElement(elm: ElementTarget): this;
   ```
 
 - Param  [`ElementTarget`] elm
@@ -110,8 +118,8 @@ Set sort target items.
 
 - Syntax
 
-  ``` js
-  elementSorter.setItems(items);
+  ``` ts
+  elementSorter.setItems(items: ItemsSettable): this;
   ```
 
 - Param  [`ItemsSettable`](#itemssettable) items - 'auto'|selector|NodeList|array
@@ -123,8 +131,8 @@ Get sort target items.
 
 - Syntax
 
-  ``` js
-  let items = elementSorter.getItems();
+  ``` ts
+  elementSorter.getItems(): HTMLElement[];
   ```
 
 - Returns `HTMLElement[]`
@@ -135,10 +143,11 @@ Execute sort.
 
 - Syntax
 
-  ``` js
-  elementSorter.execute();
+  ``` ts
+  elementSorter.execute(): this;
   ```
 
 - Returns `this`
 
 [`ElementTarget`]: #elementtarget
+[`SorterOptions`]: #sorteroptions

@@ -20,8 +20,8 @@ Class for filtering elements.
 
 - Syntax
 
-  ``` js
-  let hitCount = ElementUtil.filter(selector, str = '', htmlMode = false);
+  ``` ts
+  function filter(selector: ElementTarget, str?: string, enableHTML?: boolean): number;
   ```
 
 - Param  [`ElementTarget`] selector filtering targets.
@@ -34,9 +34,9 @@ Class for filtering elements.
 ``` js
 import { ElementFilter } from 'element-util';
 
-let elementFilter = new ElementFilter('ul.country-list li', '');
+const elementFilter = new ElementFilter('ul.country-list li');
 elementFilter.setFilter('den').execute();
-let count = elementFilter.getHit();
+const count = elementFilter.getHit();
 ```
 
 ## Types
@@ -63,8 +63,10 @@ interface FilterOptions {
 
 - Syntax
 
-  ``` js
-  let elementFilter = new ElementFilter(selector, str = '', options = {});
+  ``` ts
+  class ElementFilter {
+    constructor(selector: ElementTarget, str?: string, options?: FilterOptions);
+  }
   ```
 
 - Param  [`ElementTarget`] selector filtering targets.
@@ -77,8 +79,8 @@ Set filter string.
 
 - Syntax
 
-  ``` js
-  elementFilter.setFilter(str);
+  ``` ts
+  elementFilter.setFilter(str: string): this;
   ```
 
 - Param  `string` str
@@ -90,8 +92,8 @@ Get count of filtered elements.
 
 - Syntax
 
-  ``` js
-  let count = elementFilter.getHit();
+  ``` ts
+  elementFilter.getHit(): number;
   ```
 
 - Returns `number`
@@ -102,8 +104,8 @@ Execute filtering.
 
 - Syntax
 
-  ``` js
-  elementFilter.execute();
+  ``` ts
+  elementFilter.execute(): this;
   ```
 
 - Returns `this`
