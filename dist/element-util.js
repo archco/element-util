@@ -706,19 +706,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/methods/base.ts");
 
 /**
- * Add event listener for each item.
+ * Add event listener for each element.
  *
  * @export
  * @param {ElementTarget} selector
- * @param {string} type event-type
+ * @param {string} type event type
  * @param {EventListener} listener
- * @param {boolean} [useCapture=false]
+ * @param {(boolean|AddEventListenerOptions)} [options=false]
  * @returns {number} the number of affected.
  */
-function addListener(selector, type, listener, useCapture) {
-    if (useCapture === void 0) { useCapture = false; }
+function addListener(selector, type, listener, options) {
+    if (options === void 0) { options = false; }
     var elms = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
-    elms.forEach(function (elm) { return elm.addEventListener(type, listener, useCapture); });
+    elms.forEach(function (elm) { return elm.addEventListener(type, listener, options); });
     return elms.length;
 }
 /**
@@ -729,8 +729,10 @@ function addListener(selector, type, listener, useCapture) {
  * @param {ElementTarget} target the target element that will be ignored an event.
  * @param {string} type event type.
  * @param {EventListener} listener
+ * @param {(boolean|AddEventListenerOptions)} [options=false]
  */
-function addOuterListener(base, target, type, listener) {
+function addOuterListener(base, target, type, listener, options) {
+    if (options === void 0) { options = false; }
     var root = base === window ? window : Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(base);
     var targetElm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(target);
     root.addEventListener(type, function (event) {
@@ -739,7 +741,7 @@ function addOuterListener(base, target, type, listener) {
             && !targetElm.contains(eventTarget)) {
             listener(event);
         }
-    });
+    }, options);
 }
 /**
  * Wrap for each element.

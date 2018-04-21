@@ -80,20 +80,20 @@ export function findAncestor(self: ElementTarget, ancestor: ElementTarget): Elem
 //
 
 /**
- * Add event listener for each item.
+ * Add event listener for each element.
  *
  * @export
  * @param {ElementTarget} selector
- * @param {string} type event-type
+ * @param {string} type event type
  * @param {EventListener} listener
- * @param {boolean} [useCapture=false]
+ * @param {(boolean|AddEventListenerOptions)} [options=false]
  * @returns {number} the number of affected.
  */
 export function addListener(
   selector: ElementTarget,
   type: string,
   listener: EventListener,
-  useCapture?: boolean,
+  options?: boolean|AddEventListenerOptions,
 ): number;
 
 /**
@@ -104,12 +104,14 @@ export function addListener(
  * @param {ElementTarget} target the target element that will be ignored an event.
  * @param {string} type event type.
  * @param {EventListener} listener
+ * @param {(boolean|AddEventListenerOptions)} [options=false]
  */
 export function addOuterListener(
   base: Window|ElementTarget,
   target: ElementTarget,
   type: string,
   listener: EventListener,
+  options?: boolean|AddEventListenerOptions,
 ): void;
 
 /**

@@ -6,24 +6,24 @@ import {
 } from './base';
 
 /**
- * Add event listener for each item.
+ * Add event listener for each element.
  *
  * @export
  * @param {ElementTarget} selector
- * @param {string} type event-type
+ * @param {string} type event type
  * @param {EventListener} listener
- * @param {boolean} [useCapture=false]
+ * @param {(boolean|AddEventListenerOptions)} [options=false]
  * @returns {number} the number of affected.
  */
 export function addListener(
   selector: ElementTarget,
   type: string,
   listener: EventListener,
-  useCapture: boolean = false,
+  options: boolean|AddEventListenerOptions = false,
 ): number {
 
   const elms = getElementsAsArray(selector);
-  elms.forEach(elm => elm.addEventListener(type, listener, useCapture));
+  elms.forEach(elm => elm.addEventListener(type, listener, options));
   return elms.length;
 }
 
@@ -35,12 +35,14 @@ export function addListener(
  * @param {ElementTarget} target the target element that will be ignored an event.
  * @param {string} type event type.
  * @param {EventListener} listener
+ * @param {(boolean|AddEventListenerOptions)} [options=false]
  */
 export function addOuterListener(
   base: Window|ElementTarget,
   target: ElementTarget,
   type: string,
   listener: EventListener,
+  options: boolean|AddEventListenerOptions = false,
 ): void {
   const root = base === window ? window : getElement(base as ElementTarget);
   const targetElm = getElement(target) as HTMLElement;
@@ -50,7 +52,7 @@ export function addOuterListener(
       && !targetElm.contains(eventTarget)) {
       listener(event);
     }
-  });
+  }, options);
 }
 
 /**

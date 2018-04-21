@@ -11,7 +11,7 @@ type ElementTarget = string|Element|NodeList;
 
 ## addListener
 
-Add event listener for each item.
+Add event listener for each element.
 
 - Syntax
 
@@ -20,15 +20,15 @@ Add event listener for each item.
     selector: ElementTarget,
     type: string,
     listener: EventListener,
-    useCapture?: boolean,
+    options?: boolean|AddEventListenerOptions,
   ): number;
   ```
 
 - Param [`ElementTarget`] selector
 - Param `string` type - event type.
 - Param `Function` listener
-- Param `boolean` [ useCapture = false ]
-- Returns `number` - length of elements.
+- Param `boolean`|`AddEventListenerOptions` [ options = false ]
+- Returns `number` - the number of affected.
 
 ## addOuterListener
 
@@ -42,6 +42,7 @@ Add listener for the event that occurs outer of the target element.
     target: ElementTarget,
     type: string,
     listener: EventListener,
+    options?: boolean|AddEventListenerOptions,
   ): void;
   ```
 
@@ -49,6 +50,7 @@ Add listener for the event that occurs outer of the target element.
 - Param [`ElementTarget`] target - the target element that will be ignored an event.
 - Param `string` type - event type.
 - Param `EventListener` listener - listener function.
+- Param `boolean`|`AddEventListenerOptions` [ options = false ]
 - Returns `void`
 
 ### Example
