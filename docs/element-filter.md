@@ -7,6 +7,7 @@ Class for filtering elements.
 - [Usage](#usage)
   - [Via helper method](#via-helper-method)
   - [Via class](#via-class)
+  - [Examples](#examples)
 - [Types](#types)
 - [Class methods](#class-methods)
   - [constructor](#constructor)
@@ -35,8 +36,51 @@ Class for filtering elements.
 import { ElementFilter } from 'element-util';
 
 const elementFilter = new ElementFilter('ul.country-list li');
-elementFilter.setFilter('den').execute();
-const count = elementFilter.getHit();
+let result = elementFilter.setFilter('den').execute();
+console.log(result.filtered[0]);
+```
+
+### Examples
+
+#### Options: enableHTML
+
+If `enableHTML` option is true, filter method will tried compares to the element's `innerHTML` attribute. Default value is `false`, and then using the `textContent` attribute.
+
+``` html
+<ul>
+  <li>
+    <span class="category1">item1</span>
+  </li>
+  <li>
+    <span class="category2">item2</span>
+  </li>
+  <li>
+    <span class="category1">item3</span>
+  </li>
+</ul>
+```
+
+``` js
+const result = filter('ul > li', 'category1', { enableHTML: true });
+result.filtered.length; // 2
+```
+
+#### Options: action
+
+The `action` option allows you to specify an action after filtering elements in the filter method. The possible values are `'hideOthers'`, `'addClass'` or [`FilterActionFunction`].
+
+``` js
+// Hiding not matched elements.
+filter('ul li', 'word', { action: 'hideOthers' });
+
+// Add class to matched elements.
+filter('ul li', 'word', { action: 'addClass: highlighted' });
+
+// Set custom action function.
+const customAction = (elm, isMatched) => {
+  elm.dataset.selected = isMatched ? 'true' : 'false';
+};
+filter('ul li', 'word', { action: customAction });
 ```
 
 ## Types
