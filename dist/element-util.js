@@ -105,34 +105,33 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
 
 
 /**
- * Filtering elements. (It's helper method of the ElementFilter.)
+ * Filtering elements. (It's helper method for the ElementFilter.)
  *
  * @export
  * @param {ElementTarget} selector target elements.
  * @param {string} [str=''] filter string.
- * @param {boolean} [enableHTML=false] using .innerHTML, default is false.
- * @returns {number} The number of hit.
+ * @param {FilterOptions} [options={}] options.
+ * @returns {FilterResult} {elms, filtered}
  */
-function filter(selector, str, enableHTML) {
+function filter(selector, str, options) {
     if (str === void 0) { str = ''; }
-    if (enableHTML === void 0) { enableHTML = false; }
-    var f = new ElementFilter(selector, str, { enableHTML: enableHTML });
-    return f.execute().hit;
+    if (options === void 0) { options = {}; }
+    return new ElementFilter(selector, str, options).execute();
 }
 var ElementFilter = /** @class */ (function () {
     /**
      * Creates an instance of ElementFilter.
      * @param {ElementTarget} selector target elements.
-     * @param {string} [str=''] a string for filtering.
+     * @param {string} [str=''] filter string.
      * @param {FilterOptions} [options={}]
      * @memberof ElementFilter
      */
     function ElementFilter(selector, str, options) {
         if (str === void 0) { str = ''; }
         if (options === void 0) { options = {}; }
-        this.hit = 0;
-        this.elms = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElements"])(selector);
-        this.filter = str;
+        this.filtered = [];
+        this.elms = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
+        this.setFilter(str);
         this.options = this.getDefaultOptions();
         this.setOptions(options);
     }
@@ -151,10 +150,12 @@ var ElementFilter = /** @class */ (function () {
      * Set options.
      *
      * @param {FilterOptions} options
+     * @returns {this}
      * @memberof ElementFilter
      */
     ElementFilter.prototype.setOptions = function (options) {
         this.options = __assign({}, this.options, options);
+        return this;
     };
     /**
      * Set filter string.
@@ -168,18 +169,9 @@ var ElementFilter = /** @class */ (function () {
         return this;
     };
     /**
-     * Get hit.
-     *
-     * @returns {number} The number of hit.
-     * @memberof ElementFilter
-     */
-    ElementFilter.prototype.getHit = function () {
-        return this.hit;
-    };
-    /**
      * Execute filtering.
      *
-     * @returns {this}
+     * @returns {FilterResult}
      * @memberof ElementFilter
      */
     ElementFilter.prototype.execute = function () {
@@ -189,34 +181,47 @@ var ElementFilter = /** @class */ (function () {
         else {
             this.filteringNodes(this.elms);
         }
-        return this;
+        return {
+            elms: this.elms,
+            filtered: this.filtered,
+        };
     };
     ElementFilter.prototype.filteringTable = function () {
-        var table = this.elms[0];
-        var tableRows = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElements"])('tbody tr', table);
+        var tableRows = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])('tbody tr', this.elms[0]);
         this.filteringNodes(tableRows);
     };
-    ElementFilter.prototype.filteringNodes = function (nodes) {
-        this.hit = 0;
+    ElementFilter.prototype.filteringNodes = function (elms) {
         var str = this.filter.toUpperCase();
-        var elms = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["nodeListToArray"])(nodes);
         for (var _i = 0, elms_1 = elms; _i < elms_1.length; _i++) {
             var elm = elms_1[_i];
             var content = this.options.enableHTML
                 ? elm.innerHTML
                 : elm.textContent;
             if (content.toUpperCase().indexOf(str) === -1) {
-                Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["hide"])(elm);
+                this.actionToElm(elm, false);
             }
             else {
-                Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["show"])(elm);
-                this.hit++;
+                this.actionToElm(elm, true);
+                this.filtered.push(elm);
             }
         }
     };
+    ElementFilter.prototype.actionToElm = function (elm, isMatched) {
+        var action = this.options.action;
+        if (action === 'hideOthers') {
+            isMatched ? Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["show"])(elm) : Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["hide"])(elm);
+        }
+        else if (typeof action === 'string' && /^(addClass:)/.test(action)) {
+            var _a = action.split(':').map(function (x) { return x.trim(); }), className = _a[1];
+            isMatched ? Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["addClass"])(elm, className) : Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["removeClass"])(elm, className);
+        }
+        else if (typeof action === 'function') {
+            action(elm, isMatched);
+        }
+    };
     ElementFilter.prototype.elmsIsTable = function () {
-        var elm = this.elms[0];
-        return this.elms.length === 1 && elm.tagName === 'TABLE';
+        return this.elms.length === 1
+            && this.elms[0].tagName === 'TABLE';
     };
     return ElementFilter;
 }());
