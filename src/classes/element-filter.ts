@@ -1,13 +1,29 @@
 import {
   ElementTarget,
   getElements,
-  nodeListToArray,
+  getElementsAsArray,
 } from '../methods/base';
-import { hide, show } from '../methods/util';
+import {
+  addClass,
+  hide,
+  removeClass,
+  show,
+} from '../methods/util';
+
+export type FilterActionFunction = (elm: HTMLElement, isFiltered: boolean) => void;
 
 export interface FilterOptions {
   /** Enable to use `innerHTML`. Default is false, and than use `textContent`. */
   enableHTML?: boolean;
+  /** action for each filtered element. 'hideOthers' or 'addClass: foo'. */
+  action?: string | FilterActionFunction;
+}
+
+export interface FilterResult {
+  /** Filtering targets. */
+  elms: HTMLElement[];
+  /** Filtered elements. */
+  filtered: HTMLElement[];
 }
 
 /**
@@ -16,30 +32,29 @@ export interface FilterOptions {
  * @export
  * @param {ElementTarget} selector target elements.
  * @param {string} [str=''] filter string.
- * @param {boolean} [enableHTML=false] using .innerHTML, default is false.
- * @returns {number} The number of hit.
+ * @param {FilterOptions} [options={}] options.
+ * @returns {FilterResult} {elms, filtered}
  */
-export function filter(selector: ElementTarget, str: string = '', enableHTML: boolean = false): number {
-  const f = new ElementFilter(selector, str, { enableHTML });
-  return f.execute().hit;
+export function filter(selector: ElementTarget, str: string = '', options: FilterOptions = {}): FilterResult {
+  return new ElementFilter(selector, str, options).execute();
 }
 
 export class ElementFilter {
-  elms: NodeList;
+  elms: HTMLElement[];
+  filtered: HTMLElement[] = [];
   filter: string;
-  hit: number = 0;
   options: FilterOptions;
 
   /**
    * Creates an instance of ElementFilter.
    * @param {ElementTarget} selector target elements.
-   * @param {string} [str=''] a string for filtering.
+   * @param {string} [str=''] filter string.
    * @param {FilterOptions} [options={}]
    * @memberof ElementFilter
    */
   constructor(selector: ElementTarget, str: string = '', options: FilterOptions = {}) {
-    this.elms = getElements(selector);
-    this.filter = str;
+    this.elms = getElementsAsArray(selector);
+    this.setFilter(str);
     this.options = this.getDefaultOptions();
     this.setOptions(options);
   }
@@ -60,13 +75,15 @@ export class ElementFilter {
    * Set options.
    *
    * @param {FilterOptions} options
+   * @returns {this}
    * @memberof ElementFilter
    */
-  setOptions(options: FilterOptions) {
+  setOptions(options: FilterOptions): this {
     this.options = {
       ...this.options,
       ...options,
     };
+    return this;
   }
 
   /**
@@ -82,56 +99,58 @@ export class ElementFilter {
   }
 
   /**
-   * Get hit.
-   *
-   * @returns {number} The number of hit.
-   * @memberof ElementFilter
-   */
-  getHit(): number {
-    return this.hit;
-  }
-
-  /**
    * Execute filtering.
    *
-   * @returns {this}
+   * @returns {FilterResult}
    * @memberof ElementFilter
    */
-  execute(): this {
+  execute(): FilterResult {
     if (this.elmsIsTable()) {
       this.filteringTable();
     } else {
       this.filteringNodes(this.elms);
     }
-    return this;
+    return {
+      elms: this.elms,
+      filtered: this.filtered,
+    };
   }
 
   protected filteringTable(): void {
-    const table = this.elms[0] as HTMLElement;
-    const tableRows = getElements('tbody tr', table);
+    const tableRows = getElementsAsArray('tbody tr', this.elms[0]);
     this.filteringNodes(tableRows);
   }
 
-  protected filteringNodes(nodes: NodeList): void {
-    this.hit = 0;
+  protected filteringNodes(elms: HTMLElement[]): void {
     const str = this.filter.toUpperCase();
-    const elms = nodeListToArray(nodes) as HTMLElement[];
 
     for (const elm of elms) {
       const content = this.options.enableHTML
         ? elm.innerHTML
         : elm.textContent;
       if (content.toUpperCase().indexOf(str) === -1) {
-        hide(elm);
+        this.actionToElm(elm, false);
       } else {
-        show(elm);
-        this.hit++;
+        this.actionToElm(elm, true);
+        this.filtered.push(elm);
       }
     }
   }
 
+  protected actionToElm(elm: HTMLElement, isFiltered: boolean): void {
+    const action = this.options.action;
+    if (action === 'hideOthers') {
+      isFiltered ? show(elm) : hide(elm);
+    } else if (typeof action === 'string' && /^(addClass:)/.test(action)) {
+      const [, className] = action.split(':').map(x => x.trim());
+      isFiltered ? addClass(elm, className) : removeClass(elm, className);
+    } else if (typeof action === 'function') {
+      action(elm, isFiltered);
+    }
+  }
+
   protected elmsIsTable(): boolean {
-    const elm = this.elms[0] as HTMLElement;
-    return this.elms.length === 1 && elm.tagName === 'TABLE';
+    return this.elms.length === 1
+      && this.elms[0].tagName === 'TABLE';
   }
 }

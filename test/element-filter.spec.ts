@@ -1,15 +1,15 @@
 import { filter } from '../src/classes/element-filter';
 import { makeElement, makeTableRow } from './util/util';
 
-// #filter-list
-const ul = makeElement('ul', {id: 'filter-list'});
+// #country-list
+const ul = makeElement('ul', {id: 'country-list'});
 const items = [
-  makeElement('li', {text: 'Aruba'}),
-  makeElement('li', {text: 'Brazil'}),
-  makeElement('li', {text: 'Brunei'}),
-  makeElement('li', {text: 'China'}),
-  makeElement('li', {text: 'Dominica'}),
-  makeElement('li', {text: 'Palau'}),
+  makeElement('li', {html: '<span class="south-america">Aruba</span>'}),
+  makeElement('li', {html: '<span class="south-america">Brazil</span>'}),
+  makeElement('li', {html: '<span class="asia">Brunei</span>'}),
+  makeElement('li', {html: '<span class="asia">China</span>'}),
+  makeElement('li', {html: '<span class="north-america">Dominica</span>'}),
+  makeElement('li', {html: '<span class="oceania">Palau</span>'}),
 ];
 items.forEach(el => ul.appendChild(el));
 document.body.appendChild(ul);
@@ -48,13 +48,63 @@ document.body.appendChild(table);
 describe('#ElementFilter', () => {
   describe('#filter', () => {
     it('filtering on list.', () => {
-      const hit = filter('#filter-list li', 'br');
-      expect(hit).toEqual(2); // brazil and brunei.
+      const { filtered } = filter('#country-list li', 'br');
+      expect(filtered.length).toEqual(2); // brazil and brunei.
+      expect(filtered[0].textContent).toEqual('Brazil');
     });
 
     it('filtering on table element.', () => {
-      const hit = filter('#filter-table', 'james');
-      expect(hit).toEqual(1);
+      const { filtered } = filter('#filter-table', 'james');
+      expect(filtered.length).toEqual(1);
+    });
+  });
+
+  describe('#FilterOptions:enableHTML', () => {
+    it('works.', () => {
+      const { filtered } = filter('#country-list li', 'asia', { enableHTML: true });
+      expect(filtered.length).toEqual(2);
+      expect(filtered[0].textContent).toEqual('Brunei');
+    });
+  });
+
+  describe('#FilterOptions:action', () => {
+    it('hideOthers.', () => {
+      const list = document.querySelectorAll('#country-list li');
+      const aruba = list[0] as HTMLElement;
+      const brazil = list[1] as HTMLElement;
+
+      filter('#country-list li', 'aruba', { action: 'hideOthers' });
+      expect(aruba.style.display).toEqual('');
+      expect(brazil.style.display).toEqual('none');
+      filter('#country-list li', 'brazil', { action: 'hideOthers' });
+      expect(aruba.style.display).toEqual('none');
+      expect(brazil.style.display).toEqual('');
+    });
+
+    it('addClass.', () => {
+      const list = document.querySelectorAll('#country-list li');
+      const aruba = list[0] as HTMLElement;
+      const brazil = list[1] as HTMLElement;
+
+      filter('#country-list li', 'aruba', { action: 'addClass:boom' });
+      expect(aruba.classList.contains('boom')).toBeTruthy();
+      expect(brazil.classList.contains('boom')).toBeFalsy();
+      filter('#country-list li', 'brazil', { action: 'addClass: boom' });
+      expect(aruba.classList.contains('boom')).toBeFalsy();
+      expect(brazil.classList.contains('boom')).toBeTruthy();
+    });
+
+    it('specify custom action.', () => {
+      const list = document.querySelectorAll('#country-list li');
+      const aruba = list[0] as HTMLElement;
+      const customAction = (elm: HTMLElement, isFiltered: boolean): void => {
+        elm.dataset.selected = isFiltered ? 'true' : 'false';
+      };
+
+      filter('#country-list li', 'aruba', { action: customAction });
+      expect(aruba.dataset.selected).toEqual('true');
+      filter('#country-list li', 'brazil', { action: customAction });
+      expect(aruba.dataset.selected).toEqual('false');
     });
   });
 });

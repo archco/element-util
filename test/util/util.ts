@@ -3,9 +3,16 @@ interface ElementOptions {
   className?: string;
   dataset?: object;
   text?: string;
+  html?: string;
+  attr?: {
+    [index: string]: string;
+  };
 }
 
-export function makeElement(tag: string, {id, className, dataset, text}: ElementOptions = {}): HTMLElement {
+export function makeElement(
+  tag: string,
+  {id, className, dataset, text, html, attr}: ElementOptions = {},
+): HTMLElement {
   const elm = document.createElement(tag);
   if (id) {
     elm.setAttribute('id', id);
@@ -20,6 +27,14 @@ export function makeElement(tag: string, {id, className, dataset, text}: Element
   }
   if (text) {
     elm.textContent = text;
+  }
+  if (html) {
+    elm.innerHTML = html;
+  }
+  if (attr) {
+    for (const key of Object.keys(attr)) {
+      elm.setAttribute(key, attr[key]);
+    }
   }
   return elm;
 }
