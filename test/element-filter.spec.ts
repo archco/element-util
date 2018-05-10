@@ -97,8 +97,8 @@ describe('#ElementFilter', () => {
     it('specify custom action.', () => {
       const list = document.querySelectorAll('#country-list li');
       const aruba = list[0] as HTMLElement;
-      const customAction = (elm: HTMLElement, isFiltered: boolean): void => {
-        elm.dataset.selected = isFiltered ? 'true' : 'false';
+      const customAction = (elm: HTMLElement, isMatched: boolean): void => {
+        elm.dataset.selected = isMatched ? 'true' : 'false';
       };
 
       filter('#country-list li', 'aruba', { action: customAction });

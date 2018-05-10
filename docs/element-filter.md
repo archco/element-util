@@ -21,13 +21,13 @@ Class for filtering elements.
 - Syntax
 
   ``` ts
-  function filter(selector: ElementTarget, str?: string, enableHTML?: boolean): number;
+  function filter(selector: ElementTarget, str?: string, options?: FilterOptions): FilterResult;
   ```
 
 - Param  [`ElementTarget`] selector filtering targets.
 - Param  `string` [ str = '' ] filter string.
-- Param  `boolean` [ htmlMode = false ]
-- Returns `number` The number of hit.
+- Param  [`FilterOptions`] [ options = {} ]
+- Returns [`FilterResult`] result object.
 
 ### Via class
 
@@ -48,12 +48,37 @@ const count = elementFilter.getHit();
 type ElementTarget = string|Element|NodeList;
 ```
 
+### FilterActionFunction
+
+``` ts
+/**
+ * Action function for a filtered element.
+ * @param {HTMLElement} elm element.
+ * @param {boolean} isMatched whether element is matched or not.
+ * @returns {void}
+ */
+type FilterActionFunction = (elm: HTMLElement, isMatched: boolean) => void;
+```
+
 ### FilterOptions
 
 ``` ts
 interface FilterOptions {
   /** Enable to use `innerHTML`. Default is false, and than use `textContent`. */
   enableHTML?: boolean;
+  /** action for each filtered element. 'hideOthers' or 'addClass: foo'. */
+  action?: string | FilterActionFunction;
+}
+```
+
+### FilterResult
+
+``` ts
+interface FilterResult {
+  /** Filtering targets. */
+  elms: HTMLElement[];
+  /** Filtered elements. */
+  filtered: HTMLElement[];
 }
 ```
 
@@ -71,7 +96,7 @@ interface FilterOptions {
 
 - Param  [`ElementTarget`] selector filtering targets.
 - Param  `string` [ str = '' ] filter string.
-- Param  [`FilterOptions`](#filteroptions) [ options = {} ]
+- Param  [`FilterOptions`] [ options = {} ]
 
 ### setFilter
 
@@ -86,18 +111,6 @@ Set filter string.
 - Param  `string` str
 - Returns `this`
 
-### getHit
-
-Get count of filtered elements.
-
-- Syntax
-
-  ``` ts
-  elementFilter.getHit(): number;
-  ```
-
-- Returns `number`
-
 ### execute
 
 Execute filtering.
@@ -105,9 +118,12 @@ Execute filtering.
 - Syntax
 
   ``` ts
-  elementFilter.execute(): this;
+  elementFilter.execute(): FilterResult;
   ```
 
-- Returns `this`
+- Returns [`FilterResult`]
 
 [`ElementTarget`]: #elementtarget
+[`FilterActionFunction`]: #filteractionfunction
+[`FilterOptions`]: #filteroptions
+[`FilterResult`]: #filterresult

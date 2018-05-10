@@ -10,7 +10,13 @@ import {
   show,
 } from '../methods/util';
 
-export type FilterActionFunction = (elm: HTMLElement, isFiltered: boolean) => void;
+/**
+ * Action function for a filtered element.
+ * @param {HTMLElement} elm element.
+ * @param {boolean} isMatched whether element is matched or not.
+ * @returns {void}
+ */
+export type FilterActionFunction = (elm: HTMLElement, isMatched: boolean) => void;
 
 export interface FilterOptions {
   /** Enable to use `innerHTML`. Default is false, and than use `textContent`. */
@@ -27,7 +33,7 @@ export interface FilterResult {
 }
 
 /**
- * Filtering elements. (It's helper method of the ElementFilter.)
+ * Filtering elements. (It's helper method for the ElementFilter.)
  *
  * @export
  * @param {ElementTarget} selector target elements.
@@ -137,15 +143,15 @@ export class ElementFilter {
     }
   }
 
-  protected actionToElm(elm: HTMLElement, isFiltered: boolean): void {
+  protected actionToElm(elm: HTMLElement, isMatched: boolean): void {
     const action = this.options.action;
     if (action === 'hideOthers') {
-      isFiltered ? show(elm) : hide(elm);
+      isMatched ? show(elm) : hide(elm);
     } else if (typeof action === 'string' && /^(addClass:)/.test(action)) {
       const [, className] = action.split(':').map(x => x.trim());
-      isFiltered ? addClass(elm, className) : removeClass(elm, className);
+      isMatched ? addClass(elm, className) : removeClass(elm, className);
     } else if (typeof action === 'function') {
-      action(elm, isFiltered);
+      action(elm, isMatched);
     }
   }
 

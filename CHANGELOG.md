@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Improved ElementFilter. #13
+  - Added interface `FilterResult`. `execute()` method returns result as `FilterResult`.
+  - Removed `hit` property.
+  - Added a new option `action`. This action is for each filtered element.
+
 ## [1.5.1] - 2018-04-21
 
 ### Fixed

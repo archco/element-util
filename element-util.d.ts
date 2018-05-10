@@ -218,32 +218,49 @@ export function appendHiddenInput(target: ElementTarget, name: string, value: st
 // ElementFilter
 //
 
+/**
+ * Action function for a filtered element.
+ * @param {HTMLElement} elm element.
+ * @param {boolean} isMatched whether element is matched or not.
+ * @returns {void}
+ */
+export type FilterActionFunction = (elm: HTMLElement, isMatched: boolean) => void;
+
 export interface FilterOptions {
   /** Enable to use `innerHTML`. Default is false, and than use `textContent`. */
   enableHTML?: boolean;
+  /** action for each filtered element. 'hideOthers' or 'addClass: foo'. */
+  action?: string | FilterActionFunction;
+}
+
+export interface FilterResult {
+  /** Filtering targets. */
+  elms: HTMLElement[];
+  /** Filtered elements. */
+  filtered: HTMLElement[];
 }
 
 /**
- * Filtering elements. (It's helper method of the ElementFilter.)
+ * Filtering elements. (It's helper method for the ElementFilter.)
  *
  * @export
  * @param {ElementTarget} selector target elements.
  * @param {string} [str=''] filter string.
- * @param {boolean} [enableHTML=false] using .innerHTML, default is false.
- * @returns {number} The number of hit.
+ * @param {FilterOptions} [options={}] options.
+ * @returns {FilterResult} {elms, filtered}
  */
-export function filter(selector: ElementTarget, str?: string, enableHTML?: boolean): number;
+export function filter(selector: ElementTarget, str?: string, options?: FilterOptions): FilterResult;
 
 export class ElementFilter {
-  elms: NodeList;
+  elms: HTMLElement[];
+  filtered: HTMLElement[];
   filter: string;
-  hit: number;
   options: FilterOptions;
 
   /**
    * Creates an instance of ElementFilter.
    * @param {ElementTarget} selector target elements.
-   * @param {string} [str=''] a string for filtering.
+   * @param {string} [str=''] filter string.
    * @param {FilterOptions} [options={}]
    * @memberof ElementFilter
    */
@@ -275,20 +292,12 @@ export class ElementFilter {
   setFilter(str: string): this;
 
   /**
-   * Get hit.
-   *
-   * @returns {number} The number of hit.
-   * @memberof ElementFilter
-   */
-  getHit(): number;
-
-  /**
    * Execute filtering.
    *
-   * @returns {this}
+   * @returns {FilterResult}
    * @memberof ElementFilter
    */
-  execute(): this;
+  execute(): FilterResult;
 }
 
 //
