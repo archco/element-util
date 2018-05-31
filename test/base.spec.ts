@@ -13,6 +13,8 @@ import {
 
 describe('#getElement', () => {
   const div = makeElement('div', {id: 'target'});
+  const span = makeElement('span', { text: 'child' });
+  div.appendChild(span);
   document.body.appendChild(div);
 
   it('returns as HTMLElement.', () => {
@@ -20,10 +22,33 @@ describe('#getElement', () => {
     expect(elm instanceof HTMLElement).toBeTruthy();
   });
 
+  it('should works if gave argument as Element or NodeList.', () => {
+    expect(getElement(div)).toEqual(div);
+    expect(getElement(div.childNodes)).toEqual(span);
+  });
+
   it('if base is not exists, then occur ReferenceError.', () => {
     expect(() => {
       getElement('#target', '#none');
     }).toThrow(ReferenceError);
+  });
+});
+
+describe('#getElements', () => {
+  const div = makeElement('div');
+  const spans = makeElements(3, 'span', { className: 'child' });
+  spans.forEach(s => div.appendChild(s));
+
+  it('returns as NodeList.', () => {
+    const nodes = getElements('.child', div);
+    expect(nodes instanceof NodeList).toBeTruthy();
+    expect(nodes.length).toBe(3);
+  });
+
+  it('should works if gave argument as a single element.', () => {
+    const nodes = getElements(spans[0], div);
+    expect(nodes instanceof NodeList).toBeTruthy();
+    expect(nodes.length).toBe(1);
   });
 });
 
