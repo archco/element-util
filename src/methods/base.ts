@@ -35,8 +35,6 @@ export function getElement(selector: ElementTarget, base: Document|ElementTarget
     return selector;
   } else if (selector instanceof NodeList) {
     return selector[0] as Element;
-  } else {
-    throw new TypeError('selector is must be String or Element');
   }
 }
 
@@ -50,15 +48,12 @@ export function getElement(selector: ElementTarget, base: Document|ElementTarget
  */
 export function getElements(selector: ElementTarget, base: Document|ElementTarget = document): NodeList {
   base = resolveBase(base);
-
   if (typeof selector === 'string') {
     return base.querySelectorAll(selector);
   } else if (selector instanceof Element) {
-    return toNodeList(selector);
+    return toNodeList(selector, base);
   } else if (selector instanceof NodeList) {
     return selector;
-  } else {
-    throw new TypeError('selector is must be String or NodeList');
   }
 }
 
@@ -91,16 +86,18 @@ export function removeElements(selector: ElementTarget, base: Document|ElementTa
 }
 
 /**
- * Converts a single element to NodeList.
+ * Convert a single element to NodeList.
  *
  * @export
  * @param {(Element|string)} elm
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
  * @returns {NodeList}
  */
-export function toNodeList(elm: Element|string): NodeList {
+export function toNodeList(elm: Element|string, base: Document|ElementTarget = document): NodeList {
+  base = resolveBase(base);
   elm = getElement(elm);
   elm.setAttribute('toNodeList', '');
-  const nodeList = document.querySelectorAll('[toNodeList]');
+  const nodeList = base.querySelectorAll('[toNodeList]');
   elm.removeAttribute('toNodeList');
   return nodeList;
 }
@@ -113,12 +110,9 @@ export function toNodeList(elm: Element|string): NodeList {
  * @returns {any[]}
  */
 export function nodeListToArray(list: NodeList|any[]|string): any[] {
-  if (Array.isArray(list)) {
-    return list;
-  } else {
-    list = getElements(list);
-    return [].slice.call(list);
-  }
+  return Array.isArray(list)
+    ? list
+    : [].slice.call(getElements(list));
 }
 
 /**

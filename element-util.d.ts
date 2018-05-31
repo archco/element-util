@@ -48,13 +48,14 @@ export function getElementsAsArray(selector: ElementTarget, base?: Document|Elem
 export function removeElements(selector: ElementTarget, base?: Document|ElementTarget): number;
 
 /**
- * Converts a single element to NodeList.
+ * Convert a single element to NodeList.
  *
  * @export
  * @param {(Element|string)} elm
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
  * @returns {NodeList}
  */
-export function toNodeList(elm: Element|string): NodeList;
+export function toNodeList(elm: Element|string, base?: Document|ElementTarget): NodeList
 
 /**
  * Converts NodeList to Array.
