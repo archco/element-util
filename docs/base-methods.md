@@ -67,15 +67,16 @@ Remove elements by selector.
 
 ## toNodeList
 
-Convert a single Element to NodeList.
+Convert a single element to NodeList.
 
 - Syntax
 
   ``` ts
-  function toNodeList(elm: Element|string): NodeList;
+  function toNodeList(elm: Element|string, base?: Document|ElementTarget): NodeList;
   ```
 
-- Param  `Element`|`string` elm
+- Param `Element`|`string` elm
+- Param `Document`|[`ElementTarget`] [ base = document ]
 - Return `NodeList`
 
 ## nodeListToArray

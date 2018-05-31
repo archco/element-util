@@ -46,17 +46,32 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
 /******/ 	};
 /******/
 /******/ 	// define __esModule on exports
 /******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
 /******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -574,9 +589,6 @@ function getElement(selector, base) {
     else if (selector instanceof NodeList) {
         return selector[0];
     }
-    else {
-        throw new TypeError('selector is must be String or Element');
-    }
 }
 /**
  * Get elements as NodeList.
@@ -593,13 +605,10 @@ function getElements(selector, base) {
         return base.querySelectorAll(selector);
     }
     else if (selector instanceof Element) {
-        return toNodeList(selector);
+        return toNodeList(selector, base);
     }
     else if (selector instanceof NodeList) {
         return selector;
-    }
-    else {
-        throw new TypeError('selector is must be String or NodeList');
     }
 }
 /**
@@ -631,16 +640,19 @@ function removeElements(selector, base) {
     return elms.length;
 }
 /**
- * Converts a single element to NodeList.
+ * Convert a single element to NodeList.
  *
  * @export
  * @param {(Element|string)} elm
+ * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
  * @returns {NodeList}
  */
-function toNodeList(elm) {
+function toNodeList(elm, base) {
+    if (base === void 0) { base = document; }
+    base = resolveBase(base);
     elm = getElement(elm);
     elm.setAttribute('toNodeList', '');
-    var nodeList = document.querySelectorAll('[toNodeList]');
+    var nodeList = base.querySelectorAll('[toNodeList]');
     elm.removeAttribute('toNodeList');
     return nodeList;
 }
@@ -652,13 +664,9 @@ function toNodeList(elm) {
  * @returns {any[]}
  */
 function nodeListToArray(list) {
-    if (Array.isArray(list)) {
-        return list;
-    }
-    else {
-        list = getElements(list);
-        return [].slice.call(list);
-    }
+    return Array.isArray(list)
+        ? list
+        : [].slice.call(getElements(list));
 }
 /**
  * Find ancestor element.
