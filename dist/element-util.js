@@ -726,13 +726,11 @@ __webpack_require__.r(__webpack_exports__);
  * @param {string} type event type
  * @param {EventListener} listener
  * @param {(boolean|AddEventListenerOptions)} [options=false]
- * @returns {number} the number of affected.
  */
 function addListener(selector, type, listener, options) {
     if (options === void 0) { options = false; }
     var elms = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
     elms.forEach(function (elm) { return elm.addEventListener(type, listener, options); });
-    return elms.length;
 }
 /**
  * Add listener for the event that occurs outer of the target element.

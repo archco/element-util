@@ -88,14 +88,13 @@ export function findAncestor(self: ElementTarget, ancestor: ElementTarget): Elem
  * @param {string} type event type
  * @param {EventListener} listener
  * @param {(boolean|AddEventListenerOptions)} [options=false]
- * @returns {number} the number of affected.
  */
 export function addListener(
   selector: ElementTarget,
   type: string,
   listener: EventListener,
   options?: boolean|AddEventListenerOptions,
-): number;
+): void;
 
 /**
  * Add listener for the event that occurs outer of the target element.
