@@ -1,5 +1,6 @@
 import {
   addClass,
+  addListener,
   addOuterListener,
   appendHiddenInput,
   hide,
@@ -203,5 +204,23 @@ describe('#addOuterListener', () => {
     const target1 = document.querySelector('.outer__target') as HTMLElement;
     target1.click();
     expect(listener.mock.calls.length).toBe(1);
+  });
+});
+
+describe('#addListener', () => {
+  const div = makeElement('div', { id: 'addListener' });
+  const buttons = makeElements(3, 'button');
+  buttons.forEach(b => div.appendChild(b));
+  document.documentElement.appendChild(div);
+
+  it('should works.', () => {
+    const mockFn = jest.fn();
+    addListener('#addListener button', 'click', mockFn);
+    buttons[0].click();
+    expect(mockFn.mock.calls.length).toBe(1);
+    buttons[1].click();
+    expect(mockFn.mock.calls.length).toBe(2);
+    buttons[2].click();
+    expect(mockFn.mock.calls.length).toBe(3);
   });
 });

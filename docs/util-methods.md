@@ -21,14 +21,14 @@ Add event listener for each element.
     type: string,
     listener: EventListener,
     options?: boolean|AddEventListenerOptions,
-  ): number;
+  ): void;
   ```
 
 - Param [`ElementTarget`] selector
 - Param `string` type - event type.
 - Param `Function` listener
 - Param `boolean`|`AddEventListenerOptions` [ options = false ]
-- Returns `number` - the number of affected.
+- Returns `void`
 
 ## addOuterListener
 

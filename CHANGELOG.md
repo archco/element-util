@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Changed return value of `addListener()` method from `number` to `void`.
+
 ## [1.6.1] - 2018-05-31
 
 ### Changed

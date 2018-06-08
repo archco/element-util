@@ -13,18 +13,15 @@ import {
  * @param {string} type event type
  * @param {EventListener} listener
  * @param {(boolean|AddEventListenerOptions)} [options=false]
- * @returns {number} the number of affected.
  */
 export function addListener(
   selector: ElementTarget,
   type: string,
   listener: EventListener,
   options: boolean|AddEventListenerOptions = false,
-): number {
-
+): void {
   const elms = getElementsAsArray(selector);
   elms.forEach(elm => elm.addEventListener(type, listener, options));
-  return elms.length;
 }
 
 /**
