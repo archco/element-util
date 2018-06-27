@@ -1,6 +1,6 @@
 {
   "name": "element-util",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "The javascript library for using DOM Elements conveniently.",
   "main": "dist/element-util.js",
   "types": "element-util.d.ts",
