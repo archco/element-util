@@ -1,4 +1,4 @@
-import { sort } from '../src/classes/element-sorter';
+import { sort, ElementSorter } from '../src/classes/element-sorter';
 import { makeElement, makeTableRow } from './util/util';
 
 // #sort-list
@@ -13,6 +13,18 @@ const items = [
 ];
 items.forEach(el => ul.appendChild(el));
 document.body.appendChild(ul);
+
+// #sort-list-2
+const ul2 = makeElement('ul', {id: 'sort-list-2', dataset: {sortType: 'number'}});
+const items2 = [
+  makeElement('li', {text: '2'}),
+  makeElement('li', {text: '100'}),
+  makeElement('li', {text: '11'}),
+  makeElement('li', {text: '1.5'}),
+  makeElement('li', {text: '88.88'}),
+];
+items2.forEach(el => ul2.appendChild(el));
+document.body.appendChild(ul2);
 
 // #sort-table
 const table = makeElement('table', {id: 'sort-table'});
@@ -52,8 +64,21 @@ describe('#ElementSorter', () => {
       expect(sortedItems[0].textContent).toEqual('ant');
     });
 
-    it('sort on table.', () => {
-      sort('#sort-table');
+    it('specifying items option.', () => {
+      const sortedItems = sort('#sort-list-2', {items: '#sort-list-2 li'});
+      expect(sortedItems[0].textContent).toEqual('1.5');
+    });
+
+    it('cursor style of thead to be `pointer`.', () => {
+      const th = document.querySelector('#sort-table thead th:first-child') as HTMLElement;
+      expect(th.style.cursor).toEqual('pointer');
+    });
+  });
+
+  describe('#sort on table', () => {
+    sort('#sort-table');
+
+    it('sortType: date', () => {
       const sel = '#sort-table tbody tr:first-child td:nth-child(3)'; // first row, third column.
       const dateHead =  document.querySelector('#sort-table thead th:nth-child(3)') as HTMLElement;
       dateHead.click(); // ascend.
@@ -64,9 +89,22 @@ describe('#ElementSorter', () => {
       expect(elm.textContent).toEqual('2017-10-06');
     });
 
-    it('cursor style of thead to be `pointer`.', () => {
-      const th = document.querySelector('#sort-table thead th:first-child') as HTMLElement;
-      expect(th.style.cursor).toEqual('pointer');
+    it('sortType: string (default)', () => {
+      const sel = '#sort-table tbody tr:first-child td:nth-child(1)'; // first row, first column
+      const firstHead = document.querySelector('#sort-table thead th:first-child') as HTMLElement;
+      firstHead.click(); // ascend.
+      expect(document.querySelector(sel).textContent).toEqual('James');
+      firstHead.click(); // descend.
+      expect(document.querySelector(sel).textContent).toEqual('Owen');
+    });
+
+    it('sortType: number', () => {
+      const sel = '#sort-table tbody tr:first-child td:nth-child(2)'; // first row, first column
+      const secondHead = document.querySelector('#sort-table thead th:nth-child(2)') as HTMLElement;
+      secondHead.click(); // ascend.
+      expect(document.querySelector(sel).textContent).toEqual('Zero');
+      secondHead.click(); // descend.
+      expect(document.querySelector(sel).textContent).toEqual('One hundred');
     });
   });
 });
