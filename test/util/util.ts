@@ -1,41 +1,38 @@
 interface ElementOptions {
   id?: string;
   className?: string;
-  dataset?: object;
   text?: string;
   html?: string;
   attr?: {
+    [index: string]: string;
+  };
+  dataset?: {
     [index: string]: string;
   };
 }
 
 export function makeElement(
   tag: string,
-  {id, className, dataset, text, html, attr}: ElementOptions = {},
+  {id, className, text, html, attr = {}, dataset = {}}: ElementOptions = {},
 ): HTMLElement {
   const elm = document.createElement(tag);
-  if (id) {
-    elm.setAttribute('id', id);
-  }
-  if (className) {
-    className.split(' ').forEach(c => elm.classList.add(c));
-  }
-  if (dataset) {
-    for (const key of Object.keys(dataset)) {
-      elm.dataset[key] = dataset[key];
-    }
-  }
-  if (text) {
-    elm.textContent = text;
-  }
-  if (html) {
-    elm.innerHTML = html;
-  }
-  if (attr) {
-    for (const key of Object.keys(attr)) {
-      elm.setAttribute(key, attr[key]);
-    }
-  }
+
+  // id
+  if (id) elm.setAttribute('id', id);
+
+  // class
+  if (className) className.split(' ').forEach(c => elm.classList.add(c));
+
+  // text or html
+  if (html) elm.innerHTML = html;
+  if (text) elm.textContent = text;
+
+  // dataset
+  Object.keys(dataset).forEach(k => elm.dataset[k] = dataset[k]);
+
+  // attr
+  Object.keys(attr).forEach(k => elm.setAttribute(k, attr[k]));
+
   return elm;
 }
 
