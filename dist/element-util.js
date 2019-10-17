@@ -172,7 +172,7 @@ var ElementFilter = /** @class */ (function () {
      * @memberof ElementFilter
      */
     ElementFilter.prototype.setOptions = function (options) {
-        this.options = __assign({}, this.options, options);
+        this.options = __assign(__assign({}, this.options), options);
         return this;
     };
     /**
@@ -323,7 +323,7 @@ var ElementSorter = /** @class */ (function () {
      * @memberof ElementSorter
      */
     ElementSorter.prototype.setOptions = function (options) {
-        this.options = __assign({}, this.options, options);
+        this.options = __assign(__assign({}, this.options), options);
         return this;
     };
     /**
