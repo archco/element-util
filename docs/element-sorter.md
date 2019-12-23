@@ -10,23 +10,23 @@ Class for sort elements.
 - [Types](#types)
 - [Class Methods](#class-methods)
   - [constructor](#constructor)
-  - [setItems](#setitems)
-  - [getItems](#getitems)
+  - [setItems](#setItems)
+  - [getItems](#getItems)
   - [execute](#execute)
 
 ## Usage
 
 ### Via helper method
 
-- Syntax
+Syntax
 
-  ``` ts
-  function sort(elm: ElementTarget, options?: SorterOptions): HTMLElement[];
-  ```
+``` ts
+function sort(elm: ElementTarget, options?: SorterOptions): HTMLElement[];
+```
 
-- Param  [`ElementTarget`] elm - base element.
-- Param  `object` [ options = {} ] - See below options description.
-- Returns `HTMLElement[]` Sorted items.
+- @param  [`ElementTarget`] elm - base element.
+- @param  `object` options - See below options description. default: `{}`
+- @returns `HTMLElement[]` Sorted items.
 
 ### Via class
 
@@ -88,66 +88,66 @@ interface SorterOptions {
 
 ### constructor
 
-- Syntax
+Syntax
 
-  ``` ts
-  class ElementSorter {
-    constructor(elm: ElementTarget, options: SorterOptions);
-  }
-  ```
+``` ts
+class ElementSorter {
+  constructor(elm: ElementTarget, options: SorterOptions);
+}
+```
 
-- Param [`ElementTarget`] elm - Base element.
-- Param [`SorterOptions`] [ options = {} ]
+- @param [`ElementTarget`] elm - Base element.
+- @param [`SorterOptions`] options - default: `{}`
 
 ### setElement
 
 Set base element.
 
-- Syntax
+Syntax
 
-  ``` ts
-  elementSorter.setElement(elm: ElementTarget): this;
-  ```
+``` ts
+elementSorter.setElement(elm: ElementTarget): this;
+```
 
-- Param  [`ElementTarget`] elm
-- Returns `this`
+- @param  [`ElementTarget`] elm
+- @returns `this`
 
 ### setItems
 
 Set sort target items.
 
-- Syntax
+Syntax
 
-  ``` ts
-  elementSorter.setItems(items: ItemsSettable): this;
-  ```
+``` ts
+elementSorter.setItems(items: ItemsSettable): this;
+```
 
-- Param  [`ItemsSettable`](#itemssettable) items - 'auto'|selector|NodeList|array
-- Returns `this`
+- @param  [`ItemsSettable`](#ItemsSettable) items - 'auto'|selector|NodeList|array
+- @returns `this`
 
 ### getItems
 
 Get sort target items.
 
-- Syntax
+Syntax
 
-  ``` ts
-  elementSorter.getItems(): HTMLElement[];
-  ```
+``` ts
+elementSorter.getItems(): HTMLElement[];
+```
 
-- Returns `HTMLElement[]`
+- @returns `HTMLElement[]`
 
 ### execute
 
 Execute sort.
 
-- Syntax
+Syntax
 
-  ``` ts
-  elementSorter.execute(): this;
-  ```
+``` ts
+elementSorter.execute(): this;
+```
 
-- Returns `this`
+- @returns `this`
 
-[`ElementTarget`]: #elementtarget
-[`SorterOptions`]: #sorteroptions
+[`ElementTarget`]: #ElementTarget
+[`SorterOptions`]: #SorterOptions

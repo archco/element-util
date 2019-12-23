@@ -13,97 +13,97 @@ type ElementTarget = string|Element|NodeList;
 
 Get a single element.
 
-- Syntax
+Syntax
 
-  ``` ts
-  function getElement(selector: ElementTarget, base?: Document|ElementTarget): Element;
-  ```
+``` ts
+function getElement(selector: ElementTarget, base?: Document|ElementTarget): Element;
+```
 
-- Param  [`ElementTarget`] selector
-- Param  `Document`|[`ElementTarget`] [ base = document ]
-- Returns `Element`
+- @param  [`ElementTarget`] selector
+- @param  `Document`|[`ElementTarget`] base - default: `document`
+- @returns `Element`
 
 ## getElements
 
 Get elements as NodeList.
 
-- Syntax
+Syntax
 
-  ``` ts
-  function getElements(selector: ElementTarget, base?: Document|ElementTarget): NodeList;
-  ```
+``` ts
+function getElements(selector: ElementTarget, base?: Document|ElementTarget): NodeList;
+```
 
-- Param  [`ElementTarget`] selector
-- Param  `Document`|[`ElementTarget`] [ base = document ]
-- Returns `NodeList`
+- @param  [`ElementTarget`] selector
+- @param  `Document`|[`ElementTarget`] base - default: `document`
+- @returns `NodeList`
 
 ## getElementsAsArray
 
 Get elements as array of HTMLElement.
 
-- Syntax
+Syntax
 
-  ``` ts
-  function getElementsAsArray(selector: ElementTarget, base?: Document|ElementTarget): HTMLElement[];
-  ```
+``` ts
+function getElementsAsArray(selector: ElementTarget, base?: Document|ElementTarget): HTMLElement[];
+```
 
-- Param  [`ElementTarget`] selector
-- Param  `Document`|[`ElementTarget`] [ base = document ]
-- Return `HTMLElement[]`
+- @param  [`ElementTarget`] selector
+- @param  `Document`|[`ElementTarget`] base - default: `document`
+- @returns `HTMLElement[]`
 
 ## removeElements
 
 Remove elements by selector.
 
-- Syntax
+Syntax
 
-  ``` ts
-  function removeElements(selector: ElementTarget, base?: Document|ElementTarget): number;
-  ```
+``` ts
+function removeElements(selector: ElementTarget, base?: Document|ElementTarget): number;
+```
 
-- Param  [`ElementTarget`] selector
-- Param  `Document`|[`ElementTarget`] [ base = document ]
-- Return `number` The number of removed.
+- @param  [`ElementTarget`] selector
+- @param  `Document`|[`ElementTarget`] base - default: `document`
+- @returns `number` The number of removed.
 
 ## toNodeList
 
 Convert a single element to NodeList.
 
-- Syntax
+Syntax
 
-  ``` ts
-  function toNodeList(elm: Element|string, base?: Document|ElementTarget): NodeList;
-  ```
+``` ts
+function toNodeList(elm: Element|string, base?: Document|ElementTarget): NodeList;
+```
 
-- Param `Element`|`string` elm
-- Param `Document`|[`ElementTarget`] [ base = document ]
-- Return `NodeList`
+- @param `Element`|`string` elm
+- @param `Document`|[`ElementTarget`] base - default: `document`
+- @returns `NodeList`
 
 ## nodeListToArray
 
 Convert NodeList to Array.
 
-- Syntax
+Syntax
 
-  ``` ts
-  function nodeListToArray(list: NodeList|any[]|string): any[];
-  ```
+``` ts
+function nodeListToArray(list: NodeList|any[]|string): any[];
+```
 
-- Param  `NodeList`|`string`|`any[]` nodeList
-- Return `any[]`
+- @param  `NodeList`|`string`|`any[]` nodeList
+- @returns `any[]`
 
 ## findAncestor
 
 Find ancestor from element.
 
-- Syntax
+Syntax
 
-  ``` js
-  function findAncestor(self: ElementTarget, ancestor: ElementTarget): Element|null;
-  ```
+``` js
+function findAncestor(self: ElementTarget, ancestor: ElementTarget): Element|null;
+```
 
-- Param [`ElementTarget`] self - base element.
-- Param [`ElementTarget`] ancestor
-- Return `Element`|`null`
+- @param [`ElementTarget`] self - base element.
+- @param [`ElementTarget`] ancestor
+- @returns `Element`|`null`
 
-[`ElementTarget`]: #elementtarget
+[`ElementTarget`]: #ElementTarget

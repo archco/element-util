@@ -11,24 +11,24 @@ Class for filtering elements.
 - [Types](#types)
 - [Class methods](#class-methods)
   - [constructor](#constructor)
-  - [setFilter](#setfilter)
-  - [getHit](#gethit)
+  - [setFilter](#setFilter)
+  - [getHit](#getHit)
   - [execute](#execute)
 
 ## Usage
 
 ### Via helper method
 
-- Syntax
+Syntax
 
-  ``` ts
-  function filter(selector: ElementTarget, str?: string, options?: FilterOptions): FilterResult;
-  ```
+``` ts
+function filter(selector: ElementTarget, str?: string, options?: FilterOptions): FilterResult;
+```
 
-- Param  [`ElementTarget`] selector filtering targets.
-- Param  `string` [ str = '' ] filter string.
-- Param  [`FilterOptions`] [ options = {} ]
-- Returns [`FilterResult`] result object.
+- @param  [`ElementTarget`] selector filtering targets.
+- @param  `string` [ str = '' ] filter string.
+- @param  [`FilterOptions`] options - default: `{}`
+- @returns [`FilterResult`] - result object.
 
 ### Via class
 
@@ -130,44 +130,44 @@ interface FilterResult {
 
 ### constructor
 
-- Syntax
+Syntax
 
-  ``` ts
-  class ElementFilter {
-    constructor(selector: ElementTarget, str?: string, options?: FilterOptions);
-  }
-  ```
+``` ts
+class ElementFilter {
+  constructor(selector: ElementTarget, str?: string, options?: FilterOptions);
+}
+```
 
-- Param  [`ElementTarget`] selector filtering targets.
-- Param  `string` [ str = '' ] filter string.
-- Param  [`FilterOptions`] [ options = {} ]
+- @param  [`ElementTarget`] selector filtering targets.
+- @param  `string` str - filter string. default: `''`
+- @param  [`FilterOptions`] options - default: `{}`
 
 ### setFilter
 
 Set filter string.
 
-- Syntax
+Syntax
 
-  ``` ts
-  elementFilter.setFilter(str: string): this;
-  ```
+``` ts
+elementFilter.setFilter(str: string): this;
+```
 
-- Param  `string` str
-- Returns `this`
+- @param  `string` str
+- @returns `this`
 
 ### execute
 
 Execute filtering.
 
-- Syntax
+Syntax
 
-  ``` ts
-  elementFilter.execute(): FilterResult;
-  ```
+``` ts
+elementFilter.execute(): FilterResult;
+```
 
-- Returns [`FilterResult`]
+- @returns [`FilterResult`]
 
-[`ElementTarget`]: #elementtarget
-[`FilterActionFunction`]: #filteractionfunction
-[`FilterOptions`]: #filteroptions
-[`FilterResult`]: #filterresult
+[`ElementTarget`]: #ElementTarget
+[`FilterActionFunction`]: #FilterActionFunction
+[`FilterOptions`]: #FilterOptions
+[`FilterResult`]: #FilterResult
