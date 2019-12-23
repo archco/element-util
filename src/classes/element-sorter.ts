@@ -219,7 +219,7 @@ export class ElementSorter {
   protected compare(a: string, b: string, type: string, asc: boolean = true): number {
     const compareNumber = (aVal: string, bVal: string): number => {
       const aNum = parseFloat(aVal);
-      const bNum = parseFloat(b);
+      const bNum = parseFloat(bVal);
       return asc ? aNum - bNum : bNum - aNum;
     };
     const compareDate = (aVal: string, bVal: string): number => {

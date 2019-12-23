@@ -1,6 +1,5 @@
 import {
   ElementTarget,
-  getElements,
   getElementsAsArray,
 } from '../methods/base';
 import {

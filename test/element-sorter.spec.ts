@@ -1,4 +1,4 @@
-import { sort, ElementSorter } from '../src/classes/element-sorter';
+import { sort } from '../src/classes/element-sorter';
 import { makeElement, makeTableRow } from './util/util';
 
 // #sort-list
