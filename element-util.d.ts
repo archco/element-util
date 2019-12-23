@@ -10,9 +10,8 @@ export type ElementTarget = string|Element|NodeList;
 /**
  * Get a single element.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {Element}
  */
 export function getElement(selector: ElementTarget, base?: Document|ElementTarget): Element;
@@ -20,9 +19,8 @@ export function getElement(selector: ElementTarget, base?: Document|ElementTarge
 /**
  * Get elements as NodeList.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {NodeList}
  */
 export function getElements(selector: ElementTarget, base?: Document|ElementTarget): NodeList;
@@ -30,9 +28,8 @@ export function getElements(selector: ElementTarget, base?: Document|ElementTarg
 /**
  * Get elements as array of HTMLElements.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {HTMLElement[]}
  */
 export function getElementsAsArray(selector: ElementTarget, base?: Document|ElementTarget): HTMLElement[];
@@ -40,9 +37,8 @@ export function getElementsAsArray(selector: ElementTarget, base?: Document|Elem
 /**
  * Remove elements.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {number} The number of removed.
  */
 export function removeElements(selector: ElementTarget, base?: Document|ElementTarget): number;
@@ -50,9 +46,8 @@ export function removeElements(selector: ElementTarget, base?: Document|ElementT
 /**
  * Convert a single element to NodeList.
  *
- * @export
  * @param {(Element|string)} elm
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {NodeList}
  */
 export function toNodeList(elm: Element|string, base?: Document|ElementTarget): NodeList
@@ -60,7 +55,6 @@ export function toNodeList(elm: Element|string, base?: Document|ElementTarget): 
 /**
  * Converts NodeList to Array.
  *
- * @export
  * @param {(NodeList|any[]|string)} list
  * @returns {any[]}
  */
@@ -69,7 +63,6 @@ export function nodeListToArray(list: NodeList|any[]|string): any[];
 /**
  * Find ancestor element.
  *
- * @export
  * @param {ElementTarget} self
  * @param {ElementTarget} ancestor
  * @returns {(Element|null)}
@@ -83,11 +76,10 @@ export function findAncestor(self: ElementTarget, ancestor: ElementTarget): Elem
 /**
  * Add event listener for each element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} type event type
  * @param {EventListener} listener
- * @param {(boolean|AddEventListenerOptions)} [options=false]
+ * @param {(boolean|AddEventListenerOptions)} [options=false] default: `false`
  */
 export function addListener(
   selector: ElementTarget,
@@ -99,12 +91,11 @@ export function addListener(
 /**
  * Add listener for the event that occurs outer of the target element.
  *
- * @export
  * @param {(Window|ElementTarget)} base the event target.
  * @param {ElementTarget} target the target element that will be ignored an event.
  * @param {string} type event type.
  * @param {EventListener} listener
- * @param {(boolean|AddEventListenerOptions)} [options=false]
+ * @param {(boolean|AddEventListenerOptions)} [options=false] default: `false`
  */
 export function addOuterListener(
   base: Window|ElementTarget,
@@ -117,36 +108,32 @@ export function addOuterListener(
 /**
  * Wrap for each element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className wrapper's class name.
- * @param {string} [tagName='div'] wrapper's tag name.
+ * @param {string} [tagName='div'] wrapper's tag name. default: `'div'`
  */
 export function wrap(selector: ElementTarget, className: string, tagName?: string): void;
 
 /**
  * Wrap all elements to inside a one wrapper.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className wrapper's class name.
- * @param {string} [tagName='div'] wrapper's tag name.
+ * @param {string} [tagName='div'] wrapper's tag name. default: `'div'`
  */
 export function wrapAll(selector: ElementTarget, className: string, tagName?: string): void;
 
 /**
  * Add confirm on the 'submit' event.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {string} [message='Are you confirm?'] confirm message.
+ * @param {string} [message='Are you confirm?'] confirm message. default: `'Are you confirm?'`
  */
 export function submitConfirm(selector: ElementTarget, message?: string): void;
 
 /**
  * Add classes to element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className
  */
@@ -155,7 +142,6 @@ export function addClass(selector: ElementTarget, className: string): void;
 /**
  * Remove classes from element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className
  */
@@ -164,7 +150,6 @@ export function removeClass(selector: ElementTarget, className: string): void;
 /**
  * Toggling classes to element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className
  */
@@ -173,7 +158,6 @@ export function toggleClass(selector: ElementTarget, className: string): void;
 /**
  * Hide element. It will set value of style.display to 'none'.
  *
- * @export
  * @param {ElementTarget} selector
  */
 export function hide(selector: ElementTarget): void;
@@ -181,7 +165,6 @@ export function hide(selector: ElementTarget): void;
 /**
  * Show element. It will just remove 'display: none;'.
  *
- * @export
  * @param {ElementTarget} selector
  */
 export function show(selector: ElementTarget): void;
@@ -189,7 +172,6 @@ export function show(selector: ElementTarget): void;
 /**
  * Toggling show/hide element.
  *
- * @export
  * @param {ElementTarget} selector
  */
 export function toggleShow(selector: ElementTarget): void;
@@ -197,7 +179,6 @@ export function toggleShow(selector: ElementTarget): void;
 /**
  * Make a hidden input.
  *
- * @export
  * @param {string} name name attribute.
  * @param {string} value value attribute.
  * @returns {HTMLInputElement}
@@ -207,7 +188,6 @@ export function makeHiddenInput(name: string, value: string): HTMLInputElement;
 /**
  * Makes hidden input, and append to target element. If input[name=".."] already exists, overwrite it.
  *
- * @export
  * @param {ElementTarget} target
  * @param {string} name name attribute.
  * @param {string} value value attribute.
@@ -243,10 +223,9 @@ export interface FilterResult {
 /**
  * Filtering elements. (It's helper method for the ElementFilter.)
  *
- * @export
  * @param {ElementTarget} selector target elements.
- * @param {string} [str=''] filter string.
- * @param {FilterOptions} [options={}] options.
+ * @param {string} [str=''] filter string. default: `''`
+ * @param {FilterOptions} [options={}] options. default: `{}`
  * @returns {FilterResult} {elms, filtered}
  */
 export function filter(selector: ElementTarget, str?: string, options?: FilterOptions): FilterResult;
@@ -260,8 +239,8 @@ export class ElementFilter {
   /**
    * Creates an instance of ElementFilter.
    * @param {ElementTarget} selector target elements.
-   * @param {string} [str=''] filter string.
-   * @param {FilterOptions} [options={}]
+   * @param {string} [str=''] filter string. default: `''`
+   * @param {FilterOptions} [options={}] options. default: `{}`
    * @memberof ElementFilter
    */
   constructor(selector: ElementTarget, str?: string, options?: FilterOptions);
@@ -326,9 +305,8 @@ export interface SorterOptions {
 /**
  * Sorting elements. (It's helper method of the ElementSorter.)
  *
- * @export
  * @param {ElementTarget} elm base element.
- * @param {SorterOptions} [options={}] options for ElementSorter.
+ * @param {SorterOptions} [options={}] options for ElementSorter. default: `{}`
  * @returns {HTMLElement[]} sorted elements.
  */
 export function sort(elm: ElementTarget, options?: SorterOptions): HTMLElement[];

@@ -34,10 +34,9 @@ export interface FilterResult {
 /**
  * Filtering elements. (It's helper method for the ElementFilter.)
  *
- * @export
  * @param {ElementTarget} selector target elements.
- * @param {string} [str=''] filter string.
- * @param {FilterOptions} [options={}] options.
+ * @param {string} [str=''] filter string. default: `''`
+ * @param {FilterOptions} [options={}] options. default: `{}`
  * @returns {FilterResult} {elms, filtered}
  */
 export function filter(selector: ElementTarget, str: string = '', options: FilterOptions = {}): FilterResult {
@@ -53,8 +52,8 @@ export class ElementFilter {
   /**
    * Creates an instance of ElementFilter.
    * @param {ElementTarget} selector target elements.
-   * @param {string} [str=''] filter string.
-   * @param {FilterOptions} [options={}]
+   * @param {string} [str=''] filter string. default: `''`
+   * @param {FilterOptions} [options={}] options. default: `{}`
    * @memberof ElementFilter
    */
   constructor(selector: ElementTarget, str: string = '', options: FilterOptions = {}) {

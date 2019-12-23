@@ -27,9 +27,8 @@ export interface SorterOptions {
 /**
  * Sorting elements. (It's helper method of the ElementSorter.)
  *
- * @export
  * @param {ElementTarget} elm base element.
- * @param {SorterOptions} [options={}] options for ElementSorter.
+ * @param {SorterOptions} [options={}] options for ElementSorter. default: `{}`
  * @returns {HTMLElement[]} sorted elements.
  */
 export function sort(elm: ElementTarget, options: SorterOptions = {}): HTMLElement[] {

@@ -8,11 +8,10 @@ import {
 /**
  * Add event listener for each element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} type event type
  * @param {EventListener} listener
- * @param {(boolean|AddEventListenerOptions)} [options=false]
+ * @param {(boolean|AddEventListenerOptions)} [options=false] default: `false`
  */
 export function addListener(
   selector: ElementTarget,
@@ -27,12 +26,11 @@ export function addListener(
 /**
  * Add listener for the event that occurs outer of the target element.
  *
- * @export
  * @param {(Window|ElementTarget)} base the event target.
  * @param {ElementTarget} target the target element that will be ignored an event.
  * @param {string} type event type.
  * @param {EventListener} listener
- * @param {(boolean|AddEventListenerOptions)} [options=false]
+ * @param {(boolean|AddEventListenerOptions)} [options=false] default: `false`
  */
 export function addOuterListener(
   base: Window|ElementTarget,
@@ -55,10 +53,9 @@ export function addOuterListener(
 /**
  * Wrap for each element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className wrapper's class name.
- * @param {string} [tagName='div'] wrapper's tag name.
+ * @param {string} [tagName='div'] wrapper's tag name. default: `'div'`
  */
 export function wrap(
   selector: ElementTarget,
@@ -85,10 +82,9 @@ export function wrap(
 /**
  * Wrap all elements to inside a one wrapper.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className wrapper's class name.
- * @param {string} [tagName='div'] wrapper's tag name.
+ * @param {string} [tagName='div'] wrapper's tag name. default: `'div'`
  */
 export function wrapAll(
   selector: ElementTarget,
@@ -116,9 +112,8 @@ export function wrapAll(
 /**
  * Add confirm on the 'submit' event.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {string} [message='Are you confirm?'] confirm message.
+ * @param {string} [message='Are you confirm?'] confirm message. default: `'Are you confirm?'`
  */
 export function submitConfirm(selector: ElementTarget, message: string = 'Are you confirm?'): void {
   addListener(selector, 'submit', e => {
@@ -131,7 +126,6 @@ export function submitConfirm(selector: ElementTarget, message: string = 'Are yo
 /**
  * Add classes to element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className
  */
@@ -144,7 +138,6 @@ export function addClass(selector: ElementTarget, className: string): void {
 /**
  * Remove classes from element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className
  */
@@ -157,7 +150,6 @@ export function removeClass(selector: ElementTarget, className: string): void {
 /**
  * Toggling classes to element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className
  */
@@ -170,7 +162,6 @@ export function toggleClass(selector: ElementTarget, className: string): void {
 /**
  * Hide element. It will set value of style.display to 'none'.
  *
- * @export
  * @param {ElementTarget} selector
  */
 export function hide(selector: ElementTarget): void {
@@ -181,7 +172,6 @@ export function hide(selector: ElementTarget): void {
 /**
  * Show element. It will just remove 'display: none;'.
  *
- * @export
  * @param {ElementTarget} selector
  */
 export function show(selector: ElementTarget): void {
@@ -194,7 +184,6 @@ export function show(selector: ElementTarget): void {
 /**
  * Toggling show/hide element.
  *
- * @export
  * @param {ElementTarget} selector
  */
 export function toggleShow(selector: ElementTarget): void {
@@ -205,7 +194,6 @@ export function toggleShow(selector: ElementTarget): void {
 /**
  * Make a hidden input.
  *
- * @export
  * @param {string} name name attribute.
  * @param {string} value value attribute.
  * @returns {HTMLInputElement}
@@ -221,7 +209,6 @@ export function makeHiddenInput(name: string, value: string): HTMLInputElement {
 /**
  * Makes hidden input, and append to target element. If input[name=".."] already exists, overwrite it.
  *
- * @export
  * @param {ElementTarget} target
  * @param {string} name name attribute.
  * @param {string} value value attribute.
