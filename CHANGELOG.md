@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.6.5] - 2019-10-17
+## [1.6.8] - 2019-12-23
 
-### Updated
+- Fixed protected method `compareNumber` in `ElementSorter` (d8f3a4ae1c2fa8f41815a7146100aa7b85b46736)
+
+## [1.6.5] - 2019-10-17
 
 - Update dependencies.
 
@@ -127,7 +129,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 First release. Please see [ElementUtil API](https://github.com/archco/element-util/tree/master/docs).
 
-[Unreleased]: https://github.com/archco/element-util/compare/v1.6.2...HEAD
+[Unreleased]: https://github.com/archco/element-util/compare/v1.6.8...HEAD
+[1.6.8]: https://github.com/archco/element-util/compare/v1.6.5...v1.6.8
+[1.6.5]: https://github.com/archco/element-util/compare/v1.6.2...v1.6.5
 [1.6.2]: https://github.com/archco/element-util/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/archco/element-util/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/archco/element-util/compare/v1.5.1...v1.6.0

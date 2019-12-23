@@ -446,7 +446,7 @@ var ElementSorter = /** @class */ (function () {
         if (asc === void 0) { asc = true; }
         var compareNumber = function (aVal, bVal) {
             var aNum = parseFloat(aVal);
-            var bNum = parseFloat(b);
+            var bNum = parseFloat(bVal);
             return asc ? aNum - bNum : bNum - aNum;
         };
         var compareDate = function (aVal, bVal) {
