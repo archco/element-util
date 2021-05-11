@@ -8,105 +8,21 @@
 	else
 		root["ElementUtil"] = factory();
 })(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/element-util.ts");
-/******/ })
-/************************************************************************/
-/******/ ({
+return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/classes/element-filter.ts":
 /*!***************************************!*\
   !*** ./src/classes/element-filter.ts ***!
   \***************************************/
-/*! exports provided: filter, ElementFilter */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filter", function() { return filter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ElementFilter", function() { return ElementFilter; });
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "filter": () => (/* binding */ filter),
+/* harmony export */   "ElementFilter": () => (/* binding */ ElementFilter)
+/* harmony export */ });
 /* harmony import */ var _methods_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../methods/base */ "./src/methods/base.ts");
 /* harmony import */ var _methods_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../methods/util */ "./src/methods/util.ts");
 var __assign = (undefined && undefined.__assign) || function () {
@@ -125,10 +41,9 @@ var __assign = (undefined && undefined.__assign) || function () {
 /**
  * Filtering elements. (It's helper method for the ElementFilter.)
  *
- * @export
  * @param {ElementTarget} selector target elements.
- * @param {string} [str=''] filter string.
- * @param {FilterOptions} [options={}] options.
+ * @param {string} [str=''] filter string. default: `''`
+ * @param {FilterOptions} [options={}] options. default: `{}`
  * @returns {FilterResult} {elms, filtered}
  */
 function filter(selector, str, options) {
@@ -140,15 +55,15 @@ var ElementFilter = /** @class */ (function () {
     /**
      * Creates an instance of ElementFilter.
      * @param {ElementTarget} selector target elements.
-     * @param {string} [str=''] filter string.
-     * @param {FilterOptions} [options={}]
+     * @param {string} [str=''] filter string. default: `''`
+     * @param {FilterOptions} [options={}] options. default: `{}`
      * @memberof ElementFilter
      */
     function ElementFilter(selector, str, options) {
         if (str === void 0) { str = ''; }
         if (options === void 0) { options = {}; }
         this.filtered = [];
-        this.elms = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
+        this.elms = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElementsAsArray)(selector);
         this.setFilter(str);
         this.options = this.getDefaultOptions();
         this.setOptions(options);
@@ -205,7 +120,7 @@ var ElementFilter = /** @class */ (function () {
         };
     };
     ElementFilter.prototype.filteringTable = function () {
-        var tableRows = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])('tbody tr', this.elms[0]);
+        var tableRows = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElementsAsArray)('tbody tr', this.elms[0]);
         this.filteringNodes(tableRows);
     };
     ElementFilter.prototype.filteringNodes = function (elms) {
@@ -227,11 +142,11 @@ var ElementFilter = /** @class */ (function () {
     ElementFilter.prototype.actionToElm = function (elm, isMatched) {
         var action = this.options.action;
         if (action === 'hideOthers') {
-            isMatched ? Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["show"])(elm) : Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["hide"])(elm);
+            isMatched ? (0,_methods_util__WEBPACK_IMPORTED_MODULE_1__.show)(elm) : (0,_methods_util__WEBPACK_IMPORTED_MODULE_1__.hide)(elm);
         }
         else if (typeof action === 'string' && /^(addClass:)/.test(action)) {
             var _a = action.split(':').map(function (x) { return x.trim(); }), className = _a[1];
-            isMatched ? Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["addClass"])(elm, className) : Object(_methods_util__WEBPACK_IMPORTED_MODULE_1__["removeClass"])(elm, className);
+            isMatched ? (0,_methods_util__WEBPACK_IMPORTED_MODULE_1__.addClass)(elm, className) : (0,_methods_util__WEBPACK_IMPORTED_MODULE_1__.removeClass)(elm, className);
         }
         else if (typeof action === 'function') {
             action(elm, isMatched);
@@ -252,13 +167,13 @@ var ElementFilter = /** @class */ (function () {
 /*!***************************************!*\
   !*** ./src/classes/element-sorter.ts ***!
   \***************************************/
-/*! exports provided: sort, ElementSorter */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sort", function() { return sort; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ElementSorter", function() { return ElementSorter; });
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "sort": () => (/* binding */ sort),
+/* harmony export */   "ElementSorter": () => (/* binding */ ElementSorter)
+/* harmony export */ });
 /* harmony import */ var _methods_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../methods/base */ "./src/methods/base.ts");
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
@@ -275,9 +190,8 @@ var __assign = (undefined && undefined.__assign) || function () {
 /**
  * Sorting elements. (It's helper method of the ElementSorter.)
  *
- * @export
  * @param {ElementTarget} elm base element.
- * @param {SorterOptions} [options={}] options for ElementSorter.
+ * @param {SorterOptions} [options={}] options for ElementSorter. default: `{}`
  * @returns {HTMLElement[]} sorted elements.
  */
 function sort(elm, options) {
@@ -311,7 +225,7 @@ var ElementSorter = /** @class */ (function () {
             datasetName: {
                 sortDirection: 'sortDirection',
                 sortType: 'sortType',
-                sortValue: 'sortValue',
+                sortValue: 'sortValue', // data-sort-value
             },
         };
     };
@@ -334,7 +248,7 @@ var ElementSorter = /** @class */ (function () {
      * @memberof ElementSorter
      */
     ElementSorter.prototype.setElement = function (elm) {
-        this.elm = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(elm);
+        this.elm = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(elm);
         return this;
     };
     /**
@@ -355,14 +269,14 @@ var ElementSorter = /** @class */ (function () {
      */
     ElementSorter.prototype.setItems = function (items) {
         if (this.elmIsTable()) {
-            this.items = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])('tbody tr', this.elm);
+            this.items = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElementsAsArray)('tbody tr', this.elm);
         }
         else if (items === 'auto') {
-            this.items = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["nodeListToArray"])(this.elm.childNodes)
+            this.items = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.nodeListToArray)(this.elm.childNodes)
                 .filter(function (node) { return node.tagName; });
         }
         else {
-            this.items = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(items, this.elm);
+            this.items = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElementsAsArray)(items, this.elm);
         }
         return this;
     };
@@ -393,7 +307,7 @@ var ElementSorter = /** @class */ (function () {
     };
     ElementSorter.prototype.sortTable = function () {
         var _this = this;
-        var heads = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])('thead th', this.elm);
+        var heads = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElementsAsArray)('thead th', this.elm);
         heads.forEach(function (head, i) {
             head.style.cursor = 'pointer'; // Set cursor style to `pointer`.
             head.addEventListener('click', function (event) {
@@ -415,8 +329,8 @@ var ElementSorter = /** @class */ (function () {
     ElementSorter.prototype.sortingTable = function (rows, nth, type, direction) {
         var _this = this;
         var compareMethod = function (a, b) {
-            a = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])("td:nth-child(" + nth + ")", a);
-            b = Object(_methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])("td:nth-child(" + nth + ")", b);
+            a = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElement)("td:nth-child(" + nth + ")", a);
+            b = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElement)("td:nth-child(" + nth + ")", b);
             var aVal = _this.getSortValue(a);
             var bVal = _this.getSortValue(b);
             type = type || _this.getSortType(a);
@@ -474,91 +388,22 @@ var ElementSorter = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/element-util.ts":
-/*!*****************************!*\
-  !*** ./src/element-util.ts ***!
-  \*****************************/
-/*! exports provided: getElement, getElements, getElementsAsArray, removeElements, toNodeList, nodeListToArray, findAncestor, addListener, addOuterListener, wrap, wrapAll, submitConfirm, addClass, removeClass, toggleClass, hide, show, toggleShow, makeHiddenInput, appendHiddenInput, filter, ElementFilter, sort, ElementSorter */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _methods_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./methods/base */ "./src/methods/base.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElement"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElements", function() { return _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElements"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElementsAsArray", function() { return _methods_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeElements", function() { return _methods_base__WEBPACK_IMPORTED_MODULE_0__["removeElements"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "toNodeList", function() { return _methods_base__WEBPACK_IMPORTED_MODULE_0__["toNodeList"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "nodeListToArray", function() { return _methods_base__WEBPACK_IMPORTED_MODULE_0__["nodeListToArray"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "findAncestor", function() { return _methods_base__WEBPACK_IMPORTED_MODULE_0__["findAncestor"]; });
-
-/* harmony import */ var _methods_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./methods/util */ "./src/methods/util.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addListener", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["addListener"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addOuterListener", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["addOuterListener"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "wrap", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["wrap"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "wrapAll", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["wrapAll"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "submitConfirm", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["submitConfirm"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addClass", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["addClass"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeClass", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["removeClass"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "toggleClass", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["toggleClass"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hide", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["hide"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "show", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["show"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "toggleShow", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["toggleShow"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeHiddenInput", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["makeHiddenInput"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "appendHiddenInput", function() { return _methods_util__WEBPACK_IMPORTED_MODULE_1__["appendHiddenInput"]; });
-
-/* harmony import */ var _classes_element_filter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./classes/element-filter */ "./src/classes/element-filter.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "filter", function() { return _classes_element_filter__WEBPACK_IMPORTED_MODULE_2__["filter"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ElementFilter", function() { return _classes_element_filter__WEBPACK_IMPORTED_MODULE_2__["ElementFilter"]; });
-
-/* harmony import */ var _classes_element_sorter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./classes/element-sorter */ "./src/classes/element-sorter.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "sort", function() { return _classes_element_sorter__WEBPACK_IMPORTED_MODULE_3__["sort"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ElementSorter", function() { return _classes_element_sorter__WEBPACK_IMPORTED_MODULE_3__["ElementSorter"]; });
-
-
-
-
-
-
-
-/***/ }),
-
 /***/ "./src/methods/base.ts":
 /*!*****************************!*\
   !*** ./src/methods/base.ts ***!
   \*****************************/
-/*! exports provided: getElement, getElements, getElementsAsArray, removeElements, toNodeList, nodeListToArray, findAncestor */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return getElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getElements", function() { return getElements; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getElementsAsArray", function() { return getElementsAsArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeElements", function() { return removeElements; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toNodeList", function() { return toNodeList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nodeListToArray", function() { return nodeListToArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findAncestor", function() { return findAncestor; });
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getElement": () => (/* binding */ getElement),
+/* harmony export */   "getElements": () => (/* binding */ getElements),
+/* harmony export */   "getElementsAsArray": () => (/* binding */ getElementsAsArray),
+/* harmony export */   "removeElements": () => (/* binding */ removeElements),
+/* harmony export */   "toNodeList": () => (/* binding */ toNodeList),
+/* harmony export */   "nodeListToArray": () => (/* binding */ nodeListToArray),
+/* harmony export */   "findAncestor": () => (/* binding */ findAncestor)
+/* harmony export */ });
 function resolveBase(base) {
     base = base === document ? base : getElement(base);
     if (!base) {
@@ -578,9 +423,8 @@ function polyfillForMatches() {
 /**
  * Get a single element.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {Element}
  */
 function getElement(selector, base) {
@@ -599,9 +443,8 @@ function getElement(selector, base) {
 /**
  * Get elements as NodeList.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {NodeList}
  */
 function getElements(selector, base) {
@@ -620,9 +463,8 @@ function getElements(selector, base) {
 /**
  * Get elements as array of HTMLElements.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {HTMLElement[]}
  */
 function getElementsAsArray(selector, base) {
@@ -633,9 +475,8 @@ function getElementsAsArray(selector, base) {
 /**
  * Remove elements.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {number} The number of removed.
  */
 function removeElements(selector, base) {
@@ -648,9 +489,8 @@ function removeElements(selector, base) {
 /**
  * Convert a single element to NodeList.
  *
- * @export
  * @param {(Element|string)} elm
- * @param {(Document|ElementTarget)} [base=document] base element. default is Document.
+ * @param {(Document|ElementTarget)} [base=document] base element. default: `document`
  * @returns {NodeList}
  */
 function toNodeList(elm, base) {
@@ -665,7 +505,6 @@ function toNodeList(elm, base) {
 /**
  * Converts NodeList to Array.
  *
- * @export
  * @param {(NodeList|any[]|string)} list
  * @returns {any[]}
  */
@@ -677,7 +516,6 @@ function nodeListToArray(list) {
 /**
  * Find ancestor element.
  *
- * @export
  * @param {ElementTarget} self
  * @param {ElementTarget} ancestor
  * @returns {(Element|null)}
@@ -704,54 +542,52 @@ function findAncestor(self, ancestor) {
 /*!*****************************!*\
   !*** ./src/methods/util.ts ***!
   \*****************************/
-/*! exports provided: addListener, addOuterListener, wrap, wrapAll, submitConfirm, addClass, removeClass, toggleClass, hide, show, toggleShow, makeHiddenInput, appendHiddenInput */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addListener", function() { return addListener; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOuterListener", function() { return addOuterListener; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "wrap", function() { return wrap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "wrapAll", function() { return wrapAll; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitConfirm", function() { return submitConfirm; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addClass", function() { return addClass; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeClass", function() { return removeClass; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleClass", function() { return toggleClass; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hide", function() { return hide; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "show", function() { return show; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleShow", function() { return toggleShow; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeHiddenInput", function() { return makeHiddenInput; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appendHiddenInput", function() { return appendHiddenInput; });
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addListener": () => (/* binding */ addListener),
+/* harmony export */   "addOuterListener": () => (/* binding */ addOuterListener),
+/* harmony export */   "wrap": () => (/* binding */ wrap),
+/* harmony export */   "wrapAll": () => (/* binding */ wrapAll),
+/* harmony export */   "submitConfirm": () => (/* binding */ submitConfirm),
+/* harmony export */   "addClass": () => (/* binding */ addClass),
+/* harmony export */   "removeClass": () => (/* binding */ removeClass),
+/* harmony export */   "toggleClass": () => (/* binding */ toggleClass),
+/* harmony export */   "hide": () => (/* binding */ hide),
+/* harmony export */   "show": () => (/* binding */ show),
+/* harmony export */   "toggleShow": () => (/* binding */ toggleShow),
+/* harmony export */   "makeHiddenInput": () => (/* binding */ makeHiddenInput),
+/* harmony export */   "appendHiddenInput": () => (/* binding */ appendHiddenInput)
+/* harmony export */ });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/methods/base.ts");
 
 /**
  * Add event listener for each element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} type event type
  * @param {EventListener} listener
- * @param {(boolean|AddEventListenerOptions)} [options=false]
+ * @param {(boolean|AddEventListenerOptions)} [options=false] default: `false`
  */
 function addListener(selector, type, listener, options) {
     if (options === void 0) { options = false; }
-    var elms = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
+    var elms = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElementsAsArray)(selector);
     elms.forEach(function (elm) { return elm.addEventListener(type, listener, options); });
 }
 /**
  * Add listener for the event that occurs outer of the target element.
  *
- * @export
  * @param {(Window|ElementTarget)} base the event target.
  * @param {ElementTarget} target the target element that will be ignored an event.
  * @param {string} type event type.
  * @param {EventListener} listener
- * @param {(boolean|AddEventListenerOptions)} [options=false]
+ * @param {(boolean|AddEventListenerOptions)} [options=false] default: `false`
  */
 function addOuterListener(base, target, type, listener, options) {
     if (options === void 0) { options = false; }
-    var root = base === window ? window : Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(base);
-    var targetElm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(target);
+    var root = base === window ? window : (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(base);
+    var targetElm = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(target);
     root.addEventListener(type, function (event) {
         var eventTarget = event.target;
         if (targetElm !== eventTarget
@@ -763,14 +599,13 @@ function addOuterListener(base, target, type, listener, options) {
 /**
  * Wrap for each element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className wrapper's class name.
- * @param {string} [tagName='div'] wrapper's tag name.
+ * @param {string} [tagName='div'] wrapper's tag name. default: `'div'`
  */
 function wrap(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
-    var elms = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
+    var elms = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElementsAsArray)(selector);
     for (var _i = 0, elms_1 = elms; _i < elms_1.length; _i++) {
         var elm = elms_1[_i];
         var parent_1 = elm.parentNode;
@@ -789,14 +624,13 @@ function wrap(selector, className, tagName) {
 /**
  * Wrap all elements to inside a one wrapper.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className wrapper's class name.
- * @param {string} [tagName='div'] wrapper's tag name.
+ * @param {string} [tagName='div'] wrapper's tag name. default: `'div'`
  */
 function wrapAll(selector, className, tagName) {
     if (tagName === void 0) { tagName = 'div'; }
-    var elms = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElementsAsArray"])(selector);
+    var elms = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElementsAsArray)(selector);
     var parent = elms[0].parentNode;
     var preSibling = elms[0].previousSibling;
     var div = document.createElement(tagName);
@@ -815,9 +649,8 @@ function wrapAll(selector, className, tagName) {
 /**
  * Add confirm on the 'submit' event.
  *
- * @export
  * @param {ElementTarget} selector
- * @param {string} [message='Are you confirm?'] confirm message.
+ * @param {string} [message='Are you confirm?'] confirm message. default: `'Are you confirm?'`
  */
 function submitConfirm(selector, message) {
     if (message === void 0) { message = 'Are you confirm?'; }
@@ -830,57 +663,52 @@ function submitConfirm(selector, message) {
 /**
  * Add classes to element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className
  */
 function addClass(selector, className) {
-    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
+    var elm = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(selector);
     var classes = className.split(' ');
     classes.forEach(function (c) { return elm.classList.add(c); });
 }
 /**
  * Remove classes from element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className
  */
 function removeClass(selector, className) {
-    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
+    var elm = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(selector);
     var classes = className.split(' ');
     classes.forEach(function (c) { return elm.classList.remove(c); });
 }
 /**
  * Toggling classes to element.
  *
- * @export
  * @param {ElementTarget} selector
  * @param {string} className
  */
 function toggleClass(selector, className) {
-    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
+    var elm = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(selector);
     var classes = className.split(' ');
     classes.forEach(function (c) { return elm.classList.toggle(c); });
 }
 /**
  * Hide element. It will set value of style.display to 'none'.
  *
- * @export
  * @param {ElementTarget} selector
  */
 function hide(selector) {
-    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
+    var elm = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(selector);
     elm.style.display = 'none';
 }
 /**
  * Show element. It will just remove 'display: none;'.
  *
- * @export
  * @param {ElementTarget} selector
  */
 function show(selector) {
-    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
+    var elm = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(selector);
     if (elm.style.display && elm.style.display === 'none') {
         elm.style.display = '';
     }
@@ -888,17 +716,15 @@ function show(selector) {
 /**
  * Toggling show/hide element.
  *
- * @export
  * @param {ElementTarget} selector
  */
 function toggleShow(selector) {
-    var elm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(selector);
+    var elm = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(selector);
     elm.style.display !== 'none' ? hide(elm) : show(elm);
 }
 /**
  * Make a hidden input.
  *
- * @export
  * @param {string} name name attribute.
  * @param {string} value value attribute.
  * @returns {HTMLInputElement}
@@ -913,21 +739,122 @@ function makeHiddenInput(name, value) {
 /**
  * Makes hidden input, and append to target element. If input[name=".."] already exists, overwrite it.
  *
- * @export
  * @param {ElementTarget} target
  * @param {string} name name attribute.
  * @param {string} value value attribute.
  */
 function appendHiddenInput(target, name, value) {
-    var targetElm = Object(_base__WEBPACK_IMPORTED_MODULE_0__["getElement"])(target);
+    var targetElm = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(target);
     // Remove if already has input.
-    Object(_base__WEBPACK_IMPORTED_MODULE_0__["removeElements"])("input[name=\"" + name + "\"]", target);
+    (0,_base__WEBPACK_IMPORTED_MODULE_0__.removeElements)("input[name=\"" + name + "\"]", target);
     targetElm.appendChild(makeHiddenInput(name, value));
 }
 
 
 /***/ })
 
-/******/ });
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!*****************************!*\
+  !*** ./src/element-util.ts ***!
+  \*****************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "findAncestor": () => (/* reexport safe */ _methods_base__WEBPACK_IMPORTED_MODULE_0__.findAncestor),
+/* harmony export */   "getElement": () => (/* reexport safe */ _methods_base__WEBPACK_IMPORTED_MODULE_0__.getElement),
+/* harmony export */   "getElements": () => (/* reexport safe */ _methods_base__WEBPACK_IMPORTED_MODULE_0__.getElements),
+/* harmony export */   "getElementsAsArray": () => (/* reexport safe */ _methods_base__WEBPACK_IMPORTED_MODULE_0__.getElementsAsArray),
+/* harmony export */   "nodeListToArray": () => (/* reexport safe */ _methods_base__WEBPACK_IMPORTED_MODULE_0__.nodeListToArray),
+/* harmony export */   "removeElements": () => (/* reexport safe */ _methods_base__WEBPACK_IMPORTED_MODULE_0__.removeElements),
+/* harmony export */   "toNodeList": () => (/* reexport safe */ _methods_base__WEBPACK_IMPORTED_MODULE_0__.toNodeList),
+/* harmony export */   "addClass": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.addClass),
+/* harmony export */   "addListener": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.addListener),
+/* harmony export */   "addOuterListener": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.addOuterListener),
+/* harmony export */   "appendHiddenInput": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.appendHiddenInput),
+/* harmony export */   "hide": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.hide),
+/* harmony export */   "makeHiddenInput": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.makeHiddenInput),
+/* harmony export */   "removeClass": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.removeClass),
+/* harmony export */   "show": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.show),
+/* harmony export */   "submitConfirm": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.submitConfirm),
+/* harmony export */   "toggleClass": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.toggleClass),
+/* harmony export */   "toggleShow": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.toggleShow),
+/* harmony export */   "wrap": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.wrap),
+/* harmony export */   "wrapAll": () => (/* reexport safe */ _methods_util__WEBPACK_IMPORTED_MODULE_1__.wrapAll),
+/* harmony export */   "ElementFilter": () => (/* reexport safe */ _classes_element_filter__WEBPACK_IMPORTED_MODULE_2__.ElementFilter),
+/* harmony export */   "filter": () => (/* reexport safe */ _classes_element_filter__WEBPACK_IMPORTED_MODULE_2__.filter),
+/* harmony export */   "ElementSorter": () => (/* reexport safe */ _classes_element_sorter__WEBPACK_IMPORTED_MODULE_3__.ElementSorter),
+/* harmony export */   "sort": () => (/* reexport safe */ _classes_element_sorter__WEBPACK_IMPORTED_MODULE_3__.sort)
+/* harmony export */ });
+/* harmony import */ var _methods_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./methods/base */ "./src/methods/base.ts");
+/* harmony import */ var _methods_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./methods/util */ "./src/methods/util.ts");
+/* harmony import */ var _classes_element_filter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./classes/element-filter */ "./src/classes/element-filter.ts");
+/* harmony import */ var _classes_element_sorter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./classes/element-sorter */ "./src/classes/element-sorter.ts");
+
+
+
+
+
+})();
+
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
 });
 //# sourceMappingURL=element-util.js.map

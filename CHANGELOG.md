@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## 1.6.9 - 2021-05-11
+
+- Update dependencies.
+
 ## [1.6.8] - 2019-12-23
 
 - Fixed protected method `compareNumber` in `ElementSorter` (d8f3a4ae1c2fa8f41815a7146100aa7b85b46736)
