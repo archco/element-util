@@ -1,6 +1,6 @@
 # ElementUtil
 
-[![Build Status](https://travis-ci.org/archco/element-util.svg?branch=master)](https://travis-ci.org/archco/element-util)
+[![Node.js CI](https://github.com/archco/element-util/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/archco/element-util/actions/workflows/node.js.yml)
 [![npm version](https://badge.fury.io/js/element-util.svg)](https://www.npmjs.com/package/element-util)
 [![Downloads](https://img.shields.io/npm/dm/element-util.svg)](https://www.npmjs.com/package/element-util)
 
