@@ -329,8 +329,8 @@ var ElementSorter = /** @class */ (function () {
     ElementSorter.prototype.sortingTable = function (rows, nth, type, direction) {
         var _this = this;
         var compareMethod = function (a, b) {
-            a = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElement)("td:nth-child(" + nth + ")", a);
-            b = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElement)("td:nth-child(" + nth + ")", b);
+            a = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElement)("td:nth-child(".concat(nth, ")"), a);
+            b = (0,_methods_base__WEBPACK_IMPORTED_MODULE_0__.getElement)("td:nth-child(".concat(nth, ")"), b);
             var aVal = _this.getSortValue(a);
             var bVal = _this.getSortValue(b);
             type = type || _this.getSortType(a);
@@ -746,7 +746,7 @@ function makeHiddenInput(name, value) {
 function appendHiddenInput(target, name, value) {
     var targetElm = (0,_base__WEBPACK_IMPORTED_MODULE_0__.getElement)(target);
     // Remove if already has input.
-    (0,_base__WEBPACK_IMPORTED_MODULE_0__.removeElements)("input[name=\"" + name + "\"]", target);
+    (0,_base__WEBPACK_IMPORTED_MODULE_0__.removeElements)("input[name=\"".concat(name, "\"]"), target);
     targetElm.appendChild(makeHiddenInput(name, value));
 }
 
